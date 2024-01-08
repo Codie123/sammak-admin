@@ -191,7 +191,7 @@
             <h5 class="card-title fw-semibold mb-4">Add Hero Slider</h5>
             <div class="card">
               <div class="card-body">
-                <form>
+                <form class="addForm">
                   <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
                     <input
@@ -209,13 +209,19 @@
                       type="text"
                       class="form-control"
                       id="smallDescription"
+                      name="description"
                     ></textarea>
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label"
                       >Hero Slider Image</label
                     >
-                    <input type="file" class="form-control" id="categorySlug" />
+                    <input
+                      type="file"
+                      class="form-control"
+                      id="categorySlug"
+                      name="file"
+                    />
                   </div>
                   <div class="mb-3 form-check">
                     <input
@@ -227,7 +233,9 @@
                       >Status</label
                     >
                   </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary" onclick="add()">
+                    Submit
+                  </button>
                   <a href="./hero-slider.html" class="btn btn-light">Cancel</a>
                 </form>
               </div>
@@ -236,6 +244,7 @@
         </div>
       </div>
     </div>
+    <script src="./hero.js"></script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/sidebarmenu.js"></script>

@@ -7,10 +7,10 @@ window.addEventListener("load", () => {
     }
   }, 1000);
 
-  form.addEventListener("submit", (e) => {
-    // e.preventDefault();
-    add();
-  });
+  // form.addEventListener("submit", (e) => {
+  //   // e.preventDefault();
+  //   add();
+  // });
 });
 
 function add() {
@@ -24,7 +24,7 @@ function add() {
   // Make an AJAX request to the Spring Boot backend
   var formData = new FormData(document.getElementById("productForm"));
   console.log(formData);
-  fetch("http://13.200.180.167:9731/admin/addProducts", {
+  fetch("http://13.200.180.167:9731/HeroSlider/addHeroSlider", {
     method: "POST",
     body: formData,
 

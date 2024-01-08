@@ -190,7 +190,7 @@
             </div>
             <h5 class="card-title fw-semibold mb-4">Add Product</h5>
 
-            <div class="card">
+            <!-- <div class="card">
               <div class="card-body">
                 <form
                   class="forms-sample addForm"
@@ -243,7 +243,7 @@
                     ></textarea>
                   </div>
 
-                  <!-- details -->
+
                   <h4 class="card-title">Details</h4>
 
                   <div class="form-group mb-3">
@@ -292,7 +292,7 @@
                     />
                   </div>
 
-                  <!-- ends -->
+
 
                   <div class="form-check mb-3">
                     <label class="form-check-label" for="status">
@@ -308,6 +308,114 @@
                     Submit
                   </button>
                   <a href="./product.html" class="btn btn-light">Cancel</a>
+                </form>
+              </div>
+            </div> -->
+
+            <div class="card">
+              <div class="card-body">
+                <form
+                  class="forms-sample addForm"
+                  method="POST"
+                  id="productForm"
+                  enctype="multipart/form-data"
+                >
+                  <div class="form-group mb-3">
+                    <label for="productName">Name</label>
+                    <input
+                      type="text"
+                      name="productName"
+                      class="form-control"
+                      id="name"
+                      placeholder="Name"
+                    />
+                  </div>
+                  <div class="form-group mb-3">
+                    <label>Image</label>
+                    <input
+                      type="file"
+                      name="file"
+                      multiple
+                      class="form-control file-upload-info"
+                    />
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="smallDescription" class="pt-2 pb-2"
+                      >Small Description</label
+                    >
+                    <textarea
+                      class="form-control"
+                      name="smallDescription"
+                      id="small_description"
+                      rows="4"
+                    ></textarea>
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="productDescription">Description</label>
+                    <textarea
+                      class="form-control"
+                      name="productDescription"
+                      id="description"
+                      rows="4"
+                    ></textarea>
+                  </div>
+                  <!-- details -->
+                  <h4 class="card-title">Details</h4>
+                  <div class="form-group mb-3">
+                    <label for="original_price" class="pt-2 pb-2"
+                      >Original Price</label
+                    >
+                    <input
+                      type="text"
+                      name="original_price"
+                      class="form-control"
+                      id="original_price"
+                      placeholder="Original Price"
+                    />
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="selling_price" class="pt-2 pb-2"
+                      >Selling Price</label
+                    >
+                    <input
+                      type="text"
+                      name="selling_price"
+                      class="form-control"
+                      id="selling_price"
+                      placeholder="selling Price"
+                    />
+                  </div>
+
+                  <div class="form-group mb-3">
+                    <label for="quantity" class="pt-2 pb-2">Category</label>
+                    <input
+                      type="text"
+                      name="category"
+                      class="form-control"
+                      id="category"
+                      placeholder="Category"
+                    />
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="quantity" class="pt-2 pb-2">Quantity</label>
+                    <input
+                      type="text"
+                      name="quantity"
+                      class="form-control"
+                      id="quantity"
+                      placeholder="Quantity"
+                    />
+                  </div>
+
+                  <!-- ends -->
+                  <button
+                    type="button"
+                    class="btn btn-primary mr-2"
+                    onclick="add()"
+                  >
+                    Submit
+                  </button>
+                  <!-- <a href="{{ url('category/view') }}" class="btn btn-light">Cancel</a> -->
                 </form>
               </div>
             </div>
