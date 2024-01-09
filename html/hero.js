@@ -1,5 +1,5 @@
 window.addEventListener("load", () => {
-  const form = document.querySelector(".addForm");
+  const form = document.querySelector(".heroSlider");
 
   setInterval(() => {
     if (!localStorage.getItem("token")) {
@@ -9,11 +9,11 @@ window.addEventListener("load", () => {
 
   // form.addEventListener("submit", (e) => {
   //   // e.preventDefault();
-  //   add();
+  //   // add();
   // });
 });
 
-function add() {
+function addHero() {
   // const token = localStorage.getItem("token");
   // const config = {
   //   headers: {
@@ -22,7 +22,7 @@ function add() {
   //   },
   // };
   // Make an AJAX request to the Spring Boot backend
-  var formData = new FormData(document.getElementById("productForm"));
+  var formData = new FormData(document.getElementById("heroSlider"));
   console.log(formData);
   fetch("http://13.200.180.167:9731/HeroSlider/addHeroSlider", {
     method: "POST",
@@ -34,12 +34,19 @@ function add() {
       Accept: "application/json",
     },
   })
-    .then((response) => response.text())
+    .then((response) => response.json())
     .then((data) => {
       // Handle the response from the backend
+      redirectUrl(data);
       console.log("Response:", data);
     })
     .catch((error) => {
       console.error("Error:", error);
     });
+}
+
+function redirectUrl(data) {
+  if (data.status === 200) {
+    window.location.href = "hero-slider.html";
+  }
 }

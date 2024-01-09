@@ -191,52 +191,46 @@
             <h5 class="card-title fw-semibold mb-4">Add Hero Slider</h5>
             <div class="card">
               <div class="card-body">
-                <form class="addForm">
+                <form id="heroSlider">
                   <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
+                    <label for="heroTitle" class="form-label">Title</label>
                     <input
                       type="text"
+                      name="heroTitle"
                       class="form-control"
-                      id="title"
-                      aria-describedby="title"
+                      id="heroTitle"
+                      aria-describedby="heroTitle"
                     />
                   </div>
                   <div class="mb-3">
-                    <label for="smallDescription" class="form-label"
+                    <label for="description" class="form-label"
                       >Small Description</label
                     >
                     <textarea
                       type="text"
-                      class="form-control"
-                      id="smallDescription"
                       name="description"
+                      class="form-control"
+                      id="description"
                     ></textarea>
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label"
-                      >Hero Slider Image</label
+                    <label for="file" class="form-label"
+                      >Categories Image</label
                     >
                     <input
                       type="file"
-                      class="form-control"
-                      id="categorySlug"
                       name="file"
+                      class="form-control"
+                      id="file"
                     />
                   </div>
-                  <div class="mb-3 form-check">
-                    <input
-                      type="checkbox"
-                      class="form-check-input"
-                      id="exampleCheck1"
-                    />
-                    <label class="form-check-label" for="exampleCheck1"
-                      >Status</label
-                    >
-                  </div>
-                  <button type="submit" class="btn btn-primary" onclick="add()">
+                  <button
+                    type="button"
+                    onclick="addHero()"
+                    class="btn btn-primary"
+                  >
                     Submit
                   </button>
-                  <a href="./hero-slider.html" class="btn btn-light">Cancel</a>
                 </form>
               </div>
             </div>
