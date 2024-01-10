@@ -195,6 +195,7 @@
                 <form
                   class="forms-sample"
                   action=""
+                  id="productForm"
                   method="POST"
                   enctype="multipart/form-data"
                 >
@@ -202,7 +203,7 @@
                     <label for="name">Name</label>
                     <input
                       type="text"
-                      name="name"
+                      name="productName"
                       class="form-control"
                       id="name"
                       placeholder="Name"
@@ -212,9 +213,24 @@
                     <label>Image</label>
                     <input
                       type="file"
-                      name="image"
+                      name="file"
+                      multiple
                       class="form-control file-upload-info"
                     />
+                  </div>
+                  <div class="mb-3 row">
+                    <div
+                      class="col-md-4 d-flex justify-content-between gap-3"
+                      id="preview"
+                    >
+                      <img
+                        src=""
+                        alt=""
+                        class="img-fluid"
+                        id="refImage"
+                        style="width: 50px"
+                      />
+                    </div>
                   </div>
 
                   <div class="form-group mb-3">
@@ -223,7 +239,7 @@
                     >
                     <textarea
                       class="form-control"
-                      name="small_description"
+                      name="smallDescription"
                       id="small_description"
                       rows="4"
                     ></textarea>
@@ -232,7 +248,7 @@
                     <label for="description">Description</label>
                     <textarea
                       class="form-control"
-                      name="description"
+                      name="productDescription"
                       id="description"
                       rows="4"
                     ></textarea>
@@ -246,7 +262,7 @@
                     >
                     <input
                       type="text"
-                      name="original_price"
+                      name="originalPrice"
                       class="form-control"
                       id="original_price"
                       placeholder="Original Price"
@@ -258,7 +274,7 @@
                     >
                     <input
                       type="text"
-                      name="selling_price"
+                      name="sellingPrice"
                       class="form-control"
                       id="selling_price"
                       placeholder="selling Price"
@@ -268,7 +284,7 @@
                     <label for="quantity" class="pt-2 pb-2">Category</label>
                     <input
                       type="text"
-                      name="category"
+                      name="categoryName"
                       class="form-control"
                       id="category"
                       placeholder="Category"
@@ -308,6 +324,8 @@
         </div>
       </div>
     </div>
+
+    <script src="editpro.js"></script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/sidebarmenu.js"></script>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Modernize Free</title>
+    <title>Sammak Admin - edit</title>
     <link
       rel="shortcut icon"
       type="image/png"
@@ -192,38 +192,50 @@
 
             <div class="card">
               <div class="card-body">
-                <form>
+                <form
+                  id="heroslider"
+                  method="PUT"
+                  enctype="multipart/form-data"
+                >
                   <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
                     <input
                       type="text"
                       class="form-control"
                       id="title"
+                      name="heroTitle"
                       aria-describedby="title"
                     />
                   </div>
                   <div class="mb-3">
-                    <label for="smallDescription" class="form-label"
+                    <label for="description" class="form-label"
                       >Small Description</label
                     >
                     <textarea
                       type="text"
                       class="form-control"
                       id="smallDescription"
+                      name="description"
                     ></textarea>
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label"
+                    <label for="image" class="form-label"
                       >Hero Slider Image</label
                     >
-                    <input type="file" class="form-control" id="categorySlug" />
+                    <input
+                      type="file"
+                      class="form-control"
+                      name="file"
+                      id="refImage"
+                    />
                   </div>
                   <div class="mb-3 row">
                     <div class="col-md-4">
                       <img
-                        src="../assets/images/products/s4.jpg"
+                        src=""
                         alt=""
                         class="img-fluid"
+                        id="refImage"
                         style="width: 50px"
                       />
                     </div>
@@ -247,6 +259,7 @@
         </div>
       </div>
     </div>
+    <script src="./edithero.js"></script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/sidebarmenu.js"></script>

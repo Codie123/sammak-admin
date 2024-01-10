@@ -243,74 +243,7 @@
     </div>
 
     <!-- fetch products  -->
-    <script>
-      window.addEventListener("load", () => {
-        // Toaster
-        setInterval(() => {
-          if (!localStorage.getItem("token")) {
-            window.location.href = "login.html";
-          }
-        }, 1000);
-        // ends
-        // token
-        const token = localStorage.getItem("token");
-        const config = {
-          headers: {
-            Accept: "*/*",
-            Authorization: `Bearer ` + token,
-          },
-        };
-        // ends
-
-        // get all products
-        document.querySelector(".loader").classList.remove("d-none");
-        fetch("http://13.200.180.167:9731/Product/post", {
-          method: "GET",
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-          },
-          config,
-        })
-          .then((response) => {
-            let data = response.json();
-            console.log(data);
-            return data;
-          })
-          .then((data) => {
-            productList(data);
-          })
-          .catch((err) => {
-            console.log("Something went wrong " + err);
-          });
-
-        // ends
-
-        function productList(data) {
-          const tableContainer = document.querySelector(".tBody");
-
-          let resData = data.result;
-
-          resData.forEach((element) => {
-            console.log(element);
-
-            const markup = `<tr class="tableRow"><td class="border-bottom-0"><h6 class="fw-semibold mb-0">${
-              element.id
-            }</h6></td><td class="border-bottom-0"><h6 class="fw-semibold mb-1">${
-              element.productName
-            }</h6> <span class="fw-normal">${
-              element.categoryName
-            }</span></td><td class="border-bottom-0"><h6 class="fw-semibold mb-0 fs-4">SAR${
-              element.sellingPrice
-            }</h6></td><td class="border-bottom-0"><div class="d-flex align-items-center gap-2"><img src="${element.images.map(
-              (x) => x.imageUrl
-            )}" width="100px" height="100px"></div></td><td class="border-bottom-0"><a href="./edit-product.html"><button class="btn btn-primary">Edit</button></a><button class="btn btn-primary" id="deleteBtn">Delete</button></td></tr>`;
-
-            tableContainer.insertAdjacentHTML("beforeend", markup);
-          });
-          document.querySelector(".loader").classList.add("d-none");
-        }
-      });
-    </script>
+    <script src="getproduct.js"></script>
     <!-- ends -->
 
     <!-- Delete Modal  -->

@@ -23,7 +23,7 @@ function add() {
   // };
   // Make an AJAX request to the Spring Boot backend
   var formData = new FormData(document.getElementById("productForm"));
-  console.log(formData);
+  console.log();
   fetch("http://13.200.180.167:9731/admin/addProducts", {
     method: "POST",
     body: formData,

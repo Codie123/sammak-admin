@@ -101,29 +101,25 @@ function heroList(data) {
   editBtn.forEach((x) => {
     x.addEventListener("click", (e) => {
       e.preventDefault();
-      editHero(e.target.dataset.edit);
+      editHero(data, e.target.dataset.edit);
     });
   });
 }
-async function editHero(id) {
-  const token = localStorage.getItem("token");
-  const config = {
-    headers: {
-      Accept: "*/*",
-      Authorization: `Bearer ` + token,
-    },
-  };
-  const response = await fetch(
-    "http://13.200.180.167:9731/HeroSlider/updateSlider/",
-    {
-      method: "GET",
-      body: id,
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-      config,
-    }
+function editHero(data, editId) {
+  // const token = localStorage.getItem("token");
+  // const config = {
+  //   headers: {
+  //     Accept: "*/*",
+  //     Authorization: `Bearer ` + token,
+  //   },
+  // };
+  const data1 = data.result;
+
+  localStorage.setItem("edit", (data.result.id = editId));
+  let dataFilter = data1.filter(
+    (x) => x.id === parseInt(localStorage.getItem("edit"))
   );
-  const data = await response.json();
-  console.log(data);
+  localStorage.setItem("editData", JSON.stringify(dataFilter));
+
+  window.location.href = "edit-hero.html";
 }
