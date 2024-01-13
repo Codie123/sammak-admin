@@ -37,16 +37,30 @@ function addHero() {
     .then((response) => response.json())
     .then((data) => {
       // Handle the response from the backend
-      redirectUrl(data);
-      console.log("Response:", data);
+      if (data.status === 200) {
+        console.log(data);
+        // initiate toaster value
+        showToastOnNextPage(`${data.result}`, `${data.message}`);
+        // ends
+      } else {
+        // Handle other conditions if needed
+        console.error("Error:", data.errorMessage);
+      }
     })
     .catch((error) => {
       console.error("Error:", error);
     });
 }
 
-function redirectUrl(data) {
-  if (data.status === 200) {
-    window.location.href = "hero-slider.html";
-  }
+function showToastOnNextPage(message, type) {
+  const toastDetails = {
+    message: message,
+    type: type,
+  };
+
+  // Store the toast details in local storage
+  localStorage.setItem("nextPageToast", JSON.stringify(toastDetails));
+
+  // Redirect to the next page
+  window.location.href = "hero-slider.html";
 }

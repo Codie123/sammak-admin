@@ -1,6 +1,7 @@
 let editBtn;
+let deleteProductId;
 window.addEventListener("load", () => {
-  // Toaster
+  // Authenticate User
   setInterval(() => {
     if (!localStorage.getItem("token")) {
       window.location.href = "login.html";
@@ -9,12 +10,30 @@ window.addEventListener("load", () => {
     localStorage.removeItem("editpro");
   }, 1000);
   // ends
+
+  // logout Event
+  const logoutBtn = document.querySelector("#logout");
+  logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("token");
+  });
+  // ends
+
   // token
   getProduct();
   // ends
 
-  // get all products
+  // call toaster
+  const toastDetailsJSON = localStorage.getItem("nextPageToast");
 
+  if (toastDetailsJSON) {
+    const toastDetails = JSON.parse(toastDetailsJSON);
+
+    // Show the toast using the showToast function
+    showToast(toastDetails.message, toastDetails.type);
+
+    // Clear the stored toast details from local storage
+    localStorage.removeItem("nextPageToast");
+  }
   // ends
 });
 async function getProduct() {
@@ -53,33 +72,121 @@ async function getProduct() {
       (x) => x.imageUrl
     )}" width="100px" height="100px"></div></td><td class="border-bottom-0"><a><button class="editBtn btn btn-primary" data-edit=${
       element.id
-    }>Edit</button></a><button class="btn btn-primary" id="deleteBtn">Delete</button></td></tr>`;
+    }>Edit</button></a><button  class="btn btn-danger delete-btn"  data-prid="${
+      element.id
+    }">Delete</button></td></tr>`;
 
     tableContainer.insertAdjacentHTML("beforeend", markup);
   });
+
   document.querySelector(".loader").classList.add("d-none");
 
   //   edit button global intitiator
   editBtn = document.querySelectorAll(".editBtn");
-  console.log(editBtn);
   editBtn.forEach((x) => {
     x.addEventListener("click", (e) => {
       e.preventDefault();
       editproduct(data, e.target.dataset.edit);
     });
   });
+
+  const deleteBtn = document.querySelectorAll(".delete-btn");
+  const deleteModal = document.querySelector("#deleteModal");
+  console.log(deleteBtn);
+  deleteBtn.forEach((x) => {
+    x.addEventListener("click", (e) => {
+      deleteProductId = e.target.dataset.prid;
+      console.log(deleteProductId);
+      // deleteModal.classList.add("show");
+      // deleteModal.setAttribute("aria-hidden", false);
+    });
+  });
 }
 
 function editproduct(data, editId) {
-  console.log("found you ");
   const data1 = data.result;
-  console.log(data1);
-
+  // setting product id
   localStorage.setItem("editpro", (data.result.id = editId));
+  // filter product
   let dataFilter = data1.filter(
     (x) => x.id === parseInt(localStorage.getItem("editpro"))
   );
+
   localStorage.setItem("editproData", JSON.stringify(dataFilter));
 
   window.location.href = "edit-product.html";
 }
+
+// delete product
+function loadDelete() {
+  console.log(load);
+
+  const confirmBtn = document.querySelector("#confirmDelete");
+
+  confirmBtn.addEventListener("click", () => {
+    console.log("clicked");
+    deleteProduct(deleteProductId);
+  });
+
+  async function deleteProduct(id) {
+    console.log(id);
+    const token = localStorage.getItem("token");
+    const deleteId = id;
+
+    const response = await fetch(
+      `http://13.200.180.167:9731/admin/deleteById/${deleteId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Accept: "*/*",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      const deleteMessage = document.querySelector("#deleteMessage");
+      deleteMessage.innerHTML =
+        '<div class="alert alert-success">Product deleted successfully!</div>';
+    } else {
+      console.error(`Error: ${response.status} - ${response.statusText}`);
+      const errorText = await response.text();
+      const deleteMessage = document.querySelector("#deleteMessage");
+      deleteMessage.innerHTML =
+        '<div class="alert alert-danger">Error deleting product.</div>';
+      console.error(`Error Details: ${errorText}`);
+    }
+  }
+}
+
+// toaster function
+function showToast(message, type) {
+  const toastContainer = document.querySelector(".toast");
+  // Create a new toast element
+  const toastBd = document.querySelector(".toast-body");
+  toastBd.innerHTML = message;
+  toastContainer.classList.add("show");
+  toastContainer.classList.add(type);
+
+  // const toast = document.createElement("div");
+  // toast.className = `toast ${type}`;
+  // toast.textContent = message;
+
+  // Append the toast to the container
+  // toastContainer.appendChild(toast);
+
+  // Show the toast
+  // setTimeout(() => {
+  //   toast.style.display = "block";
+  // }, 100);
+
+  // // Remove the toast after a delay
+  // setTimeout(() => {
+  //   toast.style.display = "none";
+  //   // Remove the toast element from the container
+  //   toastContainer.removeChild(toast);
+  // }, 3000); // Adjust the delay as needed
+}
+// ends

@@ -34,12 +34,40 @@ function add() {
       Accept: "application/json",
     },
   })
-    .then((response) => response.text())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
     .then((data) => {
       // Handle the response from the backend
-      console.log("Response:", data);
+      if (data.status === 200) {
+        console.log(data);
+        // initiate toaster value
+        showToastOnNextPage(`${data.result}`, `${data.message}`);
+        // ends
+      } else {
+        // Handle other conditions if needed
+        console.error("Error:", data.errorMessage);
+      }
     })
     .catch((error) => {
       console.error("Error:", error);
+      // Optionally, show an error toaster message
+      // toastr.error("An error occurred while adding the product.");
     });
+}
+
+function showToastOnNextPage(message, type) {
+  const toastDetails = {
+    message: message,
+    type: type,
+  };
+
+  // Store the toast details in local storage
+  localStorage.setItem("nextPageToast", JSON.stringify(toastDetails));
+
+  // Redirect to the next page
+  window.location.href = "product.html";
 }

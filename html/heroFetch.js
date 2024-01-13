@@ -7,8 +7,28 @@ window.addEventListener("load", () => {
     }
   }, 1000);
   // ends
+  // logout trigger
+  const logoutBtn = document.querySelector("#logout");
+  logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("token");
+  });
+  // ends
   // token
   getHero();
+  // ends
+
+  // call toaster
+  const toastDetailsJSON = localStorage.getItem("nextPageToast");
+
+  if (toastDetailsJSON) {
+    const toastDetails = JSON.parse(toastDetailsJSON);
+
+    // Show the toast using the showToast function
+    showToast(toastDetails.message, toastDetails.type);
+
+    // Clear the stored toast details from local storage
+    localStorage.removeItem("nextPageToast");
+  }
   // ends
 });
 
@@ -32,24 +52,6 @@ async function getHero() {
   const data = await response.json();
 
   heroList(data);
-  // fetch("http://13.200.180.167:9731/HeroSlider/getAll", {
-  //   method: "GET",
-  //   headers: {
-  //     "Content-type": "application/json; charset=UTF-8",
-  //   },
-  //   config,
-  // })
-  //   .then((response) => {
-  //     let data = response.json();
-  //     //   console.log(data);
-  //     return data;
-  //   })
-  //   .then((data) => {
-  //     heroList(data);
-  //   })
-  //   .catch((err) => {
-  //     console.log("Something went wrong " + err);
-  //   });
 }
 
 function heroList(data) {
@@ -123,3 +125,14 @@ function editHero(data, editId) {
 
   window.location.href = "edit-hero.html";
 }
+
+// toaster function
+function showToast(message, type) {
+  const toastContainer = document.querySelector(".toast");
+  // Create a new toast element
+  const toastBd = document.querySelector(".toast-body");
+  toastBd.innerHTML = message;
+  toastContainer.classList.add("show");
+  toastContainer.classList.add(type);
+}
+// ends

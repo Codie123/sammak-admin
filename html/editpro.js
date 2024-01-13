@@ -22,7 +22,7 @@ window.addEventListener("load", () => {
   formEle.addEventListener("submit", (e) => {
     e.preventDefault();
     console.log(dataEdit);
-    // editProduct();
+    editProduct();
     console.log(dataEdit[0].originalPrice);
   });
 
@@ -64,17 +64,21 @@ function editProduct() {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       // Check if the response body is not empty before parsing as JSON
-      return response.text();
+      return response.json();
     })
     .then((data) => {
-      if (data) {
-        const jsonData = JSON.parse(data);
-        redirectUrl(jsonData);
-        console.log("Response:", jsonData);
-      } else {
-        console.log("Empty response received.");
-        // Handle empty response if needed
+      console.log(data);
+      if (data.status === 200) {
+        showToastOnNextPage(`${data.message}`, `success`);
       }
+      // if (data) {
+      //   const jsonData = JSON.parse(data);
+      //   redirectUrl(jsonData);
+      //   console.log("Response:", jsonData);
+      // } else {
+      //   console.log("Empty response received.");
+      //   // Handle empty response if needed
+      // }
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -82,8 +86,15 @@ function editProduct() {
     });
 }
 
-function redirectUrl(data) {
-  console.log("function" + data);
+function showToastOnNextPage(message, type) {
+  const toastDetails = {
+    message: message,
+    type: type,
+  };
 
+  // Store the toast details in local storage
+  localStorage.setItem("nextPageToast", JSON.stringify(toastDetails));
+
+  // Redirect to the next page
   window.location.href = "product.html";
 }

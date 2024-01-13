@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="../assets/css/styles.css" />
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-   
   </head>
 
   <body>
@@ -172,8 +171,9 @@
                         <p class="mb-0 fs-3">My Task</p>
                       </a>
                       <a
-                        href="./authentication-login.html"
+                        href="javascript:void(0)"
                         class="btn btn-outline-primary mx-3 mt-2 d-block"
+                        id="logout"
                         >Logout</a
                       >
                     </div>
@@ -198,7 +198,16 @@
               <div class="card w-100">
                 <div class="card-body p-4">
                   <h5 class="card-title fw-semibold mb-4">Hero Slider List</h5>
-                  <div class="table-responsive" style="position: relative; overflow: auto; width: 100%; max-height: 500px; height: 500px;">
+                  <div
+                    class="table-responsive"
+                    style="
+                      position: relative;
+                      overflow: auto;
+                      width: 100%;
+                      max-height: 500px;
+                      height: 500px;
+                    "
+                  >
                     <table class="table text-nowrap mb-0 align-middle">
                       <thead class="text-dark fs-4">
                         <tr>
@@ -221,49 +230,86 @@
                           </th>
                         </tr>
                       </thead>
-                      <tbody class="tBody">
-                       
-                       
-                       
-                      </tbody>
+                      <tbody class="tBody"></tbody>
                     </table>
-                    
-                    
-              
                   </div>
 
                   <!-- loader -->
                   <div class="loader d-none"></div>
 
-                    <!-- ends -->
-                    
-                </div>
+                  <!-- ends -->
                 </div>
               </div>
             </div>
-            <!-- <div class="col-lg">
-              <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a class="page-link" href="#">Previous</a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                  </li>
-                </ul>
-              </nav>
-            </div> -->
           </div>
         </div>
+
+        <!-- Delete Modal -->
+        <div
+          class="modal fade"
+          id="deleteModal"
+          tabindex="-1"
+          aria-labelledby="deleteModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">
+                  Delete Product
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you want to delete this product?</p>
+                <div id="deleteMessage"></div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ends -->
+        <!-- toaster -->
+
+        <div
+          class="toast position-fixed"
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+          style="top: 10px; right: 10px"
+        >
+          <div class="toast-header justify-content-between">
+            <div class="toast-body">Logged In successfully</div>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="toast"
+              aria-label="Close"
+            ></button>
+          </div>
+        </div>
+        <!-- ends -->
       </div>
     </div>
     <!-- fetch all products  -->
-    <script src="./heroFetch.js">
-      
-    </script>
+    <script src="./heroFetch.js"></script>
     <!-- <script src="./hero.js"></script> -->
     <!-- ends -->
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
@@ -272,6 +318,5 @@
     <script src="../assets/js/app.min.js"></script>
 
     <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
-
   </body>
 </html>

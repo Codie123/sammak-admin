@@ -8,9 +8,10 @@ window.addEventListener("load", () => {
   const formEle = document.querySelector("#heroslider");
   const title = document.getElementById("title");
   const description = document.getElementById("smallDescription");
-  const image = document.getElementById("refImage");
+  const image = document.getElementById("previewImg");
   const dataEdit = JSON.parse(localStorage.getItem("editData"));
 
+  console.log(image);
   formEle.addEventListener("submit", (e) => {
     e.preventDefault();
     addHero();
@@ -43,16 +44,11 @@ function addHero() {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       // Check if the response body is not empty before parsing as JSON
-      return response.text();
+      return response.json();
     })
     .then((data) => {
-      if (data) {
-        const jsonData = JSON.parse(data);
-        redirectUrl(jsonData);
-        console.log("Response:", jsonData);
-      } else {
-        console.log("Empty response received.");
-        // Handle empty response if needed
+      if (data.status === 200) {
+        showToastOnNextPage(`${data.result}`, `${data.message}`);
       }
     })
     .catch((error) => {
@@ -61,8 +57,15 @@ function addHero() {
     });
 }
 
-function redirectUrl(data) {
-  console.log("function" + data);
+function showToastOnNextPage(message, type) {
+  const toastDetails = {
+    message: message,
+    type: type,
+  };
 
+  // Store the toast details in local storage
+  localStorage.setItem("nextPageToast", JSON.stringify(toastDetails));
+
+  // Redirect to the next page
   window.location.href = "hero-slider.html";
 }
