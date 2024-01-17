@@ -21,7 +21,29 @@ window.addEventListener("load", () => {
   // token
   getProduct();
   // ends
+  // delete modal
+  const btnClose = document.querySelector(".btn-close");
+  const modal = document.querySelector(".modal");
+  const close = document.querySelector("#close");
+  btnClose.addEventListener("click", () => {
+    closeModal();
+  });
+  close.addEventListener("click", () => {
+    closeModal();
+  });
 
+  function closeModal() {
+    if (modal.classList.contains("show")) {
+      modal.classList.remove("show");
+      modal.style.display = "none";
+      modal.setAttribute("aria-hidden", true);
+    } else {
+      modal.classList.add("show");
+      modal.style.display = "block";
+      modal.setAttribute("aria-hidden", false);
+    }
+  }
+  // ends
   // call toaster
   const toastDetailsJSON = localStorage.getItem("nextPageToast");
 
@@ -57,27 +79,39 @@ async function getProduct() {
 
   const data = await response.json();
 
-  let resData = data.result;
+  if (data.status === 200) {
+    let resData = data.result;
 
-  resData.forEach((element) => {
-    const markup = `<tr class="tableRow"><td class="border-bottom-0"><h6 class="fw-semibold mb-0">${
+    resData.forEach((element) => {
+      const markup = `<tr class="tableRow"><td class="border-bottom-0"><h6 class="fw-semibold mb-0">${
+        element.id
+      }</h6></td><td class="border-bottom-0"><h6 class="fw-semibold mb-1">${
+        element.productName
+      }</h6> <span class="fw-normal">${
+        element.categoryName
+      }</span></td><td class="border-bottom-0"><h6 class="fw-semibold mb-0 fs-4">SAR${
+        element.sellingPrice
+      }</h6></td><td class="border-bottom-0"><div class="d-flex align-items-center gap-2"><img src="${
+        element.images[element.images.length - 1].imageUrl
+      }" width="100px" height="100px"></div></td><td class="border-bottom-0"><a><button class="editBtn btn btn-primary" data-edit=${
+        element.id
+      }>Edit</button>
+    </a>
+    <button type="button"  class="btn btn-danger delete-btn"  data-prid="${
       element.id
-    }</h6></td><td class="border-bottom-0"><h6 class="fw-semibold mb-1">${
-      element.productName
-    }</h6> <span class="fw-normal">${
-      element.categoryName
-    }</span></td><td class="border-bottom-0"><h6 class="fw-semibold mb-0 fs-4">SAR${
-      element.sellingPrice
-    }</h6></td><td class="border-bottom-0"><div class="d-flex align-items-center gap-2"><img src="${element.images.map(
-      (x) => x.imageUrl
-    )}" width="100px" height="100px"></div></td><td class="border-bottom-0"><a><button class="editBtn btn btn-primary" data-edit=${
-      element.id
-    }>Edit</button></a><button  class="btn btn-danger delete-btn"  data-prid="${
-      element.id
-    }">Delete</button></td></tr>`;
+    }" data-target="#deleteModal" data-toggle="modal" >Delete</button> 
+    </td>
+    </tr>`;
 
-    tableContainer.insertAdjacentHTML("beforeend", markup);
-  });
+      tableContainer.insertAdjacentHTML("beforeend", markup);
+    });
+  }
+  if (data.status === 404) {
+    tableContainer.insertAdjacentHTML(
+      "beforeend",
+      "<h4>No Products Found , please add a new product</h4>"
+    );
+  }
 
   document.querySelector(".loader").classList.add("d-none");
 
@@ -92,13 +126,15 @@ async function getProduct() {
 
   const deleteBtn = document.querySelectorAll(".delete-btn");
   const deleteModal = document.querySelector("#deleteModal");
-  console.log(deleteBtn);
+
   deleteBtn.forEach((x) => {
     x.addEventListener("click", (e) => {
       deleteProductId = e.target.dataset.prid;
       console.log(deleteProductId);
-      // deleteModal.classList.add("show");
-      // deleteModal.setAttribute("aria-hidden", false);
+      deleteModal.classList.add("show");
+      deleteModal.style.display = "block";
+      deleteModal.setAttribute("aria-hidden", false);
+      loadDelete();
     });
   });
 }
@@ -119,8 +155,6 @@ function editproduct(data, editId) {
 
 // delete product
 function loadDelete() {
-  console.log(load);
-
   const confirmBtn = document.querySelector("#confirmDelete");
 
   confirmBtn.addEventListener("click", () => {
@@ -144,12 +178,13 @@ function loadDelete() {
       }
     );
 
-    if (response.ok) {
+    if (response.status === 200) {
       const data = await response.json();
-      console.log(data);
-      const deleteMessage = document.querySelector("#deleteMessage");
-      deleteMessage.innerHTML =
-        '<div class="alert alert-success">Product deleted successfully!</div>';
+      // const deleteMessage = document.querySelector("#deleteMessage");
+
+      showToastOnNextPage(`${data.result}`, `success`);
+      // deleteMessage.innerHTML =
+      //   '<div class="alert alert-success">Product deleted successfully!</div>';
     } else {
       console.error(`Error: ${response.status} - ${response.statusText}`);
       const errorText = await response.text();
@@ -169,24 +204,17 @@ function showToast(message, type) {
   toastBd.innerHTML = message;
   toastContainer.classList.add("show");
   toastContainer.classList.add(type);
-
-  // const toast = document.createElement("div");
-  // toast.className = `toast ${type}`;
-  // toast.textContent = message;
-
-  // Append the toast to the container
-  // toastContainer.appendChild(toast);
-
-  // Show the toast
-  // setTimeout(() => {
-  //   toast.style.display = "block";
-  // }, 100);
-
-  // // Remove the toast after a delay
-  // setTimeout(() => {
-  //   toast.style.display = "none";
-  //   // Remove the toast element from the container
-  //   toastContainer.removeChild(toast);
-  // }, 3000); // Adjust the delay as needed
 }
 // ends
+function showToastOnNextPage(message, type) {
+  const toastDetails = {
+    message: message,
+    type: type,
+  };
+
+  // Store the toast details in local storage
+  localStorage.setItem("nextPageToast", JSON.stringify(toastDetails));
+
+  // Redirect to the next page
+  window.location.href = "product.html";
+}

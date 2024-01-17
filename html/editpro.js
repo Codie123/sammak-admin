@@ -43,10 +43,27 @@ window.addEventListener("load", () => {
     let imgEle = `<img src=${x.imageUrl}  width:"100px"; height="100px">`;
     imageContainer.insertAdjacentHTML("beforeend", imgEle);
   });
+
+  // call toaster
+  const toastDetailsJSON = localStorage.getItem("nextPageToast");
+
+  if (toastDetailsJSON) {
+    const toastDetails = JSON.parse(toastDetailsJSON);
+
+    // Show the toast using the showToast function
+    showToast(toastDetails.message, toastDetails.type);
+
+    // Clear the stored toast details from local storage
+    localStorage.removeItem("nextPageToast");
+  }
+  // ends
 });
 
 function editProduct() {
   let formData = new FormData(document.getElementById("productForm"));
+
+  document.querySelector(".update-text").classList.add("d-none");
+  document.querySelector(".dot-spinner").classList.remove("d-none");
 
   fetch(
     "http://13.200.180.167:9731/admin/updateProductById/" +
@@ -69,6 +86,8 @@ function editProduct() {
     .then((data) => {
       console.log(data);
       if (data.status === 200) {
+        document.querySelector(".update-text").classList.remove("d-none");
+        document.querySelector(".dot-spinner").classList.add("d-none");
         showToastOnNextPage(`${data.message}`, `success`);
       }
       // if (data) {
@@ -81,6 +100,8 @@ function editProduct() {
       // }
     })
     .catch((error) => {
+      document.querySelector(".update-text").classList.remove("d-none");
+      document.querySelector(".dot-spinner").classList.add("d-none");
       console.error("Error:", error);
       // Handle the error, possibly show a user-friendly message
     });

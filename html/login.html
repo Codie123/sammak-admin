@@ -108,63 +108,6 @@
     </div>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      window.addEventListener("load", () => {
-        const formEle = document.querySelector("#lgForm");
-        const email = document.querySelector("#adminemail");
-        const password = document.querySelector("#adminpassword");
-
-        // ui elements
-
-        const log = document.querySelector(".log");
-        const loader = document.querySelector(".dot-spinner");
-        const toast = document.querySelector(".toast");
-        const toastBody = document.querySelector(".toast-body");
-        // ends
-        formEle.addEventListener("submit", (e) => {
-          e.preventDefault();
-
-          if (email.value === "" || password.value === "") {
-            console.log("please enter the email or password");
-          }
-          if (email.value && password.value) {
-            log.classList.add("d-none");
-            loader.classList.remove("d-none");
-
-            fetch("http://13.200.180.167:9731/v1/auth/login", {
-              method: "POST",
-              body: JSON.stringify({
-                email: email.value,
-                password: password.value,
-              }),
-              headers: {
-                "Content-type": "application/json; charset=UTF-8",
-              },
-            })
-              .then((response) => {
-                let data = response.json();
-                console.log(data);
-                return data;
-              })
-              .then((data) => {
-                // console.log(data);
-                localStorage.setItem("token", data.result.accessToken);
-                log.classList.remove("d-none");
-                loader.classList.add("d-none");
-                toast.classList.add("show");
-                toastBody.innerHTML = "Logged in successfully";
-                window.location.href = "index.html";
-              })
-              .catch((err) => {
-                log.classList.remove("d-none");
-                loader.classList.add("d-none");
-                toast.classList.add("show");
-                toastBody.innerHTML = err;
-                console.warn(err);
-              });
-          }
-        });
-      });
-    </script>
+    <script src="./login.js"></script>
   </body>
 </html>

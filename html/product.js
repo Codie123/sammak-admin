@@ -6,7 +6,6 @@ window.addEventListener("load", () => {
       window.location.href = "login.html";
     }
   }, 1000);
-
   form.addEventListener("submit", (e) => {
     // e.preventDefault();
     add();
@@ -22,8 +21,12 @@ function add() {
   //   },
   // };
   // Make an AJAX request to the Spring Boot backend
+
   var formData = new FormData(document.getElementById("productForm"));
-  console.log();
+
+  document.querySelector(".submit-text").classList.add("d-none");
+  document.querySelector(".dot-spinner").classList.remove("d-none");
+
   fetch("http://13.200.180.167:9731/admin/addProducts", {
     method: "POST",
     body: formData,
@@ -43,7 +46,8 @@ function add() {
     .then((data) => {
       // Handle the response from the backend
       if (data.status === 200) {
-        console.log(data);
+        document.querySelector(".dot-spinner").classList.add("d-none");
+        document.querySelector(".submit-text").classList.remove("d-none");
         // initiate toaster value
         showToastOnNextPage(`${data.result}`, `${data.message}`);
         // ends
