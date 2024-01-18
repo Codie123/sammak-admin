@@ -11,6 +11,10 @@
     />
     <link rel="stylesheet" href="../assets/css/styles.min.css" />
     <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="../assets/libs/sweet-alert/sweetalert2.min.css"
+    />
   </head>
 
   <body>
@@ -147,7 +151,7 @@
                     aria-labelledby="drop2"
                   >
                     <div class="message-body">
-                      <a
+                      <!-- <a
                         href="javascript:void(0)"
                         class="d-flex align-items-center gap-2 dropdown-item"
                       >
@@ -167,7 +171,7 @@
                       >
                         <i class="ti ti-list-check fs-6"></i>
                         <p class="mb-0 fs-3">My Task</p>
-                      </a>
+                      </a> -->
                       <button
                         href=""
                         id="logout"
@@ -490,6 +494,7 @@
         </div>
       </div>
     </div>
+
     <script>
       window.addEventListener("load", () => {
         if (localStorage.getItem("token")) {
@@ -505,12 +510,14 @@
         });
       });
     </script>
+
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/sidebarmenu.js"></script>
     <script src="../assets/js/app.min.js"></script>
     <!-- <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script> -->
     <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+
     <!-- <script src="../assets/js/dashboard.js"></script> -->
   </body>
 </html>

@@ -21,29 +21,7 @@ window.addEventListener("load", () => {
   // token
   getProduct();
   // ends
-  // delete modal
-  const btnClose = document.querySelector(".btn-close");
-  const modal = document.querySelector(".modal");
-  const close = document.querySelector("#close");
-  btnClose.addEventListener("click", () => {
-    closeModal();
-  });
-  close.addEventListener("click", () => {
-    closeModal();
-  });
 
-  function closeModal() {
-    if (modal.classList.contains("show")) {
-      modal.classList.remove("show");
-      modal.style.display = "none";
-      modal.setAttribute("aria-hidden", true);
-    } else {
-      modal.classList.add("show");
-      modal.style.display = "block";
-      modal.setAttribute("aria-hidden", false);
-    }
-  }
-  // ends
   // call toaster
   const toastDetailsJSON = localStorage.getItem("nextPageToast");
 
@@ -97,7 +75,7 @@ async function getProduct() {
         element.id
       }>Edit</button>
     </a>
-    <button type="button"  class="btn btn-danger delete-btn"  data-prid="${
+    <button type="button"  class="btn btn-primary delete-btn"  data-prid="${
       element.id
     }" data-target="#deleteModal" data-toggle="modal" >Delete</button> 
     </td>
@@ -131,9 +109,9 @@ async function getProduct() {
     x.addEventListener("click", (e) => {
       deleteProductId = e.target.dataset.prid;
       console.log(deleteProductId);
-      deleteModal.classList.add("show");
-      deleteModal.style.display = "block";
-      deleteModal.setAttribute("aria-hidden", false);
+      // deleteModal.classList.add("show");
+      // deleteModal.style.display = "block";
+      // deleteModal.setAttribute("aria-hidden", false);
       loadDelete();
     });
   });
@@ -155,15 +133,14 @@ function editproduct(data, editId) {
 
 // delete product
 function loadDelete() {
-  const confirmBtn = document.querySelector("#confirmDelete");
+  // const confirmBtn = document.querySelector("#confirmDelete");
 
-  confirmBtn.addEventListener("click", () => {
-    console.log("clicked");
-    deleteProduct(deleteProductId);
-  });
+  // confirmBtn.addEventListener("click", () => {
+  //   console.log("clicked");
+  //   deleteProduct(deleteProductId);
+  // });
 
   async function deleteProduct(id) {
-    console.log(id);
     const token = localStorage.getItem("token");
     const deleteId = id;
 
@@ -180,20 +157,52 @@ function loadDelete() {
 
     if (response.status === 200) {
       const data = await response.json();
-      // const deleteMessage = document.querySelector("#deleteMessage");
 
-      showToastOnNextPage(`${data.result}`, `success`);
-      // deleteMessage.innerHTML =
-      //   '<div class="alert alert-success">Product deleted successfully!</div>';
+      Swal.fire({
+        title: "Deleted!",
+        text: "Your file has been deleted.",
+        icon: "success",
+      }).then(() => {
+        window.location.href = "product.html";
+
+        // showToastOnNextPage(`${data.result}`, `success`);
+      });
     } else {
-      console.error(`Error: ${response.status} - ${response.statusText}`);
-      const errorText = await response.text();
-      const deleteMessage = document.querySelector("#deleteMessage");
-      deleteMessage.innerHTML =
-        '<div class="alert alert-danger">Error deleting product.</div>';
-      console.error(`Error Details: ${errorText}`);
+      Swal.fire({
+        title: "Error!",
+        text: `Error: ${response.status} - ${response.statusText}`,
+        icon: "error",
+      });
     }
   }
+
+  // sweet alert
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Processing!",
+        text: "Delete in progress.",
+        icon: "info",
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        allowEnterKey: false,
+      });
+      deleteProduct(deleteProductId);
+    } else {
+      // window.location.href = "product.html";
+    }
+  });
+
+  // ends
 }
 
 // toaster function

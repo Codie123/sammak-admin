@@ -20,29 +20,6 @@ window.addEventListener("load", () => {
   getHero();
   // ends
 
-  // delete modal
-  const btnClose = document.querySelector(".btn-close");
-  const modal = document.querySelector(".modal");
-  const close = document.querySelector("#close");
-  btnClose.addEventListener("click", () => {
-    closeModal();
-  });
-  close.addEventListener("click", () => {
-    closeModal();
-  });
-
-  function closeModal() {
-    if (modal.classList.contains("show")) {
-      modal.classList.remove("show");
-      modal.style.display = "none";
-      modal.setAttribute("aria-hidden", true);
-    } else {
-      modal.classList.add("show");
-      modal.style.display = "block";
-      modal.setAttribute("aria-hidden", false);
-    }
-  }
-  // ends
   // call toaster
   const toastDetailsJSON = localStorage.getItem("nextPageToast");
 
@@ -146,10 +123,7 @@ function heroList(data) {
   deleteBtn.forEach((x) => {
     x.addEventListener("click", (e) => {
       deleteProductId = e.target.dataset.prid;
-      console.log(deleteProductId);
-      deleteModal.classList.add("show");
-      deleteModal.style.display = "block";
-      deleteModal.setAttribute("aria-hidden", false);
+
       loadDelete();
     });
   });
@@ -175,13 +149,33 @@ function editHero(data, editId) {
 
 // delete modal
 function loadDelete() {
-  const confirmBtn = document.querySelector("#confirmDelete");
-
-  confirmBtn.addEventListener("click", () => {
-    console.log("clicked");
-    deleteProduct(deleteProductId);
+  // sweet alert
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Processing!",
+        text: "Delete in progress.",
+        icon: "info",
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        allowEnterKey: false,
+      });
+      deleteProduct(deleteProductId);
+    } else {
+      // window.location.href = "product.html";
+    }
   });
 
+  // ends
   async function deleteProduct(id) {
     console.log(id);
     const token = localStorage.getItem("token");
@@ -200,18 +194,22 @@ function loadDelete() {
 
     if (response.status === 200) {
       const data = await response.json();
-      // const deleteMessage = document.querySelector("#deleteMessage");
 
-      showToastOnNextPage(`${data.result}`, `success`);
-      // deleteMessage.innerHTML =
-      //   '<div class="alert alert-success">Product deleted successfully!</div>';
+      Swal.fire({
+        title: "Deleted!",
+        text: "Your file has been deleted.",
+        icon: "success",
+      }).then(() => {
+        window.location.href = "hero-slider.html";
+
+        // showToastOnNextPage(`${data.result}`, `success`);
+      });
     } else {
-      console.error(`Error: ${response.status} - ${response.statusText}`);
-      const errorText = await response.text();
-      const deleteMessage = document.querySelector("#deleteMessage");
-      deleteMessage.innerHTML =
-        '<div class="alert alert-danger">Error deleting product.</div>';
-      console.error(`Error Details: ${errorText}`);
+      Swal.fire({
+        title: "Error!",
+        text: `Error: ${response.status} - ${response.statusText}`,
+        icon: "error",
+      });
     }
   }
 }
