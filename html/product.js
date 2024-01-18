@@ -1,3 +1,4 @@
+"use strict";
 window.addEventListener("load", () => {
   const form = document.querySelector(".addForm");
 
@@ -27,16 +28,19 @@ function add() {
   document.querySelector(".submit-text").classList.add("d-none");
   document.querySelector(".dot-spinner").classList.remove("d-none");
 
-  fetch("http://13.200.180.167:9731/admin/addProducts", {
-    method: "POST",
-    body: formData,
+  fetch(
+    "https://developmentsamak-production-7c7b.up.railway.app/admin/addProducts",
+    {
+      method: "POST",
+      body: formData,
 
-    headers: {
-      // Accept: "*/*",
-      Authorization: `Bearer ` + localStorage.getItem("token"),
-      Accept: "application/json",
-    },
-  })
+      headers: {
+        // Accept: "*/*",
+        Authorization: `Bearer ` + localStorage.getItem("token"),
+        Accept: "application/json",
+      },
+    }
+  )
     .then((response) => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);

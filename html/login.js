@@ -1,3 +1,4 @@
+"use strict";
 window.addEventListener("load", () => {
   const formEle = document.querySelector("#lgForm");
   const email = document.querySelector("#adminemail");
@@ -20,16 +21,19 @@ window.addEventListener("load", () => {
       log.classList.add("d-none");
       loader.classList.remove("d-none");
 
-      fetch("http://13.200.180.167:9731/v1/auth/login", {
-        method: "POST",
-        body: JSON.stringify({
-          email: email.value,
-          password: password.value,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      })
+      fetch(
+        "https://developmentsamak-production-7c7b.up.railway.app/v1/auth/login",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: email.value,
+            password: password.value,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        }
+      )
         .then((response) => {
           let data = response.json();
           console.log(data);
