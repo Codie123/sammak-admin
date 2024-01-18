@@ -3,14 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sammak Admin - Add Products</title>
+    <title>Orders</title>
     <link
       rel="shortcut icon"
       type="image/png"
-      href="../assets/images/logos/favicon.png"
+      href="./assets/images/logos/favicon.png"
     />
-    <link rel="stylesheet" href="../assets/css/styles.min.css" />
-    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="./assets/css/styles.min.css" />
   </head>
 
   <body>
@@ -32,7 +31,7 @@
             class="brand-logo d-flex align-items-center justify-content-between"
           >
             <a href="./index.html" class="text-nowrap logo-img">
-              <img src="../assets/images/logos/logo.png" width="180" alt="" />
+              <img src="./assets/images/logos/logo.png" width="180" alt="" />
             </a>
             <div
               class="close-btn d-xl-none d-block sidebartoggler cursor-pointer"
@@ -51,7 +50,7 @@
               <li class="sidebar-item">
                 <a
                   class="sidebar-link"
-                  href="./index.html"
+                  href="./orders.html"
                   aria-expanded="false"
                 >
                   <span>
@@ -67,7 +66,7 @@
 
               <li class="sidebar-item">
                 <a
-                  class="sidebar-link active"
+                  class="sidebar-link"
                   href="./product.html"
                   aria-expanded="false"
                 >
@@ -135,7 +134,7 @@
                     aria-expanded="false"
                   >
                     <img
-                      src="../assets/images/profile/user-1.jpg"
+                      src="./assets/images/profile/user-1.jpg"
                       alt=""
                       width="35"
                       height="35"
@@ -184,128 +183,86 @@
         <div class="container-fluid">
           <!--  Row 1 -->
           <div class="row flex-column gap-3">
-            <div class="col d-flex justify-content-end">
-              <a href="./product.html">
-                <button type="button" class="btn btn-primary m-1">Back</button>
-              </a>
-            </div>
-            <h5 class="card-title fw-semibold mb-4">Add Product</h5>
-
-            <div class="card">
-              <div class="card-body">
-                <form
-                  class="forms-sample addForm"
-                  method="POST"
-                  id="productForm"
-                  enctype="multipart/form-data"
-                >
-                  <div class="form-group mb-3">
-                    <label for="productName">Name</label>
-                    <input
-                      type="text"
-                      name="productName"
-                      class="form-control"
-                      id="name"
-                      placeholder="Name"
-                    />
-                  </div>
-                  <div class="form-group mb-3">
-                    <label>Image</label>
-                    <input
-                      type="file"
-                      name="file"
-                      multiple
-                      class="form-control file-upload-info"
-                    />
-                  </div>
-                  <div class="form-group mb-3">
-                    <label for="smallDescription" class="pt-2 pb-2"
-                      >Small Description</label
-                    >
-                    <textarea
-                      class="form-control"
-                      name="smallDescription"
-                      id="small_description"
-                      rows="4"
-                    ></textarea>
-                  </div>
-                  <div class="form-group mb-3">
-                    <label for="productDescription">Description</label>
-                    <textarea
-                      class="form-control"
-                      name="productDescription"
-                      id="description"
-                      rows="4"
-                    ></textarea>
-                  </div>
-                  <!-- details -->
-                  <h4 class="card-title">Details</h4>
-                  <div class="form-group mb-3">
-                    <label for="original_price" class="pt-2 pb-2"
-                      >Original Price</label
-                    >
-                    <input
-                      type="text"
-                      name="original_price"
-                      class="form-control"
-                      id="original_price"
-                      placeholder="Original Price"
-                    />
-                  </div>
-                  <div class="form-group mb-3">
-                    <label for="selling_price" class="pt-2 pb-2"
-                      >Selling Price</label
-                    >
-                    <input
-                      type="text"
-                      name="selling_price"
-                      class="form-control"
-                      id="selling_price"
-                      placeholder="selling Price"
-                    />
-                  </div>
-
-                  <div class="form-group mb-3">
-                    <label for="quantity" class="pt-2 pb-2">Category</label>
-                    <input
-                      type="text"
-                      name="category"
-                      class="form-control"
-                      id="category"
-                      placeholder="Category"
-                    />
-                  </div>
-                  <div class="form-group mb-3">
-                    <label for="quantity" class="pt-2 pb-2">Quantity</label>
-                    <input
-                      type="text"
-                      name="quantity"
-                      class="form-control"
-                      id="quantity"
-                      placeholder="Quantity"
-                    />
-                  </div>
-
-                  <!-- ends -->
-                  <button
-                    type="button"
-                    class="d-flex align-items-center justify-content-center btn btn-primary mr-2 gap-2"
-                    onclick="add()"
-                  >
-                    <div class="submit-text">Submit</div>
-                    <div class="dot-spinner d-none">
-                      <div class="dot-spinner__dot"></div>
-                      <div class="dot-spinner__dot"></div>
-                      <div class="dot-spinner__dot"></div>
-                      <div class="dot-spinner__dot"></div>
-                      <div class="dot-spinner__dot"></div>
-                      <div class="dot-spinner__dot"></div>
-                      <div class="dot-spinner__dot"></div>
-                      <div class="dot-spinner__dot"></div>
+            <div class="col-lg d-flex align-items-strech">
+              <div class="card w-100">
+                <div class="card-body p-4">
+                  <h5 class="card-title fw-semibold mb-4">Orders List</h5>
+                </div>
+                <div class="col-lg d-flex align-items-strech">
+                  <div class="card w-100">
+                    <div class="card-body p-4">
+                      <div
+                        class="table-responsive"
+                        style="
+                          position: relative;
+                          overflow: auto;
+                          width: 100%;
+                          max-height: 500px;
+                          height: 500px;
+                        "
+                      >
+                        <table class="table text-nowrap mb-0 align-middle">
+                          <thead class="text-dark fs-4">
+                            <tr>
+                              <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Order Id</h6>
+                              </th>
+                              <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">
+                                  Date/Time Created
+                                </h6>
+                              </th>
+                              <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Address</h6>
+                              </th>
+                              <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Quantity</h6>
+                              </th>
+                              <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Order Status</h6>
+                              </th>
+                              <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Payment Method</h6>
+                              </th>
+                              <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Action</h6>
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">1</h6>
+                              </td>
+                              <td class="border-bottom-0">
+                                <span class="mb-1">Date/Time</span>
+                              </td>
+                              <td class="border-bottom-0">
+                                <p class="mb-0 fw-normal">Lorem, ipsum.</p>
+                              </td>
+                              <td class="border-bottom-0">
+                                <p class="mb-0 fw-normal">Quantity</p>
+                              </td>
+                              <td class="border-bottom-0">
+                                <p class="mb-0 fw-normal">Status</p>
+                              </td>
+                              <td class="border-bottom-0">
+                                <p class="mb-0 fw-normal">
+                                  Lorem, ipsum dolor.
+                                </p>
+                              </td>
+                              <td class="border-bottom-0">
+                                <a href="./edit-order-status.html">
+                                  <button class="btn btn-primary">Edit</button>
+                                </a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
-                  </button>
-                  <!-- <a href="{{ url('category/view') }}" class="btn btn-light">Cancel</a> -->
-                </form>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -313,18 +270,22 @@
       </div>
     </div>
 
-    <!-- add products  -->
+    <script>
+      window.addEventListener("load", () => {
+        setInterval(() => {
+          if (!localStorage.getItem("token")) {
+            window.location.href = "login.html";
+          }
+        }, 500);
+      });
+    </script>
 
-    <script src="product.js"></script>
-
-    <!-- ends -->
-
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/sidebarmenu.js"></script>
-    <script src="../assets/js/app.min.js"></script>
-    <!-- <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script> -->
-    <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
-    <!-- <script src="../assets/js/dashboard.js"></script> -->
+    <script src="./assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="./assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/sidebarmenu.js"></script>
+    <script src="./assets/js/app.min.js"></script>
+    <!-- <script src="./assets/libs/apexcharts/dist/apexcharts.min.js"></script> -->
+    <script src="./assets/libs/simplebar/dist/simplebar.js"></script>
+    <!-- <script src="./assets/js/dashboard.js"></script> -->
   </body>
 </html>

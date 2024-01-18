@@ -3,13 +3,23 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Orders</title>
+    <title>Hero Slider</title>
     <link
       rel="shortcut icon"
       type="image/png"
-      href="../assets/images/logos/favicon.png"
+      href="./assets/images/logos/favicon.png"
     />
-    <link rel="stylesheet" href="../assets/css/styles.min.css" />
+    <link rel="stylesheet" href="./assets/css/styles.min.css" />
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- sweet alert  -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.3/dist/sweetalert2.all.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.3/dist/sweetalert2.min.css"
+      rel="stylesheet"
+    />
+    <!-- ends -->
   </head>
 
   <body>
@@ -31,7 +41,7 @@
             class="brand-logo d-flex align-items-center justify-content-between"
           >
             <a href="./index.html" class="text-nowrap logo-img">
-              <img src="../assets/images/logos/logo.png" width="180" alt="" />
+              <img src="./assets/images/logos/logo.png" width="180" alt="" />
             </a>
             <div
               class="close-btn d-xl-none d-block sidebartoggler cursor-pointer"
@@ -134,7 +144,7 @@
                     aria-expanded="false"
                   >
                     <img
-                      src="../assets/images/profile/user-1.jpg"
+                      src="./assets/images/profile/user-1.jpg"
                       alt=""
                       width="35"
                       height="35"
@@ -168,8 +178,9 @@
                         <p class="mb-0 fs-3">My Task</p>
                       </a>
                       <a
-                        href="./authentication-login.html"
+                        href="javascript:void(0)"
                         class="btn btn-outline-primary mx-3 mt-2 d-block"
+                        id="logout"
                         >Logout</a
                       >
                     </div>
@@ -183,109 +194,94 @@
         <div class="container-fluid">
           <!--  Row 1 -->
           <div class="row flex-column gap-3">
+            <div class="col d-flex justify-content-end">
+              <a href="./add-hero-slider.html">
+                <button type="button" class="btn btn-primary m-1">
+                  Add Hero SLider
+                </button>
+              </a>
+            </div>
             <div class="col-lg d-flex align-items-strech">
               <div class="card w-100">
                 <div class="card-body p-4">
-                  <h5 class="card-title fw-semibold mb-4">Orders List</h5>
-                </div>
-                <div class="col-lg d-flex align-items-strech">
-                  <div class="card w-100">
-                    <div class="card-body p-4">
-                      <div
-                        class="table-responsive"
-                        style="
-                          position: relative;
-                          overflow: auto;
-                          width: 100%;
-                          max-height: 500px;
-                          height: 500px;
-                        "
-                      >
-                        <table class="table text-nowrap mb-0 align-middle">
-                          <thead class="text-dark fs-4">
-                            <tr>
-                              <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Order Id</h6>
-                              </th>
-                              <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">
-                                  Date/Time Created
-                                </h6>
-                              </th>
-                              <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Address</h6>
-                              </th>
-                              <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Quantity</h6>
-                              </th>
-                              <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Order Status</h6>
-                              </th>
-                              <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Payment Method</h6>
-                              </th>
-                              <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Action</h6>
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">1</h6>
-                              </td>
-                              <td class="border-bottom-0">
-                                <span class="mb-1">Date/Time</span>
-                              </td>
-                              <td class="border-bottom-0">
-                                <p class="mb-0 fw-normal">Lorem, ipsum.</p>
-                              </td>
-                              <td class="border-bottom-0">
-                                <p class="mb-0 fw-normal">Quantity</p>
-                              </td>
-                              <td class="border-bottom-0">
-                                <p class="mb-0 fw-normal">Status</p>
-                              </td>
-                              <td class="border-bottom-0">
-                                <p class="mb-0 fw-normal">
-                                  Lorem, ipsum dolor.
-                                </p>
-                              </td>
-                              <td class="border-bottom-0">
-                                <a href="./edit-order-status.html">
-                                  <button class="btn btn-primary">Edit</button>
-                                </a>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
+                  <h5 class="card-title fw-semibold mb-4">Hero Slider List</h5>
+                  <div
+                    class="table-responsive"
+                    style="
+                      position: relative;
+                      overflow: auto;
+                      width: 100%;
+                      max-height: 500px;
+                      height: 500px;
+                    "
+                  >
+                    <table class="table text-nowrap mb-0 align-middle">
+                      <thead class="text-dark fs-4">
+                        <tr>
+                          <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Id</h6>
+                          </th>
+                          <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Hero slider Name</h6>
+                          </th>
+                          <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">
+                              Hero Slider small description
+                            </h6>
+                          </th>
+                          <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Hero Slider Banner</h6>
+                          </th>
+                          <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Action</h6>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody class="tBody"></tbody>
+                    </table>
                   </div>
+
+                  <!-- loader -->
+                  <div class="loader d-none"></div>
+
+                  <!-- ends -->
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- toaster -->
+
+        <div
+          class="toast position-fixed"
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+          style="top: 10px; right: 10px"
+        >
+          <div class="toast-header justify-content-between">
+            <div class="toast-body">Logged In successfully</div>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="toast"
+              aria-label="Close"
+            ></button>
+          </div>
+        </div>
+        <!-- ends -->
       </div>
     </div>
+    <!-- fetch all products  -->
+    <script src="./heroFetch.js"></script>
+    <!-- <script src="./hero.js"></script> -->
+    <!-- ends -->
+    <script src="./assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="./assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/sidebarmenu.js"></script>
+    <script src="./assets/js/app.min.js"></script>
 
-    <script>
-      window.addEventListener("load", () => {
-        setInterval(() => {
-          if (!localStorage.getItem("token")) {
-            window.location.href = "login.html";
-          }
-        }, 500);
-      });
-    </script>
-
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/sidebarmenu.js"></script>
-    <script src="../assets/js/app.min.js"></script>
-    <!-- <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script> -->
-    <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
-    <!-- <script src="../assets/js/dashboard.js"></script> -->
+    <script src="./assets/libs/simplebar/dist/simplebar.js"></script>
   </body>
 </html>

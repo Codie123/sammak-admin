@@ -3,23 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hero Slider</title>
+    <title>Sammak Admin - Add Products</title>
     <link
       rel="shortcut icon"
       type="image/png"
-      href="../assets/images/logos/favicon.png"
+      href="./assets/images/logos/favicon.png"
     />
-    <link rel="stylesheet" href="../assets/css/styles.min.css" />
-    <link rel="stylesheet" href="../assets/css/styles.css" />
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- sweet alert  -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.3/dist/sweetalert2.all.min.js"></script>
-    <link
-      href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.3/dist/sweetalert2.min.css"
-      rel="stylesheet"
-    />
-    <!-- ends -->
+    <link rel="stylesheet" href="./assets/css/styles.min.css" />
+    <link rel="stylesheet" href="./assets/css/styles.css" />
   </head>
 
   <body>
@@ -41,7 +32,7 @@
             class="brand-logo d-flex align-items-center justify-content-between"
           >
             <a href="./index.html" class="text-nowrap logo-img">
-              <img src="../assets/images/logos/logo.png" width="180" alt="" />
+              <img src="./assets/images/logos/logo.png" width="180" alt="" />
             </a>
             <div
               class="close-btn d-xl-none d-block sidebartoggler cursor-pointer"
@@ -60,7 +51,7 @@
               <li class="sidebar-item">
                 <a
                   class="sidebar-link"
-                  href="./orders.html"
+                  href="./index.html"
                   aria-expanded="false"
                 >
                   <span>
@@ -76,7 +67,7 @@
 
               <li class="sidebar-item">
                 <a
-                  class="sidebar-link"
+                  class="sidebar-link active"
                   href="./product.html"
                   aria-expanded="false"
                 >
@@ -144,7 +135,7 @@
                     aria-expanded="false"
                   >
                     <img
-                      src="../assets/images/profile/user-1.jpg"
+                      src="./assets/images/profile/user-1.jpg"
                       alt=""
                       width="35"
                       height="35"
@@ -178,9 +169,8 @@
                         <p class="mb-0 fs-3">My Task</p>
                       </a>
                       <a
-                        href="javascript:void(0)"
+                        href="./authentication-login.html"
                         class="btn btn-outline-primary mx-3 mt-2 d-block"
-                        id="logout"
                         >Logout</a
                       >
                     </div>
@@ -195,93 +185,146 @@
           <!--  Row 1 -->
           <div class="row flex-column gap-3">
             <div class="col d-flex justify-content-end">
-              <a href="./add-hero-slider.html">
-                <button type="button" class="btn btn-primary m-1">
-                  Add Hero SLider
-                </button>
+              <a href="./product.html">
+                <button type="button" class="btn btn-primary m-1">Back</button>
               </a>
             </div>
-            <div class="col-lg d-flex align-items-strech">
-              <div class="card w-100">
-                <div class="card-body p-4">
-                  <h5 class="card-title fw-semibold mb-4">Hero Slider List</h5>
-                  <div
-                    class="table-responsive"
-                    style="
-                      position: relative;
-                      overflow: auto;
-                      width: 100%;
-                      max-height: 500px;
-                      height: 500px;
-                    "
-                  >
-                    <table class="table text-nowrap mb-0 align-middle">
-                      <thead class="text-dark fs-4">
-                        <tr>
-                          <th class="border-bottom-0">
-                            <h6 class="fw-semibold mb-0">Id</h6>
-                          </th>
-                          <th class="border-bottom-0">
-                            <h6 class="fw-semibold mb-0">Hero slider Name</h6>
-                          </th>
-                          <th class="border-bottom-0">
-                            <h6 class="fw-semibold mb-0">
-                              Hero Slider small description
-                            </h6>
-                          </th>
-                          <th class="border-bottom-0">
-                            <h6 class="fw-semibold mb-0">Hero Slider Banner</h6>
-                          </th>
-                          <th class="border-bottom-0">
-                            <h6 class="fw-semibold mb-0">Action</h6>
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody class="tBody"></tbody>
-                    </table>
+            <h5 class="card-title fw-semibold mb-4">Add Product</h5>
+
+            <div class="card">
+              <div class="card-body">
+                <form
+                  class="forms-sample addForm"
+                  method="POST"
+                  id="productForm"
+                  enctype="multipart/form-data"
+                >
+                  <div class="form-group mb-3">
+                    <label for="productName">Name</label>
+                    <input
+                      type="text"
+                      name="productName"
+                      class="form-control"
+                      id="name"
+                      placeholder="Name"
+                    />
+                  </div>
+                  <div class="form-group mb-3">
+                    <label>Image</label>
+                    <input
+                      type="file"
+                      name="file"
+                      multiple
+                      class="form-control file-upload-info"
+                    />
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="smallDescription" class="pt-2 pb-2"
+                      >Small Description</label
+                    >
+                    <textarea
+                      class="form-control"
+                      name="smallDescription"
+                      id="small_description"
+                      rows="4"
+                    ></textarea>
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="productDescription">Description</label>
+                    <textarea
+                      class="form-control"
+                      name="productDescription"
+                      id="description"
+                      rows="4"
+                    ></textarea>
+                  </div>
+                  <!-- details -->
+                  <h4 class="card-title">Details</h4>
+                  <div class="form-group mb-3">
+                    <label for="original_price" class="pt-2 pb-2"
+                      >Original Price</label
+                    >
+                    <input
+                      type="text"
+                      name="original_price"
+                      class="form-control"
+                      id="original_price"
+                      placeholder="Original Price"
+                    />
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="selling_price" class="pt-2 pb-2"
+                      >Selling Price</label
+                    >
+                    <input
+                      type="text"
+                      name="selling_price"
+                      class="form-control"
+                      id="selling_price"
+                      placeholder="selling Price"
+                    />
                   </div>
 
-                  <!-- loader -->
-                  <div class="loader d-none"></div>
+                  <div class="form-group mb-3">
+                    <label for="quantity" class="pt-2 pb-2">Category</label>
+                    <input
+                      type="text"
+                      name="category"
+                      class="form-control"
+                      id="category"
+                      placeholder="Category"
+                    />
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="quantity" class="pt-2 pb-2">Quantity</label>
+                    <input
+                      type="text"
+                      name="quantity"
+                      class="form-control"
+                      id="quantity"
+                      placeholder="Quantity"
+                    />
+                  </div>
 
                   <!-- ends -->
-                </div>
+                  <button
+                    type="button"
+                    class="d-flex align-items-center justify-content-center btn btn-primary mr-2 gap-2"
+                    onclick="add()"
+                  >
+                    <div class="submit-text">Submit</div>
+                    <div class="dot-spinner d-none">
+                      <div class="dot-spinner__dot"></div>
+                      <div class="dot-spinner__dot"></div>
+                      <div class="dot-spinner__dot"></div>
+                      <div class="dot-spinner__dot"></div>
+                      <div class="dot-spinner__dot"></div>
+                      <div class="dot-spinner__dot"></div>
+                      <div class="dot-spinner__dot"></div>
+                      <div class="dot-spinner__dot"></div>
+                    </div>
+                  </button>
+                  <!-- <a href="{{ url('category/view') }}" class="btn btn-light">Cancel</a> -->
+                </form>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- toaster -->
-
-        <div
-          class="toast position-fixed"
-          role="alert"
-          aria-live="assertive"
-          aria-atomic="true"
-          style="top: 10px; right: 10px"
-        >
-          <div class="toast-header justify-content-between">
-            <div class="toast-body">Logged In successfully</div>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="toast"
-              aria-label="Close"
-            ></button>
-          </div>
-        </div>
-        <!-- ends -->
       </div>
     </div>
-    <!-- fetch all products  -->
-    <script src="./heroFetch.js"></script>
-    <!-- <script src="./hero.js"></script> -->
-    <!-- ends -->
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/sidebarmenu.js"></script>
-    <script src="../assets/js/app.min.js"></script>
 
-    <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+    <!-- add products  -->
+
+    <script src="product.js"></script>
+
+    <!-- ends -->
+
+    <script src="./assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="./assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/sidebarmenu.js"></script>
+    <script src="./assets/js/app.min.js"></script>
+    <!-- <script src="./assets/libs/apexcharts/dist/apexcharts.min.js"></script> -->
+    <script src="./assets/libs/simplebar/dist/simplebar.js"></script>
+    <!-- <script src="./assets/js/dashboard.js"></script> -->
   </body>
 </html>

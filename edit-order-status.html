@@ -3,21 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sammak Admin - Products</title>
+    <title>Edit Order Status</title>
     <link
       rel="shortcut icon"
       type="image/png"
-      href="../assets/images/logos/favicon.png"
+      href="./assets/images/logos/favicon.png"
     />
-    <link rel="stylesheet" href="../assets/css/styles.min.css" />
-    <link rel="stylesheet" href="../assets/css/styles.css" />
-    <!-- sweet alert  -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.3/dist/sweetalert2.all.min.js"></script>
-    <link
-      href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.3/dist/sweetalert2.min.css"
-      rel="stylesheet"
-    />
-    <!-- ends -->
+    <link rel="stylesheet" href="./assets/css/styles.min.css" />
   </head>
 
   <body>
@@ -39,7 +31,7 @@
             class="brand-logo d-flex align-items-center justify-content-between"
           >
             <a href="./index.html" class="text-nowrap logo-img">
-              <img src="../assets/images/logos/logo.png" width="180" alt="" />
+              <img src="./assets/images/logos/logo.png" width="180" alt="" />
             </a>
             <div
               class="close-btn d-xl-none d-block sidebartoggler cursor-pointer"
@@ -57,7 +49,7 @@
               </li>
               <li class="sidebar-item">
                 <a
-                  class="sidebar-link"
+                  class="sidebar-link active"
                   href="./orders.html"
                   aria-expanded="false"
                 >
@@ -142,7 +134,7 @@
                     aria-expanded="false"
                   >
                     <img
-                      src="../assets/images/profile/user-1.jpg"
+                      src="./assets/images/profile/user-1.jpg"
                       alt=""
                       width="35"
                       height="35"
@@ -176,9 +168,8 @@
                         <p class="mb-0 fs-3">My Task</p>
                       </a>
                       <a
-                        href="javascript:void(0)"
+                        href="./authentication-login.html"
                         class="btn btn-outline-primary mx-3 mt-2 d-block"
-                        id="logout"
                         >Logout</a
                       >
                     </div>
@@ -193,92 +184,123 @@
           <!--  Row 1 -->
           <div class="row flex-column gap-3">
             <div class="col d-flex justify-content-end">
-              <a href="./add-product.html">
-                <button type="button" class="btn btn-primary m-1">
-                  Add Products
-                </button>
+              <a href="./orders.html">
+                <button type="button" class="btn btn-primary m-1">Back</button>
               </a>
             </div>
-            <div class="col-lg d-flex align-items-strech">
-              <div class="card w-100">
-                <div class="card-body p-4">
-                  <h5 class="card-title fw-semibold mb-4">Products List</h5>
+            <h5 class="card-title fw-semibold mb-4">Add Product</h5>
 
-                  <div
-                    class="table-responsive"
-                    style="
-                      position: relative;
-                      overflow: auto;
-                      width: 100%;
-                      max-height: 500px;
-                      height: 500px;
-                    "
-                  >
-                    <table class="table text-nowrap mb-0 align-middle">
-                      <thead class="text-dark fs-4">
-                        <tr>
-                          <th class="border-bottom-0">
-                            <h6 class="fw-semibold mb-0">Id</h6>
-                          </th>
-                          <th class="border-bottom-0">
-                            <h6 class="fw-semibold mb-0">Product Name</h6>
-                          </th>
-                          <th class="border-bottom-0">
-                            <h6 class="fw-semibold mb-0">Product Price</h6>
-                          </th>
-                          <th class="border-bottom-0">
-                            <h6 class="fw-semibold mb-0">Product Image</h6>
-                          </th>
-                          <th class="border-bottom-0">
-                            <h6 class="fw-semibold mb-0">Action</h6>
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody class="tBody"></tbody>
-                    </table>
+            <div class="card">
+              <div class="card-body">
+                <form
+                  class="forms-sample"
+                  action=""
+                  method="POST"
+                  enctype="multipart/form-data"
+                >
+                  <div class="form-group mb-3">
+                    <label for="orderId">Order Id</label>
+                    <input
+                      type="text"
+                      name="orderId"
+                      class="form-control"
+                      id="orderId"
+                      placeholder="order Id"
+                    />
                   </div>
 
-                  <div class="loader d-none"></div>
-                </div>
+                  <div class="form-group mb-3">
+                    <label for="Date_created" class="pt-2 pb-2"
+                      >Date/Time Created</label
+                    >
+                    <input type="date" class="form-control" value="" />
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="Address">Address</label>
+                    <textarea
+                      class="form-control"
+                      name="Address"
+                      id="Address"
+                      rows="4"
+                    ></textarea>
+                  </div>
+
+                  <div class="form-group mb-3">
+                    <label for="quantity" class="pt-2 pb-2">Quantity</label>
+                    <input
+                      type="text"
+                      name="quantity"
+                      class="form-control"
+                      id="quantity"
+                      placeholder="Quantity"
+                    />
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="selling_price" class="pt-2 pb-2"
+                      >Order Status</label
+                    >
+                    <select class="form-select fw-semibold">
+                      <option value="Order placed">Order placed</option>
+                      <option value="order accepted">order accepted</option>
+                      <option value="order dispatched">order dispatched</option>
+                      <option value="order delivered">order delivered</option>
+                    </select>
+                  </div>
+                  <div class="form-group mb-3">
+                    <div class="btn-group" data-bs-toggle="buttons">
+                      <label class="btn text-primary font-medium">
+                        <div class="form-check">
+                          <input
+                            type="radio"
+                            id="customRadio4"
+                            name="customRadio"
+                            class="form-check-input"
+                            checked=""
+                          />
+                          <label class="form-check-label" for="customRadio4"
+                            ><span class="d-block d-md-none">1</span
+                            ><span class="d-none d-md-block"
+                              >Cash on delivery
+                            </span></label
+                          >
+                        </div>
+                      </label>
+                      <label class="btn text-primary font-medium">
+                        <div class="form-check">
+                          <input
+                            type="radio"
+                            id="customRadio5"
+                            name="customRadio"
+                            class="form-check-input"
+                          />
+                          <label class="form-check-label" for="customRadio5"
+                            ><span class="d-block d-md-none">2</span
+                            ><span class="d-none d-md-block"
+                              >Online Payment</span
+                            ></label
+                          >
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary mr-2">
+                    update
+                  </button>
+                  <a href="./orders.html" class="btn btn-light">Cancel</a>
+                </form>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- toaster -->
-
-        <div
-          class="toast position-fixed"
-          role="alert"
-          aria-live="assertive"
-          aria-atomic="true"
-          style="top: 10px; right: 10px"
-        >
-          <div class="toast-header justify-content-between">
-            <div class="toast-body">Logged In successfully</div>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="toast"
-              aria-label="Close"
-            ></button>
-          </div>
-        </div>
-        <!-- ends -->
       </div>
     </div>
-
-    <!-- fetch products  -->
-    <script src="getproduct.js"></script>
-    <!-- ends -->
-
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/sidebarmenu.js"></script>
-    <script src="../assets/js/app.min.js"></script>
-    <script src="../assets/js/theme.js"></script>
-    <!-- <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script> -->
-    <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
-    <!-- <script src="../assets/js/dashboard.js"></script> -->
+    <script src="./assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="./assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/sidebarmenu.js"></script>
+    <script src="./assets/js/app.min.js"></script>
+    <!-- <script src="./assets/libs/apexcharts/dist/apexcharts.min.js"></script> -->
+    <script src="./assets/libs/simplebar/dist/simplebar.js"></script>
+    <!-- <script src="./assets/js/dashboard.js"></script> -->
   </body>
 </html>
