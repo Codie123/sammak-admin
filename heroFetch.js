@@ -66,8 +66,6 @@ function heroList(data) {
     let resData = data.result;
 
     resData.forEach((element) => {
-      console.log(element);
-
       const markup = ` <tr>
                           <td class="border-bottom-0">
                             <h6 class="fw-semibold mb-0">${element.id}</h6>
@@ -112,7 +110,7 @@ function heroList(data) {
   document.querySelector(".loader").classList.add("d-none");
 
   editBtn = document.querySelectorAll(".editBtn");
-  console.log(editBtn);
+
   editBtn.forEach((x) => {
     x.addEventListener("click", (e) => {
       e.preventDefault();
@@ -180,7 +178,6 @@ function loadDelete() {
 
   // ends
   async function deleteProduct(id) {
-    console.log(id);
     const token = localStorage.getItem("token");
     const deleteId = id;
 

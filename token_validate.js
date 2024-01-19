@@ -13,7 +13,7 @@ if (payload.exp && currentTimestamp >= payload.exp) {
   window.location.href = "https://admin.sammak.store/index.html";
   // Handle logout or deny access
 } else {
-  console.log("Token is valid. User data:", payload);
+  console.log("Token is valid.");
 
   // Perform the logout action (invalidate the token on the server-side)
   // You might have a database of invalidated tokens or another mechanism
