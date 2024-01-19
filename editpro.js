@@ -2,7 +2,7 @@
 window.addEventListener("load", () => {
   setInterval(() => {
     if (!localStorage.getItem("token")) {
-      window.location.href = "login.html";
+      window.location.href = "https://admin.sammak.store/index.html";
     }
   }, 1000);
 
@@ -118,5 +118,5 @@ function showToastOnNextPage(message, type) {
   localStorage.setItem("nextPageToast", JSON.stringify(toastDetails));
 
   // Redirect to the next page
-  window.location.href = "product.html";
+  window.location.href = "https://admin.sammak.store/product.html";
 }

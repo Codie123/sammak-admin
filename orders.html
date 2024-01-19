@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Orders</title>
+    <title>Sammak - Orders</title>
     <link
       rel="shortcut icon"
       type="image/png"
@@ -270,16 +270,7 @@
       </div>
     </div>
 
-    <script>
-      window.addEventListener("load", () => {
-        setInterval(() => {
-          if (!localStorage.getItem("token")) {
-            window.location.href = "login.html";
-          }
-        }, 500);
-      });
-    </script>
-
+    <script src="./token_validate.js"></script>
     <script src="./assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="./assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/sidebarmenu.js"></script>

@@ -5,7 +5,7 @@ window.addEventListener("load", () => {
   // Toaster
   setInterval(() => {
     if (!localStorage.getItem("token")) {
-      window.location.href = "login.html";
+      window.location.href = "https://admin.sammak.store/index.html";
     }
   }, 1000);
   // ends
@@ -147,7 +147,7 @@ function editHero(data, editId) {
   );
   localStorage.setItem("editData", JSON.stringify(dataFilter));
 
-  window.location.href = "edit-hero.html";
+  window.location.href = "https://admin.sammak.store/edit-hero.html";
 }
 
 // delete modal
@@ -203,7 +203,7 @@ function loadDelete() {
         text: "Your file has been deleted.",
         icon: "success",
       }).then(() => {
-        window.location.href = "hero-slider.html";
+        window.location.href = "https://admin.sammak.store/hero-slider.html";
 
         // showToastOnNextPage(`${data.result}`, `success`);
       });
@@ -238,5 +238,5 @@ function showToastOnNextPage(message, type) {
   localStorage.setItem("nextPageToast", JSON.stringify(toastDetails));
 
   // Redirect to the next page
-  window.location.href = "hero-slider.html";
+  window.location.href = "https://admin.sammak.store/hero-slider.html";
 }

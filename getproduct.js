@@ -5,7 +5,7 @@ window.addEventListener("load", () => {
   // Authenticate User
   setInterval(() => {
     if (!localStorage.getItem("token")) {
-      window.location.href = "login.html";
+      window.location.href = "https://admin.sammak.store/index.html";
     }
     localStorage.removeItem("editproData");
     localStorage.removeItem("editpro");
@@ -132,7 +132,7 @@ function editproduct(data, editId) {
 
   localStorage.setItem("editproData", JSON.stringify(dataFilter));
 
-  window.location.href = "edit-product.html";
+  window.location.href = "https://admin.sammak.store/edit-product.html";
 }
 
 // delete product
@@ -167,7 +167,7 @@ function loadDelete() {
         text: "Your file has been deleted.",
         icon: "success",
       }).then(() => {
-        window.location.href = "product.html";
+        window.location.href = "https://admin.sammak.store/product.html";
 
         // showToastOnNextPage(`${data.result}`, `success`);
       });
@@ -229,5 +229,5 @@ function showToastOnNextPage(message, type) {
   localStorage.setItem("nextPageToast", JSON.stringify(toastDetails));
 
   // Redirect to the next page
-  window.location.href = "product.html";
+  window.location.href = "https://admin.sammak.store/product.html";
 }

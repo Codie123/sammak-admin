@@ -45,8 +45,9 @@ window.addEventListener("load", () => {
             loader.classList.add("d-none");
             toast.classList.add("show");
             toastBody.innerHTML = "Logged in successfully";
+            // console.log(parseJwt(data.result.accessToken));
             localStorage.setItem("token", data.result.accessToken);
-            window.location.href = "index.html";
+            window.location.href = "https://admin.sammak.store/home.html";
           } else {
             log.classList.remove("d-none");
             loader.classList.add("d-none");
@@ -64,3 +65,19 @@ window.addEventListener("load", () => {
     }
   });
 });
+
+// function parseJwt(token) {
+//   var base64Url = token.split(".")[1];
+//   var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+//   var jsonPayload = decodeURIComponent(
+//     window
+//       .atob(base64)
+//       .split("")
+//       .map(function (c) {
+//         return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+//       })
+//       .join("")
+//   );
+
+//   return JSON.parse(jsonPayload);
+// }
