@@ -45,6 +45,7 @@ window.addEventListener("load", () => {
   dataEdit[0].images.forEach((x) => {
     let imgEle = `<img src=${x.imageUrl}  width:"100px"; height="100px">`;
     imageContainer.insertAdjacentHTML("beforeend", imgEle);
+    productImage.value = x.imageUrl;
   });
 
   // call toaster
