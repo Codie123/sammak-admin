@@ -11,7 +11,9 @@ window.addEventListener("load", () => {
   const prname = document.getElementById("name");
   const smDescription = document.querySelector("#small_description");
   const description = document.getElementById("description");
+  const productImage = document.querySelector(".file-upload-info");
   const image = document.querySelector("#refImage");
+
   const imageContainer = document.querySelector("#preview");
   const oriPrice = document.querySelector("#original_price");
   const sellPrice = document.querySelector("#selling_price");

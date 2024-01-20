@@ -1,5 +1,9 @@
 "use strict";
 window.addEventListener("load", () => {
+  if (localStorage.getItem("token")) {
+    window.location.replace("/home.html");
+  }
+
   const formEle = document.querySelector("#lgForm");
   const email = document.querySelector("#adminemail");
   const password = document.querySelector("#adminpassword");
