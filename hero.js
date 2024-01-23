@@ -7,22 +7,17 @@ window.addEventListener("load", () => {
       window.location.href = "https://admin.sammak.store/index.html";
     }
   }, 1000);
-
-  // form.addEventListener("submit", (e) => {
-  //   // e.preventDefault();
-  //   // add();
-  // });
 });
 
 function addHero() {
-  // const token = localStorage.getItem("token");
-  // const config = {
-  //   headers: {
-  //     Accept: "multipart/form-data",
-  //     Authorization: `Bearer ` + token,
-  //   },
-  // };
-  // Make an AJAX request to the Spring Boot backend
+  const heroTitle = document.querySelector("#heroTitle");
+  const heroDescription = document.querySelector("#description");
+  const heroImage = document.querySelector("#file");
+
+  if (heroTitle.value && heroDescription.value && heroImage.files.length != 0) {
+    console.log("All fields Are valid");
+  }
+
   var formData = new FormData(document.getElementById("heroSlider"));
   console.log(formData);
   // fetch(
