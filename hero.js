@@ -15,42 +15,39 @@ function addHero() {
   const heroImage = document.querySelector("#file");
 
   if (heroTitle.value && heroDescription.value && heroImage.files.length != 0) {
-    console.log(heroTitle);
-    console.log(heroDescription);
-    console.log(heroImage.files[0].name);
+    var formData = new FormData(document.getElementById("heroSlider"));
+    console.log(formData);
+    // fetch(
+    //   "https://developmentsamak-production-7c7b.up.railway.app/HeroSlider/addHeroSlider",
+    //   {
+    //     method: "POST",
+    //     body: formData,
+
+    //     headers: {
+    //       // Accept: "*/*",
+    //       Authorization: `Bearer ` + localStorage.getItem("token"),
+    //       Accept: "application/json",
+    //     },
+    //   }
+    // )
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     // Handle the response from the backend
+    //     if (data.status === 200) {
+    //       console.log(data);
+    //       // initiate toaster value
+    //       showToastOnNextPage(`${data.result}`, `${data.message}`);
+    //       // ends
+    //     } else {
+    //       // Handle other conditions if needed
+    //       console.error("Error:", data.errorMessage);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error:", error);
+    //   });
+  } else {
   }
-
-  var formData = new FormData(document.getElementById("heroSlider"));
-  console.log(formData);
-  // fetch(
-  //   "https://developmentsamak-production-7c7b.up.railway.app/HeroSlider/addHeroSlider",
-  //   {
-  //     method: "POST",
-  //     body: formData,
-
-  //     headers: {
-  //       // Accept: "*/*",
-  //       Authorization: `Bearer ` + localStorage.getItem("token"),
-  //       Accept: "application/json",
-  //     },
-  //   }
-  // )
-  //   .then((response) => response.json())
-  //   .then((data) => {
-  //     // Handle the response from the backend
-  //     if (data.status === 200) {
-  //       console.log(data);
-  //       // initiate toaster value
-  //       showToastOnNextPage(`${data.result}`, `${data.message}`);
-  //       // ends
-  //     } else {
-  //       // Handle other conditions if needed
-  //       console.error("Error:", data.errorMessage);
-  //     }
-  //   })
-  //   .catch((error) => {
-  //     console.error("Error:", error);
-  //   });
 }
 
 function showToastOnNextPage(message, type) {
