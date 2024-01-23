@@ -13,12 +13,15 @@ function addHero() {
   const heroTitle = document.querySelector("#heroTitle");
   const heroDescription = document.querySelector("#description");
   const heroImage = document.querySelector("#file");
+  const submitBtn = document.querySelector("#submit");
 
   if (heroTitle.value && heroDescription.value && heroImage.files.length != 0) {
     var formData = new FormData(document.getElementById("heroSlider"));
     console.log(formData);
-    document.querySelector(".submit-text").classList.add("d-none");
-    document.querySelector(".dot-spinner").classList.remove("d-none");
+    submitBtn.innerHTML = `<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>Loading...`;
+    submitBtn.setAttribute("disabled", "true");
+    // document.querySelector(".submit-text").classList.add("d-none");
+    // document.querySelector(".dot-spinner").classList.remove("d-none");
     // fetch(
     //   "https://developmentsamak-production-7c7b.up.railway.app/HeroSlider/addHeroSlider",
     //   {
