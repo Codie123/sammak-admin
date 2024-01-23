@@ -15,7 +15,9 @@ function addHero() {
   const heroImage = document.querySelector("#file");
 
   if (heroTitle.value && heroDescription.value && heroImage.files.length != 0) {
-    console.log("All fields Are valid");
+    console.log(
+      `Form Data:- ${heroTitle} || ${heroDescription} || ${heroImage}`
+    );
   }
 
   var formData = new FormData(document.getElementById("heroSlider"));
