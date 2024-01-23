@@ -14,57 +14,68 @@ window.addEventListener("load", () => {
 });
 
 function add() {
-  // const token = localStorage.getItem("token");
-  // const config = {
-  //   headers: {
-  //     Accept: "multipart/form-data",
-  //     Authorization: `Bearer ` + token,
-  //   },
-  // };
-  // Make an AJAX request to the Spring Boot backend
+  const prName = document.querySelector("#name");
+  const prImage = document.querySelector(".file-upload-info");
+  const prSmDesc = document.querySelector("#small_description");
+  const prDesc = document.querySelector("#description");
+  const prOriprice = document.querySelector("#original_price");
+  const prSelprice = document.querySelector("#selling_price");
+  const prCat = document.querySelector("#category");
+  const prQty = document.querySelector("#quantity");
 
-  var formData = new FormData(document.getElementById("productForm"));
+  const submitBtn = document.querySelector("#submit");
+  if (
+    prName.value &&
+    prImage.files.length != 0 &&
+    prSmDesc.value &&
+    prDesc.value &&
+    prOriprice.value &&
+    prSelprice.value &&
+    prCat.value &&
+    prQty.value
+  ) {
+    var formData = new FormData(document.getElementById("productForm"));
+    submitBtn.innerHTML = `<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>Loading...`;
+    submitBtn.setAttribute("disabled", "true");
+    fetch(
+      "https://developmentsamak-production-7c7b.up.railway.app/admin/addProducts",
+      {
+        method: "POST",
+        body: formData,
 
-  document.querySelector(".submit-text").classList.add("d-none");
-  document.querySelector(".dot-spinner").classList.remove("d-none");
-
-  fetch(
-    "https://developmentsamak-production-7c7b.up.railway.app/admin/addProducts",
-    {
-      method: "POST",
-      body: formData,
-
-      headers: {
-        // Accept: "*/*",
-        Authorization: `Bearer ` + localStorage.getItem("token"),
-        Accept: "application/json",
-      },
-    }
-  )
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        headers: {
+          // Accept: "*/*",
+          Authorization: `Bearer ` + localStorage.getItem("token"),
+          Accept: "application/json",
+        },
       }
-      return response.json();
-    })
-    .then((data) => {
-      // Handle the response from the backend
-      if (data.status === 200) {
-        document.querySelector(".dot-spinner").classList.add("d-none");
-        document.querySelector(".submit-text").classList.remove("d-none");
-        // initiate toaster value
-        showToastOnNextPage(`${data.result}`, `${data.message}`);
-        // ends
-      } else {
-        // Handle other conditions if needed
-        console.error("Error:", data.errorMessage);
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      // Optionally, show an error toaster message
-      // toastr.error("An error occurred while adding the product.");
-    });
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Handle the response from the backend
+        if (data.status === 200) {
+          submitBtn.innerHTML = `Submit`;
+          submitBtn.setAttribute("disabled", "false");
+
+          // initiate toaster value
+          showToastOnNextPage(`${data.result}`, `${data.message}`);
+          // ends
+        } else {
+          // Handle other conditions if needed
+          console.error("Error:", data.errorMessage);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        // Optionally, show an error toaster message
+        // toastr.error("An error occurred while adding the product.");
+      });
+  }
 }
 
 function showToastOnNextPage(message, type) {

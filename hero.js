@@ -20,37 +20,37 @@ function addHero() {
     console.log(formData);
     submitBtn.innerHTML = `<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>Loading...`;
     submitBtn.setAttribute("disabled", "true");
-    // document.querySelector(".submit-text").classList.add("d-none");
-    // document.querySelector(".dot-spinner").classList.remove("d-none");
-    // fetch(
-    //   "https://developmentsamak-production-7c7b.up.railway.app/HeroSlider/addHeroSlider",
-    //   {
-    //     method: "POST",
-    //     body: formData,
 
-    //     headers: {
-    //       // Accept: "*/*",
-    //       Authorization: `Bearer ` + localStorage.getItem("token"),
-    //       Accept: "application/json",
-    //     },
-    //   }
-    // )
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     // Handle the response from the backend
-    //     if (data.status === 200) {
-    //       console.log(data);
-    //       // initiate toaster value
-    //       showToastOnNextPage(`${data.result}`, `${data.message}`);
-    //       // ends
-    //     } else {
-    //       // Handle other conditions if needed
-    //       console.error("Error:", data.errorMessage);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
+    fetch(
+      "https://developmentsamak-production-7c7b.up.railway.app/HeroSlider/addHeroSlider",
+      {
+        method: "POST",
+        body: formData,
+
+        headers: {
+          // Accept: "*/*",
+          Authorization: `Bearer ` + localStorage.getItem("token"),
+          Accept: "application/json",
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the response from the backend
+        if (data.status === 200) {
+          submitBtn.innerHTML = "Submit";
+          submitBtn.setAttribute("disabled", "false");
+          // initiate toaster value
+          showToastOnNextPage(`${data.result}`, `${data.message}`);
+          // ends
+        } else {
+          // Handle other conditions if needed
+          console.error("Error:", data.errorMessage);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   } else {
   }
 }
