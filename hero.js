@@ -17,6 +17,8 @@ function addHero() {
   if (heroTitle.value && heroDescription.value && heroImage.files.length != 0) {
     var formData = new FormData(document.getElementById("heroSlider"));
     console.log(formData);
+    document.querySelector(".submit-text").classList.add("d-none");
+    document.querySelector(".dot-spinner").classList.remove("d-none");
     // fetch(
     //   "https://developmentsamak-production-7c7b.up.railway.app/HeroSlider/addHeroSlider",
     //   {
