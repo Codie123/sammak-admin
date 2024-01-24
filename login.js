@@ -10,20 +10,21 @@ window.addEventListener("load", () => {
 
   // ui elements
 
-  const log = document.querySelector(".log");
-  const loader = document.querySelector(".dot-spinner");
   const toast = document.querySelector(".toast");
   const toastBody = document.querySelector(".toast-body");
+  const submitBtn = document.querySelector("#submit");
+
   // ends
   formEle.addEventListener("submit", (e) => {
     e.preventDefault();
 
     if (email.value === "" || password.value === "") {
-      console.log("please enter the email or password");
+      toast.classList.add("show");
+      toastBody.innerHTML = "please enter the email or password";
     }
     if (email.value && password.value) {
-      log.classList.add("d-none");
-      loader.classList.remove("d-none");
+      submitBtn.innerHTML = `<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>Loading...`;
+      submitBtn.setAttribute("disabled", "true");
 
       fetch(
         "https://developmentsamak-production-7c7b.up.railway.app/v1/auth/login",
@@ -40,16 +41,16 @@ window.addEventListener("load", () => {
       )
         .then((response) => {
           let data = response.json();
-          console.log(data);
+
           return data;
         })
         .then((data) => {
           if (data.result.roleName === "ROLE_Admin") {
-            log.classList.remove("d-none");
-            loader.classList.add("d-none");
+            submitBtn.innerHTML = "submit";
+            submitBtn.setAttribute("disabled", "false");
             toast.classList.add("show");
             toastBody.innerHTML = "Logged in successfully";
-            // console.log(parseJwt(data.result.accessToken));
+
             localStorage.setItem("token", data.result.accessToken);
             window.location.href = "https://admin.sammak.store/home.html";
           } else {
