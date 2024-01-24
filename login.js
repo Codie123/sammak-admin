@@ -61,8 +61,9 @@ window.addEventListener("load", () => {
           }
         })
         .catch((err) => {
-          log.classList.remove("d-none");
-          loader.classList.add("d-none");
+          submitBtn.innerHTML = "Submit";
+          submitBtn.setAttribute("disabled", "false");
+
           toast.classList.add("show");
           toastBody.innerHTML = err;
           console.warn(err);
