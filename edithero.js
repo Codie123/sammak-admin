@@ -26,9 +26,9 @@ window.addEventListener("load", () => {
 
 function addHero() {
   let formData = new FormData(document.getElementById("heroslider"));
-  if (formData) {
-    console.log("Form data is not empty ");
-  }
+  const submitBtn = document.querySelector("#submit");
+  submitBtn.innerHTML = `<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>Loading...`;
+  submitBtn.setAttribute("disabled", "true");
   fetch(
     "https://developmentsamak-production-7c7b.up.railway.app/HeroSlider/updateSlider/" +
       localStorage.getItem("edit"),
@@ -49,6 +49,8 @@ function addHero() {
     })
     .then((data) => {
       if (data.status === 200) {
+        submitBtn.innerHTML = `Submit`;
+        submitBtn.setAttribute("disabled", "false");
         showToastOnNextPage(`${data.result}`, `${data.message}`);
       }
     })
