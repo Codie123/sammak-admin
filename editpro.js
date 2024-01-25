@@ -29,11 +29,6 @@ window.addEventListener("load", () => {
     console.log(dataEdit[0].originalPrice);
   });
 
-  //   title.value = dataEdit[0].heroTitle;
-  //   description.value = dataEdit[0].description;
-  //   image.src = dataEdit[0].imageUrl;
-  //   console.log(dataEdit[0].imageUrl);
-
   prname.value = dataEdit[0].productName;
   smDescription.value = dataEdit[0].smallDescription;
   description.value = dataEdit[0].productDescription;
@@ -45,7 +40,6 @@ window.addEventListener("load", () => {
   dataEdit[0].images.forEach((x) => {
     let imgEle = `<img src=${x.imageUrl}  width:"100px"; height="100px">`;
     imageContainer.insertAdjacentHTML("beforeend", imgEle);
-    productImage.value = x.imageUrl;
   });
 
   // call toaster
@@ -65,9 +59,10 @@ window.addEventListener("load", () => {
 
 function editProduct() {
   let formData = new FormData(document.getElementById("productForm"));
+  const submitBtn = document.querySelector("#submit");
 
-  document.querySelector(".update-text").classList.add("d-none");
-  document.querySelector(".dot-spinner").classList.remove("d-none");
+  submitBtn.innerHTML = `<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>Loading...`;
+  submitBtn.setAttribute("disabled", "true");
 
   fetch(
     "https://developmentsamak-production-7c7b.up.railway.app/admin/updateProductById/" +
@@ -90,18 +85,10 @@ function editProduct() {
     .then((data) => {
       console.log(data);
       if (data.status === 200) {
-        document.querySelector(".update-text").classList.remove("d-none");
-        document.querySelector(".dot-spinner").classList.add("d-none");
+        submitBtn.innerHTML = `Submit`;
+        submitBtn.setAttribute("disabled", "false");
         showToastOnNextPage(`${data.message}`, `success`);
       }
-      // if (data) {
-      //   const jsonData = JSON.parse(data);
-      //   redirectUrl(jsonData);
-      //   console.log("Response:", jsonData);
-      // } else {
-      //   console.log("Empty response received.");
-      //   // Handle empty response if needed
-      // }
     })
     .catch((error) => {
       document.querySelector(".update-text").classList.remove("d-none");
