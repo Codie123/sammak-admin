@@ -15,7 +15,7 @@ function addHero() {
   const heroImage = document.querySelector("#file");
   const submitBtn = document.querySelector("#submit");
 
-  if (heroTitle.value && heroDescription.value && heroImage.files.length != 0) {
+  if (heroTitle.value && heroImage.files.length != 0) {
     var formData = new FormData(document.getElementById("heroSlider"));
     console.log(formData);
     submitBtn.innerHTML = `<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>Loading...`;
