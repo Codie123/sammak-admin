@@ -38,8 +38,12 @@ window.addEventListener("load", () => {
   quantity.value = dataEdit[0].quantity;
 
   dataEdit[0].images.forEach((x) => {
+    let wrapper = document.createElement("div");
+    wrapper.classList.add(".wrapper");
     let imgEle = `<img src=${x.imageUrl} class="img-fluid" id="refImage">`;
-    imageContainer.insertAdjacentHTML("beforeend", imgEle);
+    let icon = `<i class="fa-solid fa-xmark"></i>`;
+    wrapper.innerHTML = `${imgEle} ${icon}`;
+    imageContainer.insertAdjacentHTML("beforeend", wrapper);
   });
 
   // call toaster
