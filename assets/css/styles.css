@@ -20499,23 +20499,21 @@ ul {
 }
 .wrapper i{
     position: absolute;
-    /* background: black; */
-    transform: scale(2.5);
-    color: tomato;
+    background: #00000096;
+    transform: scale(1.5);
+    color: white;
     z-index: 10;
     left: 50%;
-    top: 45%;
+    top: 4%;
     opacity: 0;
     display: none;
+    right: 4%;
+    line-height: normal;
+    padding: 0 2px;
+    cursor: pointer;
 }
-.img-fluid:hover{
-    filter:grayscale(1);
-    opacity: .5;
-}
-.wrapper i:hover{
-    opacity: 1;
-    display: block;
-}
+
+
 
 
 
