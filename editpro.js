@@ -4,6 +4,8 @@ window.addEventListener("load", () => {
     if (!localStorage.getItem("token")) {
       window.location.href = "https://admin.sammak.store/index.html";
     }
+    const primgdeleteAPI =
+      "https://developmentsamak-production-7c7b.up.railway.app/admin/deleteImage/";
   }, 1000);
 
   const formEle = document.querySelector("#productForm");
@@ -20,6 +22,7 @@ window.addEventListener("load", () => {
   const category = document.querySelector("#category");
   const quantity = document.querySelector("#quantity");
 
+  const deleteImg = document.querySelectorAll("#deleteImg");
   const dataEdit = JSON.parse(localStorage.getItem("editproData"));
 
   formEle.addEventListener("submit", (e) => {
@@ -39,13 +42,18 @@ window.addEventListener("load", () => {
 
   dataEdit[0].images.forEach((x) => {
     let imgEle = `<div class="wrapper">
-                    <img src=${x.imageUrl} class="img-fluid" id="refImage">
-                    <i class="fa-solid fa-xmark"></i>
+                    <img src=${x.imageUrl} data-imgid=${x.id} data-productid =${x.productId}  class="img-fluid" id="refImage">
+                    <i class="fa-solid fa-xmark" id="deleteImg"></i>
                   </div>
     `;
-
     imageContainer.insertAdjacentHTML("beforeend", imgEle);
   });
+
+  // delete product Image
+  deleteImg.addEventListener("click", (e) => {
+    console.log(e);
+  });
+  // ends
 
   // call toaster
   const toastDetailsJSON = localStorage.getItem("nextPageToast");
