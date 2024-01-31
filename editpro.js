@@ -43,7 +43,10 @@ window.addEventListener("load", () => {
   dataEdit[0].images.forEach((x) => {
     let imgEle = `<div class="wrapper">
                     <img src=${x.imageUrl} data-imgid=${x.id} data-productid =${x.productId}  class="img-fluid" id="refImage">
-                    <i class="fa-solid fa-xmark" id="deleteImg"></i>
+                    <div id="deleteImg">
+                    <i class="fa-solid fa-xmark" ></i>
+                    
+                    </div>
                   </div>
     `;
     imageContainer.insertAdjacentHTML("beforeend", imgEle);
