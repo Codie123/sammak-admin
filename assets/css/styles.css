@@ -20491,6 +20491,12 @@ ul {
 /* ends */
 
 /* custome css */
+.wrapper{
+    position: relative;
+}
+.img-fluid{
+    z-index: 5;
+}
 .wrapper i{
     position: absolute;
     /* background: black; */
