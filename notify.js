@@ -1,5 +1,5 @@
 const socket = new WebSocket(
-  "ws://https://developmentsamak-production-7c7b.up.railway.app/notify "
+  "ws://https://developmentsamak-production-7c7b.up.railway.app/notify"
 );
 const stompClient = Stomp.over(socket);
 
