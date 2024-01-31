@@ -50,14 +50,6 @@ window.addEventListener("load", () => {
     imageContainer.insertAdjacentHTML("beforeend", imgEle);
   });
 
-  // delete product Image
-  deleteImg.forEach((x) => {
-    x.addEventListener("click", (e) => {
-      console.log(e);
-    });
-  });
-  // ends
-
   // call toaster
   const toastDetailsJSON = localStorage.getItem("nextPageToast");
 
@@ -73,6 +65,13 @@ window.addEventListener("load", () => {
   // ends
 });
 
+// delete product Image
+deleteImg.forEach((x) => {
+  x.addEventListener("click", (e) => {
+    console.log(e);
+  });
+});
+// ends
 function editProduct() {
   let formData = new FormData(document.getElementById("productForm"));
   const submitBtn = document.querySelector("#submit");
