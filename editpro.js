@@ -68,14 +68,89 @@ window.addEventListener("load", () => {
 });
 function initDeletImg() {
   const deleteImg = document.querySelectorAll("#deleteImg");
+
   deleteImg.forEach((x) => {
     x.addEventListener("click", (e) => {
       let imgId = e.target.offsetParent.childNodes[1].dataset.imgid;
       let productId = e.target.offsetParent.childNodes[1].dataset.productid;
-      console.log(imgId);
-      console.log(productId);
+      deleteProduct(imgid, productId);
     });
   });
+}
+
+function loadDelete(id, prid) {
+  // const confirmBtn = document.querySelector("#confirmDelete");
+
+  // confirmBtn.addEventListener("click", () => {
+  //   console.log("clicked");
+  //   deleteProduct(deleteProductId);
+  // });
+  let imageId = id;
+  let productId = prid;
+
+  async function deleteProduct(id, pid) {
+    const token = localStorage.getItem("token");
+    const deleteId = id;
+
+    const response = await fetch(
+      `https://developmentsamak-production-7c7b.up.railway.app/admin/deleteImage/${id}/${pid}`,
+      {
+        method: "DELETE",
+        headers: {
+          Accept: "*/*",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (response.status === 200) {
+      const data = await response.json();
+
+      Swal.fire({
+        title: "Deleted!",
+        text: "Your file has been deleted.",
+        icon: "success",
+      }).then(() => {
+        window.location.href = "https://admin.sammak.store/product.html";
+
+        // showToastOnNextPage(`${data.result}`, `success`);
+      });
+    } else {
+      Swal.fire({
+        title: "Error!",
+        text: `Error: ${response.status} - ${response.statusText}`,
+        icon: "error",
+      });
+    }
+  }
+
+  // sweet alert
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Processing!",
+        text: "Delete in progress.",
+        icon: "info",
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        allowEnterKey: false,
+      });
+      deleteProduct(imageId, productId);
+    } else {
+      // window.location.href = "product.html";
+    }
+  });
+
+  // ends
 }
 function editProduct() {
   let formData = new FormData(document.getElementById("productForm"));
