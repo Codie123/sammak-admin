@@ -74,7 +74,9 @@ async function getProduct() {
       }</span></td><td class="border-bottom-0"><h6 class="fw-semibold mb-0 fs-4">SAR${
         element.sellingPrice
       }</h6></td><td class="border-bottom-0"><div class="d-flex align-items-center gap-2"><img src="${
-        element.images[element.images.length - 1].imageUrl
+        element.images.length > 0
+          ? element.images[element.images.length - 1].imageUrl
+          : ""
       }" width="100px" height="100px"></div></td><td class="border-bottom-0"><a><button class="editBtn btn btn-primary" data-edit=${
         element.id
       }>Edit</button>
