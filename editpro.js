@@ -42,7 +42,7 @@ window.addEventListener("load", () => {
     wrapper.classList.add(".wrapper");
     let imgEle = `<img src=${x.imageUrl} class="img-fluid" id="refImage">`;
     let icon = `<i class="fa-solid fa-xmark"></i>`;
-    wrapper.innerHTML = `${imgEle} ${icon}`;
+    wrapper.innerHTML = imgEle + icon;
     imageContainer.insertAdjacentHTML("beforeend", wrapper);
   });
 
