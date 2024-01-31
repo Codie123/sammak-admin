@@ -111,7 +111,8 @@ function loadDelete(id, prid) {
         text: "Your file has been deleted.",
         icon: "success",
       }).then(() => {
-        window.location.href = "https://admin.sammak.store/product.html";
+        // window.location.href = "https://admin.sammak.store/product.html";
+        window.location.reload();
 
         // showToastOnNextPage(`${data.result}`, `success`);
       });
