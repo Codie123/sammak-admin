@@ -70,7 +70,10 @@ function initDeletImg() {
   const deleteImg = document.querySelectorAll("#deleteImg");
   deleteImg.forEach((x) => {
     x.addEventListener("click", (e) => {
-      console.log(e.target.offsetParent.childNodes[1].dataset);
+      let imgId = e.target.offsetParent.childNodes[1].dataset.imgid;
+      let productId = e.target.offsetParent.childNodes[1].dataset.productid;
+      console.log(imgId);
+      console.log(productId);
     });
   });
 }
