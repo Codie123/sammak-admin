@@ -20503,7 +20503,6 @@ ul {
     transform: scale(1.5);
     color: white;
     z-index: 10;
-    left: 50%;
     top: 4%;
     opacity: 0;
     display: none;
