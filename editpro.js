@@ -38,7 +38,7 @@ window.addEventListener("load", () => {
   quantity.value = dataEdit[0].quantity;
 
   dataEdit[0].images.forEach((x) => {
-    let imgEle = `<img src=${x.imageUrl}  width:"100px"; height="100px">`;
+    let imgEle = `<img src=${x.imageUrl} class="img-fluid>`;
     imageContainer.insertAdjacentHTML("beforeend", imgEle);
   });
 
