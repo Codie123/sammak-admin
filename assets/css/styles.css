@@ -20504,8 +20504,7 @@ ul {
     color: white;
     z-index: 10;
     top: 4%;
-    opacity: 0;
-    display: none;
+    
     right: 4%;
     line-height: normal;
     padding: 0 2px;
