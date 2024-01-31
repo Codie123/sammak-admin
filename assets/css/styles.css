@@ -20516,10 +20516,7 @@ ul {
     opacity: 1;
     display: block;
 }
-.wrapper i:hover,.img-fluid{
-    filter: grayscale(1);
-    opacity: 0.5;
-}
+
 
 
 /* ends */
