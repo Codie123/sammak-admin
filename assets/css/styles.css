@@ -20512,7 +20512,7 @@ ul {
     filter:grayscale(1);
     opacity: .5;
 }
-.img-fluid:hover,.wrapper i,.wrapper i:hover{
+.img-fluid:hover,.wrapper i{
     opacity: 1;
     display: block;
 }
