@@ -22,7 +22,6 @@ window.addEventListener("load", () => {
   const category = document.querySelector("#category");
   const quantity = document.querySelector("#quantity");
 
-  const deleteImg = document.querySelectorAll("#deleteImg");
   const dataEdit = JSON.parse(localStorage.getItem("editproData"));
 
   formEle.addEventListener("submit", (e) => {
@@ -49,6 +48,9 @@ window.addEventListener("load", () => {
     `;
     imageContainer.insertAdjacentHTML("beforeend", imgEle);
   });
+  // delete product Image
+  initDeletImg();
+  // ends
 
   // call toaster
   const toastDetailsJSON = localStorage.getItem("nextPageToast");
@@ -64,14 +66,14 @@ window.addEventListener("load", () => {
   }
   // ends
 });
-
-// delete product Image
-deleteImg.forEach((x) => {
-  x.addEventListener("click", (e) => {
-    console.log(e);
+function initDeletImg() {
+  const deleteImg = document.querySelectorAll("#deleteImg");
+  deleteImg.forEach((x) => {
+    x.addEventListener("click", (e) => {
+      console.log(e);
+    });
   });
-});
-// ends
+}
 function editProduct() {
   let formData = new FormData(document.getElementById("productForm"));
   const submitBtn = document.querySelector("#submit");
