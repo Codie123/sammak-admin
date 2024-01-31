@@ -70,7 +70,7 @@ function initDeletImg() {
   const deleteImg = document.querySelectorAll("#deleteImg");
   deleteImg.forEach((x) => {
     x.addEventListener("click", (e) => {
-      console.log(e.target.offsetParent.childNodes);
+      console.log(e.target.offsetParent.childNodes[1]);
     });
   });
 }
