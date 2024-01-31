@@ -20512,7 +20512,7 @@ ul {
     filter:grayscale(1);
     opacity: .5;
 }
-.img-fluid:hover,.wrapper i{
+.img-fluid:hover,.wrapper i,.wrapper i:hover{
     opacity: 1;
     display: block;
 }
@@ -20520,5 +20520,6 @@ ul {
     filter: grayscale(1);
     opacity: 0.5;
 }
+
 
 /* ends */
