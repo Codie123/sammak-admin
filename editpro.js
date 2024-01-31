@@ -50,8 +50,10 @@ window.addEventListener("load", () => {
   });
 
   // delete product Image
-  deleteImg.addEventListener("click", (e) => {
-    console.log(e);
+  deleteImg.forEach((x) => {
+    x.addEventListener("click", (e) => {
+      console.log(e);
+    });
   });
   // ends
 
