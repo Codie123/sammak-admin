@@ -20510,8 +20510,9 @@ ul {
 }
 .img-fluid:hover{
     filter:grayscale(1);
+    opacity: .5;
 }
-.img-fluid:hover .wrapper i{
+.img-fluid:hover,.wrapper i{
     opacity: 1;
     display: block;
 }
