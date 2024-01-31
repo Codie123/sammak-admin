@@ -73,7 +73,7 @@ function initDeletImg() {
     x.addEventListener("click", (e) => {
       let imgId = e.target.offsetParent.childNodes[1].dataset.imgid;
       let productId = e.target.offsetParent.childNodes[1].dataset.productid;
-      loadDelete(imgid, productId);
+      loadDelete(imgId, productId);
     });
   });
 }
