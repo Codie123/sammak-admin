@@ -41,29 +41,35 @@ window.addEventListener("load", () => {
       )
         .then((response) => {
           let data = response.json();
-          console.log(data);
+
           return data;
         })
         .then((data) => {
-          if (data.result.roleName === "ROLE_Admin") {
-            submitBtn.innerHTML = "submit";
-            submitBtn.setAttribute("disabled", "false");
-            toast.classList.add("show");
-            toastBody.innerHTML = "Logged in successfully";
+          if (data.ok) {
+            if (data.result.roleName === "ROLE_Admin") {
+              submitBtn.innerHTML = "submit";
+              submitBtn.setAttribute("disabled", "false");
+              toast.classList.add("show");
+              toastBody.innerHTML = "Logged in successfully";
 
-            localStorage.setItem("token", data.result.accessToken);
-            window.location.href = "https://admin.sammak.store/home.html";
-          } else {
-            log.classList.remove("d-none");
-            loader.classList.add("d-none");
-            toast.classList.add("show");
-            toastBody.innerHTML = "Please enter a valid user login credential ";
+              localStorage.setItem("token", data.result.accessToken);
+              window.location.href = "https://admin.sammak.store/home.html";
+            } else {
+              submitBtn.innerHTML = "submit";
+              submitBtn.setAttribute("disabled", "false");
+              email.value = "";
+              password.value = "";
+              toast.classList.add("show");
+              toastBody.innerHTML =
+                "Please enter a valid user login credential ";
+            }
           }
         })
         .catch((err) => {
           submitBtn.innerHTML = "Submit";
           submitBtn.setAttribute("disabled", "false");
-
+          email.value = "";
+          password.value = "";
           toast.classList.add("show");
           toastBody.innerHTML = err;
           console.warn(err);
