@@ -41,7 +41,7 @@ window.addEventListener("load", () => {
       )
         .then((response) => {
           let data = response.json();
-
+          console.log(data);
           return data;
         })
         .then((data) => {
