@@ -45,24 +45,21 @@ window.addEventListener("load", () => {
           return data;
         })
         .then((data) => {
-          if (data.ok) {
-            if (data.result.roleName === "ROLE_Admin") {
-              submitBtn.innerHTML = "submit";
-              submitBtn.removeAttribute("disabled");
-              toast.classList.add("show");
-              toastBody.innerHTML = "Logged in successfully";
+          if (data.result.roleName === "ROLE_Admin") {
+            submitBtn.innerHTML = "submit";
+            submitBtn.removeAttribute("disabled");
+            toast.classList.add("show");
+            toastBody.innerHTML = "Logged in successfully";
 
-              localStorage.setItem("token", data.result.accessToken);
-              window.location.href = "https://admin.sammak.store/home.html";
-            } else {
-              submitBtn.innerHTML = "submit";
-              submitBtn.removeAttribute("disabled");
-              email.value = "";
-              password.value = "";
-              toast.classList.add("show");
-              toastBody.innerHTML =
-                "Please enter a valid user login credential ";
-            }
+            localStorage.setItem("token", data.result.accessToken);
+            window.location.href = "https://admin.sammak.store/home.html";
+          } else {
+            submitBtn.innerHTML = "submit";
+            submitBtn.removeAttribute("disabled");
+            email.value = "";
+            password.value = "";
+            toast.classList.add("show");
+            toastBody.innerHTML = "Please enter a valid user login credential ";
           }
         })
         .catch((err) => {
