@@ -222,8 +222,8 @@ function editProduct() {
       }
     })
     .catch((error) => {
-      document.querySelector(".update-text").classList.remove("d-none");
-      document.querySelector(".dot-spinner").classList.add("d-none");
+      submitBtn.innerHTML = `Submit`;
+      submitBtn.setAttribute("disabled", "false");
       console.error("Error:", error);
       // Handle the error, possibly show a user-friendly message
     });
