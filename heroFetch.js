@@ -74,7 +74,7 @@ function heroList(data) {
                             <h6 class="fw-semibold mb-1">${element.heroTitle}</h6>
                           </td>
                           <td class="border-bottom-0">
-                            <h6 class="fw-semibold mb-0 fs-4">${element.description}</h6>
+                            <h6 class="fw-semibold mb-0 fs-4 text-elipses">${element.description}</h6>
                           </td>
                           <td class="border-bottom-0">
                             <div class="d-flex align-items-center gap-2">

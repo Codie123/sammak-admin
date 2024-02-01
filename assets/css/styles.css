@@ -20510,8 +20510,12 @@ ul {
     padding: 0 2px;
     cursor: pointer;
 }
-
-
+.text-elipses{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 205px;
+}
 
 
 
