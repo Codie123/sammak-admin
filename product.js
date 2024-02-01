@@ -52,7 +52,6 @@ function add() {
     )
       .then((response) => {
         if (!response.ok) {
-          formData.reset();
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         return response.json();
@@ -68,12 +67,11 @@ function add() {
           // ends
         } else {
           // Handle other conditions if needed
-          formData.reset();
+
           console.error("Error:", data.errorMessage);
         }
       })
       .catch((error) => {
-        formData.reset();
         console.error("Error:", error);
         // Optionally, show an error toaster message
         // toastr.error("An error occurred while adding the product.");
