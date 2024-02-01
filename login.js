@@ -48,7 +48,7 @@ window.addEventListener("load", () => {
           if (data.ok) {
             if (data.result.roleName === "ROLE_Admin") {
               submitBtn.innerHTML = "submit";
-              submitBtn.setAttribute("disabled", "");
+              submitBtn.removeAttribute("disabled");
               toast.classList.add("show");
               toastBody.innerHTML = "Logged in successfully";
 
@@ -56,7 +56,7 @@ window.addEventListener("load", () => {
               window.location.href = "https://admin.sammak.store/home.html";
             } else {
               submitBtn.innerHTML = "submit";
-              submitBtn.setAttribute("disabled", "");
+              submitBtn.removeAttribute("disabled");
               email.value = "";
               password.value = "";
               toast.classList.add("show");
@@ -67,7 +67,7 @@ window.addEventListener("load", () => {
         })
         .catch((err) => {
           submitBtn.innerHTML = "Submit";
-          submitBtn.setAttribute("disabled", "");
+          submitBtn.removeAttribute("disabled");
           email.value = "";
           password.value = "";
           toast.classList.add("show");
