@@ -11,9 +11,8 @@ window.addEventListener("load", () => {
   const formEle = document.querySelector("#productForm");
   formEle.addEventListener("submit", (e) => {
     e.preventDefault();
-    console.log(dataEdit);
+
     editProduct();
-    console.log(dataEdit[0].originalPrice);
   });
 
   // Get the product to edit
