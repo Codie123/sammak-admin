@@ -9,21 +9,6 @@ window.addEventListener("load", () => {
   }, 1000);
 
   const formEle = document.querySelector("#productForm");
-
-  const prname = document.getElementById("name");
-  const smDescription = document.querySelector("#small_description");
-  const description = document.getElementById("description");
-  const productImage = document.querySelector(".file-upload-info");
-  const image = document.querySelector("#refImage");
-
-  const imageContainer = document.querySelector("#preview");
-  const oriPrice = document.querySelector("#original_price");
-  const sellPrice = document.querySelector("#selling_price");
-  const category = document.querySelector("#category");
-  const quantity = document.querySelector("#quantity");
-
-  const dataEdit = JSON.parse(localStorage.getItem("editproData"));
-
   formEle.addEventListener("submit", (e) => {
     e.preventDefault();
     console.log(dataEdit);
@@ -31,30 +16,12 @@ window.addEventListener("load", () => {
     console.log(dataEdit[0].originalPrice);
   });
 
-  prname.value = dataEdit[0].productName;
-  smDescription.value = dataEdit[0].smallDescription;
-  description.value = dataEdit[0].productDescription;
-  oriPrice.value = dataEdit[0].originalPrice;
-  sellPrice.value = dataEdit[0].sellingPrice;
-  category.value = dataEdit[0].categoryName;
-  quantity.value = dataEdit[0].quantity;
-
-  dataEdit[0].images.forEach((x) => {
-    let imgEle = `<div class="wrapper">
-                    <img src=${x.imageUrl} data-imgid=${x.id} data-productid =${x.productId}  class="img-fluid" id="refImage">
-                    
-                    <i class="fa-solid fa-xmark" id="deleteImg"></i>
-                  </div>
-    `;
-    imageContainer.insertAdjacentHTML("beforeend", imgEle);
-  });
-  // delete product Image
-  initDeletImg();
+  // Get the product to edit
+  getProduct();
   // ends
 
   // call toaster
   const toastDetailsJSON = localStorage.getItem("nextPageToast");
-
   if (toastDetailsJSON) {
     const toastDetails = JSON.parse(toastDetailsJSON);
 
@@ -152,6 +119,75 @@ function loadDelete(id, prid) {
   });
 
   // ends
+}
+async function getProduct() {
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Accept: "*/*",
+      Authorization: `Bearer ` + token,
+    },
+  };
+
+  // all the input field
+  const prname = document.getElementById("name");
+  const productImage = document.querySelector(".file-upload-info");
+  const smDescription = document.querySelector("#small_description");
+  const description = document.getElementById("description");
+  const oriPrice = document.querySelector("#original_price");
+  const sellPrice = document.querySelector("#selling_price");
+  const category = document.querySelector("#category");
+  const quantity = document.querySelector("#quantity");
+
+  const image = document.querySelector("#refImage");
+
+  const imageContainer = document.querySelector("#preview");
+  // ends
+
+  const response = await fetch(
+    "https://developmentsamak-production-7c7b.up.railway.app/Product/post",
+    {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+      config,
+    }
+  );
+
+  const data = await response.json();
+
+  if (data.status === 200) {
+    let resData = data.result;
+    let dataFiltered = resData.filter(
+      (x) => x.id === parseInt(localStorage.getItem("editpro"))
+    );
+
+    dataFiltered.forEach((x) => {
+      prname.value = x.productName;
+      smDescription.value = x.smallDescription;
+      description.value = x.productDescription;
+      oriPrice.value = x.originalPrice;
+      sellPrice.value = x.sellingPrice;
+      category.value = x.categoryName;
+      quantity.value = x.quantity;
+
+      x.images.forEach((x) => {
+        let imgEle = `<div class="wrapper">
+                        <img src=${x.imageUrl} data-imgid=${x.id} data-productid =${x.productId}  class="img-fluid" id="refImage">
+                        
+                        <i class="fa-solid fa-xmark" id="deleteImg"></i>
+                      </div>
+        `;
+        imageContainer.insertAdjacentHTML("beforeend", imgEle);
+      });
+    });
+    initDeletImg();
+  }
+  if (data.status === 404) {
+    let error = data;
+    console.log(data);
+  }
 }
 function editProduct() {
   let formData = new FormData(document.getElementById("productForm"));

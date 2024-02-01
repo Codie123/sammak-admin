@@ -104,7 +104,12 @@ async function getProduct() {
   editBtn.forEach((x) => {
     x.addEventListener("click", (e) => {
       e.preventDefault();
-      editproduct(data, e.target.dataset.edit);
+
+      const data1 = data.result;
+
+      localStorage.setItem("editpro", (data.result.id = editId));
+
+      window.location.href = "https://admin.sammak.store/edit-product.html";
     });
   });
 
@@ -123,19 +128,19 @@ async function getProduct() {
   });
 }
 
-function editproduct(data, editId) {
-  const data1 = data.result;
-  // setting product id
-  localStorage.setItem("editpro", (data.result.id = editId));
-  // filter product
-  let dataFilter = data1.filter(
-    (x) => x.id === parseInt(localStorage.getItem("editpro"))
-  );
+// function editproduct(data, editId) {
+//   const data1 = data.result;
+//   // setting product id
+//   localStorage.setItem("editpro", (data.result.id = editId));
+//   // filter product
+//   let dataFilter = data1.filter(
+//     (x) => x.id === parseInt(localStorage.getItem("editpro"))
+//   );
 
-  localStorage.setItem("editproData", JSON.stringify(dataFilter));
+//   localStorage.setItem("editproData", JSON.stringify(dataFilter));
 
-  window.location.href = "https://admin.sammak.store/edit-product.html";
-}
+//   window.location.href = "https://admin.sammak.store/edit-product.html";
+// }
 
 // delete product
 function loadDelete() {
