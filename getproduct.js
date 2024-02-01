@@ -107,7 +107,7 @@ async function getProduct() {
 
       const data1 = data.result;
 
-      localStorage.setItem("editpro", (data.result.id = editId));
+      localStorage.setItem("editpro", (data.result.id = e.target.dataset.edit));
 
       window.location.href = "https://admin.sammak.store/edit-product.html";
     });
