@@ -94,11 +94,8 @@ function orderList(data) {
       e.preventDefault();
       const data1 = data.result;
 
-      console.log(e.target.dataset.id);
-      //   localStorage.setItem(
-      //     "editpro",
-      //     (data.result.orderId = e.target.dataset.id)
-      //   );
+      localStorage.setItem("viewOrderId", e.target.dataset.id);
+      window.location.href = "https://admin.sammak.store/view-order.html";
     });
   });
 }
