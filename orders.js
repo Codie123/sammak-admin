@@ -33,10 +33,8 @@ async function getOrder() {
   //   document.querySelector(".loader").classList.remove("d-none");
   const token = localStorage.getItem("token");
   const config = {
-    headers: {
-      Accept: "*/*",
-      Authorization: `Bearer ` + token,
-    },
+    Accept: "*/*",
+    Authorization: `Bearer ` + token,
   };
   var requestOptions = {
     method: "GET",
