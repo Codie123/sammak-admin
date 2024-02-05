@@ -47,7 +47,7 @@ async function getOrder() {
     requestOptions
   )
     .then((response) => response.json())
-    .then((result) => (result.status === 200 ? orderList(result) : ""))
+    .then((result) => (result.status === 200 ? orderList(result.result) : ""))
     .catch((error) => console.log("error", error));
 }
 
