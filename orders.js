@@ -53,8 +53,9 @@ async function getOrder() {
 
 function orderList(data) {
   const tableContainer = document.querySelector(".tb-container");
-  console.log([...data].reverse());
-  data.forEach((x) => {
+  let dataCopy = [...data].reverse();
+
+  dataCopy.forEach((x) => {
     let markup = ` <tr>
         <td class="border-bottom-0">
           <h6 class="fw-semibold mb-0">${x.orderId}</h6>
