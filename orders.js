@@ -47,10 +47,13 @@ async function getOrder() {
     requestOptions
   )
     .then((response) => response.json())
-    .then((result) => console.log(result))
+    .then((result) => (result.status === 200 ? orderList(result) : ""))
     .catch((error) => console.log("error", error));
 }
 
+function orderList(data) {
+  console.log(data);
+}
 // toaster function
 // function showToast(message, type) {
 //   const toastContainer = document.querySelector(".toast");
