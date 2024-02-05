@@ -43,6 +43,9 @@ async function getOrder() {
     "https://developmentsamak-production-7c7b.up.railway.app/admin/getAllOrders",
     {
       method: "GET",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
       config,
     }
   );
