@@ -53,17 +53,14 @@ async function getOrder() {
 
 function orderList(data) {
   const tableContainer = document.querySelector(".tb-container");
+  console.log([...data].reverse());
   data.forEach((x) => {
     let markup = ` <tr>
         <td class="border-bottom-0">
           <h6 class="fw-semibold mb-0">${x.orderId}</h6>
         </td>
-        <td class="border-bottom-0">
-          <span class="mb-1">${x.orderedAt}</span>
-        </td>
-        <td class="border-bottom-0">
-          <p class="mb-0 fw-normal">${x.trackId}</p>
-        </td>
+        
+        
         <td class="border-bottom-0">
           <p class="mb-0 fw-normal">SAR${x.totalPrice}</p>
         </td>
@@ -84,8 +81,14 @@ function orderList(data) {
           </a>
         </td>
       </tr>`;
+
     tableContainer.insertAdjacentHTML("beforeend", markup);
   });
+
+  const viewBtn = document.querySelectorAll(".deleteBtn");
+  const deleteBtn = document.querySelector(".deleteBtn");
+
+  viewBtn;
 }
 // toaster function
 // function showToast(message, type) {
