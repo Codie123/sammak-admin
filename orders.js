@@ -46,7 +46,7 @@ async function getOrder() {
     "https://developmentsamak-production-7c7b.up.railway.app/admin/getAllOrders",
     requestOptions
   )
-    .then((response) => response.text())
+    .then((response) => response.json())
     .then((result) => console.log(result))
     .catch((error) => console.log("error", error));
 }
