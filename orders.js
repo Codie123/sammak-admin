@@ -94,10 +94,11 @@ function orderList(data) {
       e.preventDefault();
       const data1 = data.result;
 
-      localStorage.setItem(
-        "editpro",
-        (data.result.orderId = e.target.dataset.id)
-      );
+      console.log(e.target.dataset.id);
+      //   localStorage.setItem(
+      //     "editpro",
+      //     (data.result.orderId = e.target.dataset.id)
+      //   );
     });
   });
 }
