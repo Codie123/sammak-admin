@@ -56,7 +56,7 @@ function orderList(data) {
   let dataCopy = [...data].reverse();
 
   dataCopy.forEach((x) => {
-    let markup = ` <tr>
+    let markup = `<tr>
         <td class="border-bottom-0">
           <h6 class="fw-semibold mb-0">${x.orderId}</h6>
         </td>
@@ -75,10 +75,10 @@ function orderList(data) {
         </td>
         <td class="border-bottom-0">
           <a href="">
-            <button class="btn btn-primary viewBtn">View Order</button>
+            <button class="btn btn-primary viewBtn" data-id=${x.orderId}>View Order</button>
           </a>
           <a href="">
-            <button class="btn btn-primary deleteBtn" >Edit</button>
+            <button class="btn btn-primary updateStatus" >Edit</button>
           </a>
         </td>
       </tr>`;
@@ -86,10 +86,20 @@ function orderList(data) {
     tableContainer.insertAdjacentHTML("beforeend", markup);
   });
 
-  const viewBtn = document.querySelectorAll(".deleteBtn");
-  const deleteBtn = document.querySelector(".deleteBtn");
+  const viewBtn = document.querySelectorAll(".viewBtn");
+  const updateBtn = document.querySelector(".updateStatus");
 
-  viewBtn;
+  viewBtn.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const data1 = data.result;
+
+      localStorage.setItem(
+        "editpro",
+        (data.result.orderId = e.target.dataset.id)
+      );
+    });
+  });
 }
 // toaster function
 // function showToast(message, type) {
