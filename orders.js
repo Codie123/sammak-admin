@@ -76,8 +76,11 @@ function orderList(data) {
           </p>
         </td>
         <td class="border-bottom-0">
-          <a href="./edit-order-status.html">
-            <button class="btn btn-primary">Edit</button>
+          <a href="">
+            <button class="btn btn-primary viewBtn">View Order</button>
+          </a>
+          <a href="">
+            <button class="btn btn-primary deleteBtn" >Edit</button>
           </a>
         </td>
       </tr>`;
