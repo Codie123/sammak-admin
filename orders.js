@@ -52,6 +52,38 @@ async function getOrder() {
 }
 
 function orderList(data) {
+  const tableContainer = document.querySelector(".tb-container");
+  data.forEach((x) => {
+    console.log(x);
+    //     let markup =` <tr>
+    //     <td class="border-bottom-0">
+    //       <h6 class="fw-semibold mb-0">${x.}</h6>
+    //     </td>
+    //     <td class="border-bottom-0">
+    //       <span class="mb-1">Date/Time</span>
+    //     </td>
+    //     <td class="border-bottom-0">
+    //       <p class="mb-0 fw-normal">Lorem, ipsum.</p>
+    //     </td>
+    //     <td class="border-bottom-0">
+    //       <p class="mb-0 fw-normal">Quantity</p>
+    //     </td>
+    //     <td class="border-bottom-0">
+    //       <p class="mb-0 fw-normal">Status</p>
+    //     </td>
+    //     <td class="border-bottom-0">
+    //       <p class="mb-0 fw-normal">
+    //         Lorem, ipsum dolor.
+    //       </p>
+    //     </td>
+    //     <td class="border-bottom-0">
+    //       <a href="./edit-order-status.html">
+    //         <button class="btn btn-primary">Edit</button>
+    //       </a>
+    //     </td>
+    //   </tr>`
+  });
+
   console.log(data);
 }
 // toaster function
