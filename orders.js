@@ -65,7 +65,7 @@ function orderList(data) {
           <p class="mb-0 fw-normal">${x.trackId}</p>
         </td>
         <td class="border-bottom-0">
-          <p class="mb-0 fw-normal">${x.totalPrice}</p>
+          <p class="mb-0 fw-normal">SAR${x.totalPrice}</p>
         </td>
         <td class="border-bottom-0">
           <p class="mb-0 fw-normal">${x.status}</p>
