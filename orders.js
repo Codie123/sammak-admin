@@ -12,7 +12,7 @@ window.addEventListener("load", () => {
     localStorage.removeItem("token");
   });
   // ends
-
+  getOrder();
   // call toaster
   const toastDetailsJSON = localStorage.getItem("nextPageToast");
 
