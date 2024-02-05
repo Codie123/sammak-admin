@@ -38,20 +38,19 @@ async function getOrder() {
       Authorization: `Bearer ` + token,
     },
   };
+  var requestOptions = {
+    method: "GET",
+    headers: config,
+    redirect: "follow",
+  };
 
-  const response = await fetch(
+  fetch(
     "https://developmentsamak-production-7c7b.up.railway.app/admin/getAllOrders",
-    {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-      config,
-    }
-  );
-
-  const data = await response.json();
-  console.log(data);
+    requestOptions
+  )
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
 }
 
 // toaster function
