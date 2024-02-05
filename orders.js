@@ -54,37 +54,35 @@ async function getOrder() {
 function orderList(data) {
   const tableContainer = document.querySelector(".tb-container");
   data.forEach((x) => {
-    console.log(x);
-    //     let markup =` <tr>
-    //     <td class="border-bottom-0">
-    //       <h6 class="fw-semibold mb-0">${x.}</h6>
-    //     </td>
-    //     <td class="border-bottom-0">
-    //       <span class="mb-1">Date/Time</span>
-    //     </td>
-    //     <td class="border-bottom-0">
-    //       <p class="mb-0 fw-normal">Lorem, ipsum.</p>
-    //     </td>
-    //     <td class="border-bottom-0">
-    //       <p class="mb-0 fw-normal">Quantity</p>
-    //     </td>
-    //     <td class="border-bottom-0">
-    //       <p class="mb-0 fw-normal">Status</p>
-    //     </td>
-    //     <td class="border-bottom-0">
-    //       <p class="mb-0 fw-normal">
-    //         Lorem, ipsum dolor.
-    //       </p>
-    //     </td>
-    //     <td class="border-bottom-0">
-    //       <a href="./edit-order-status.html">
-    //         <button class="btn btn-primary">Edit</button>
-    //       </a>
-    //     </td>
-    //   </tr>`
+    let markup = ` <tr>
+        <td class="border-bottom-0">
+          <h6 class="fw-semibold mb-0">${x.orderId}</h6>
+        </td>
+        <td class="border-bottom-0">
+          <span class="mb-1">${x.orderedAt}</span>
+        </td>
+        <td class="border-bottom-0">
+          <p class="mb-0 fw-normal">${x.trackId}</p>
+        </td>
+        <td class="border-bottom-0">
+          <p class="mb-0 fw-normal">${x.totalPrice}</p>
+        </td>
+        <td class="border-bottom-0">
+          <p class="mb-0 fw-normal">${x.status}</p>
+        </td>
+        <td class="border-bottom-0">
+          <p class="mb-0 fw-normal">
+           ${x.paymentMode}
+          </p>
+        </td>
+        <td class="border-bottom-0">
+          <a href="./edit-order-status.html">
+            <button class="btn btn-primary">Edit</button>
+          </a>
+        </td>
+      </tr>`;
+    tableContainer.insertAdjacentHTML("beforeend", markup);
   });
-
-  console.log(data);
 }
 // toaster function
 // function showToast(message, type) {
