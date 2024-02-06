@@ -97,25 +97,23 @@ async function getOrderById(id) {
       tableContainer.insertAdjacentHTML("beforeend", markup);
     });
 
-    resData.forEach((x) => {
-      const markup = `<h6>${x.shippingresponse.firstName} ${x.shippingresponse.lastName}</h6>
-      <p>${x.shippingresponse.email}</p>
-      <p>${x.shippingresponse.street1}</p>
-      <p>${x.shippingresponse.city}</p>
-      <p>${x.shippingresponse.state}</p>
-      <p>${x.shippingresponse.phone}</p>
-      <p>${x.shippingresponse.country}</p>
+    const markup = `<h6>${resData.shippingresponse.firstName} ${resData.shippingresponse.lastName}</h6>
+      <p>${resData.shippingresponse.email}</p>
+      <p>${resData.shippingresponse.street1}</p>
+      <p>${resData.shippingresponse.city}</p>
+      <p>${resData.shippingresponse.state}</p>
+      <p>${resData.shippingresponse.phone}</p>
+      <p>${resData.shippingresponse.country}</p>
 
-      <p>${x.shippingresponse.zip}</p>`;
-      ctCard.insertAdjacentHTML("beforeend", markup);
+      <p>${resData.shippingresponse.zip}</p>`;
+    ctCard.insertAdjacentHTML("beforeend", markup);
 
-      const markup2 = `
-      <p>Payment Method - ${x.paymentMode}</p>
-      <p>status - ${x.status}</p>
-      <p>Total Price - ${x.totalPrice}</p>`;
+    const markup2 = `
+      <p>Payment Method - ${resData.paymentMode}</p>
+      <p>status - ${resData.status}</p>
+      <p>Total Price - ${resData.totalPrice}</p>`;
 
-      ctCard2.insertAdjacentHTML("beforeend", markup2);
-    });
+    ctCard2.insertAdjacentHTML("beforeend", markup2);
   }
   if (data.status === 404) {
     tableContainer.insertAdjacentHTML(
