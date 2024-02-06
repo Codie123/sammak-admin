@@ -196,7 +196,8 @@
             <div class="card">
               <div class="card-body">
                 <form
-                  class="forms-sample addForm"
+                  novalidate=""
+                  class="forms-sample addForm needs-validation"
                   method="POST"
                   id="productForm"
                   enctype="multipart/form-data"
@@ -211,6 +212,9 @@
                       placeholder="Name"
                       required
                     />
+                    <div class="invalid-tooltip">
+                      Please provide a Product Name.
+                    </div>
                   </div>
                   <div class="form-group mb-3">
                     <label>Image</label>
@@ -326,6 +330,7 @@
     <script src="./assets/js/app.min.js"></script>
     <!-- <script src="./assets/libs/apexcharts/dist/apexcharts.min.js"></script> -->
     <script src="./assets/libs/simplebar/dist/simplebar.js"></script>
+    <script src="./assets/js/plugins/bootstrap-validation-init.js"></script>
     <!-- <script src="./assets/js/dashboard.js"></script> -->
   </body>
 </html>
