@@ -38,6 +38,8 @@ window.addEventListener("load", () => {
 });
 async function getOrderById(id) {
   const tableContainer = document.querySelector(".tBody");
+  const ctCard = document.querySelector(".coust-details-I");
+  const ctCard2 = document.querySelector(".coust-details-II");
   const token = localStorage.getItem("token");
   const config = {
     Accept: "*/*",
@@ -63,7 +65,7 @@ async function getOrderById(id) {
     let resData = data.result;
     console.log(resData);
     let productInfo = [...resData.orderItemResponseList];
-
+    let customerInfo = [...resData.shippingresponse];
     productInfo.forEach((x) => {
       const markup = `<tr>
         <td class="ps-0">
@@ -93,6 +95,28 @@ async function getOrderById(id) {
       </tr>`;
 
       tableContainer.insertAdjacentHTML("beforeend", markup);
+    });
+
+    customerInfo.forEach((x) => {
+      const markup = `<h6>${x.firstName} ${x.lastName}</h6>
+      <p>${x.email}</p>
+      <p>${x.street1}</p>
+      <p>${x.city}</p>
+      <p>${x.state}</p>
+      <p>${x.phone}</p>
+      <p>${x.country}</p>
+
+      <p>${x.zip}</p>`;
+      ctCard.insertAdjacentHTML("beforeend", markup);
+    });
+
+    resData.forEach((x) => {
+      const markup = `
+        <p>Payment Method - ${x.paymentMode}</p>
+        <p>status - ${x.status}</p>
+        <p>Total Price - ${x.totalPrice}</p>`;
+
+      ctCard2.insertAdjacentHTML("beforeend", markup);
     });
   }
   if (data.status === 404) {
