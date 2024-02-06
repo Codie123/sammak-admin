@@ -108,10 +108,8 @@ function orderList(data) {
 async function getOrderById(id) {
   const token = localStorage.getItem("token");
   const config = {
-    headers: {
-      Accept: "*/*",
-      Authorization: `Bearer ` + token,
-    },
+    Accept: "*/*",
+    Authorization: `Bearer ` + token,
   };
 
   const requestOptions = {
