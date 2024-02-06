@@ -44,10 +44,13 @@ async function getOrderById(id) {
       Authorization: `Bearer ` + token,
     },
   };
+  var formdata = new FormData();
+  formdata.append("trackId", `${id}`);
 
   const requestOptions = {
     method: "GET",
     headers: config,
+    body: formdata,
     redirect: "follow",
   };
   const tableContainer = document.querySelector(".tBody");
