@@ -17,7 +17,7 @@ window.addEventListener("load", () => {
   // ends
 
   // token
-  getOrderById(id);
+  getOrderById(localStorage.getItem("orderId"));
   // ends
 
   // call toaster
