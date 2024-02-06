@@ -29,13 +29,16 @@ window.addEventListener("load", () => {
   }
   // ends
 });
+
 async function getOrder() {
   //   document.querySelector(".loader").classList.remove("d-none");
+
   const token = localStorage.getItem("token");
   const config = {
     Accept: "*/*",
     Authorization: `Bearer ` + token,
   };
+
   var requestOptions = {
     method: "GET",
     headers: config,
@@ -53,6 +56,7 @@ async function getOrder() {
 
 function orderList(data) {
   const tableContainer = document.querySelector(".tb-container");
+
   let dataCopy = [...data].reverse();
 
   dataCopy.forEach((x) => {
@@ -60,7 +64,9 @@ function orderList(data) {
         <td class="border-bottom-0">
           <h6 class="fw-semibold mb-0">${x.orderId}</h6>
         </td>
-        
+        <td class="border-bottom-0">
+        <p class="mb-0 fw-normal">SAR${x.orderedAt}</p>
+      </td>
         
         <td class="border-bottom-0">
           <p class="mb-0 fw-normal">SAR${x.totalPrice}</p>
@@ -87,6 +93,7 @@ function orderList(data) {
   });
 
   const viewBtn = document.querySelectorAll(".viewBtn");
+
   const updateBtn = document.querySelector(".updateStatus");
 
   viewBtn.forEach((btn) => {
@@ -99,7 +106,9 @@ function orderList(data) {
     });
   });
 }
+
 // toaster function
+
 // function showToast(message, type) {
 //   const toastContainer = document.querySelector(".toast");
 //   // Create a new toast element
@@ -108,7 +117,9 @@ function orderList(data) {
 //   toastContainer.classList.add("show");
 //   toastContainer.classList.add(type);
 // }
+
 // ends
+
 // function showToastOnNextPage(message, type) {
 //   const toastDetails = {
 //     message: message,
