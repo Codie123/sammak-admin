@@ -45,7 +45,7 @@ async function getOrderById(id) {
   const tableContainer = document.querySelector(".tBody");
 
   const response = await fetch(
-    `https://developmentsamak-production-7c7b.up.railway.app/admin/getOrderByTrackId?trackId=${id}`,
+    `https://developmentsamak-production-7c7b.up.railway.app/admin/getOrderByTrackId/${id}`,
     {
       method: "GET",
       config,
