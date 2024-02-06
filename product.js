@@ -1,8 +1,7 @@
 "use strict";
 window.addEventListener("load", () => {
   const form = document.querySelector(".addForm");
-  const toast = document.querySelector(".toast");
-  const toastBody = document.querySelector(".toast-body");
+
   setInterval(() => {
     if (!localStorage.getItem("token")) {
       window.location.href = "https://admin.sammak.store/index.html";
@@ -23,7 +22,8 @@ function add() {
   const prSelprice = document.querySelector("#selling_price");
   const prCat = document.querySelector("#category");
   const prQty = document.querySelector("#quantity");
-
+  const toast = document.querySelector(".toast");
+  const toastBody = document.querySelector(".toast-body");
   const submitBtn = document.querySelector("#submit");
 
   // Form validation logic
