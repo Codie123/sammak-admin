@@ -1,4 +1,5 @@
 window.addEventListener("load", () => {
+  const tableContainer = document.querySelector(".tBody");
   // Authenticate User
   setInterval(() => {
     if (!localStorage.getItem("token")) {
@@ -49,7 +50,7 @@ async function getOrderById(id) {
 
     redirect: "follow",
   };
-  const tableContainer = document.querySelector(".tBody");
+  //   const tableContainer = document.querySelector(".tBody");
 
   const response = await fetch(
     `https://developmentsamak-production-7c7b.up.railway.app/admin/getOrderByTrackId?trackId=${id}`,
