@@ -14,7 +14,7 @@ window.addEventListener("load", () => {
   // ends
 
   // Call getOrder function for the first page
-  getOrder(1);
+  getOrder();
 
   // call toaster
   const toastDetailsJSON = localStorage.getItem("nextPageToast");
@@ -31,7 +31,7 @@ window.addEventListener("load", () => {
   // ends
 });
 
-async function getOrder(page) {
+async function getOrder() {
   const token = localStorage.getItem("token");
   const config = {
     Accept: "*/*",
@@ -45,7 +45,7 @@ async function getOrder(page) {
   };
 
   fetch(
-    `https://developmentsamak-production-7c7b.up.railway.app/admin/getAllOrders?page=${page}`,
+    `https://developmentsamak-production-7c7b.up.railway.app/admin/getAllOrders`,
     requestOptions
   )
     .then((response) => response.json())
@@ -58,8 +58,8 @@ function orderList(data) {
 
   // Clear previous data
   tableContainer.innerHTML = "";
-
-  data.forEach((x) => {
+  let dtcpy = [...data].reverse();
+  dtcpy.forEach((x) => {
     let markup = `<tr>
           <td class="border-bottom-0">
             <h6 class="fw-semibold mb-0">${x.orderId}</h6>
@@ -93,29 +93,13 @@ function orderList(data) {
     tableContainer.insertAdjacentHTML("beforeend", markup);
   });
 
-  // Display pagination
-  displayPagination();
-}
-
-function displayPagination() {
-  const paginationContainer = document.getElementById("pagination-container");
-  paginationContainer.innerHTML = "";
-
-  const totalPages = 10; // Assuming there are 10 pages for example
-
-  for (let i = 1; i <= totalPages; i++) {
-    const li = document.createElement("li");
-    li.classList.add("page-item");
-    const link = document.createElement("a");
-    link.classList.add("page-link");
-    link.href = "#";
-    link.textContent = i;
-    li.appendChild(link);
-    paginationContainer.appendChild(li);
-
-    // Add click event listener to each page link
-    link.addEventListener("click", () => {
-      getOrder(i);
+  // view btn
+  const viewBtn = document.querySelectorAll(".viewBtn");
+  viewBtn.forEach((x) => {
+    x.addEventListener("click", (e) => {
+      e.preventDefault();
+      localStorage.setItem("orderId", e.target.datset.id);
+      window.location.href("https://admin.sammak.store/view-order.html");
     });
-  }
+  });
 }
