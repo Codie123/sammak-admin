@@ -61,36 +61,38 @@ async function getOrderById(id) {
   if (data.status === 200) {
     let resData = data.result;
     console.log(resData);
-    // resData.forEach((x) => {
-    //   const markup = `  <tr>
-    //     <td class="ps-0">
-    //       <div class="d-flex align-items-center">
-    //         <div class="me-2 pe-1">
-    //           <img
-    //             src="../assets/images/products/product-1.jpg"
-    //             class="rounded-2"
-    //             width="48"
-    //             height="48"
-    //             alt=""
-    //           />
-    //         </div>
-    //         <div>
-    //           <h6 class="fw-semibold mb-1">Minecraf App</h6>
-    //           <p class="fs-2 mb-0 text-muted">Jason Roy</p>
-    //         </div>
-    //       </div>
-    //     </td>
-    //     <td>
-    //       <p class="mb-0 fs-3 text-dark">qty</p>
-    //     </td>
+    let productInfo = [...resData.orderItemResponseList];
 
-    //     <td>
-    //       <p class="fs-3 text-dark mb-0">$3.5k</p>
-    //     </td>
-    //   </tr>`;
+    productInfo.forEach((x) => {
+      const markup = `<tr>
+        <td class="ps-0">
+          <div class="d-flex align-items-center">
+            <div class="me-2 pe-1">
+              <img
+                src="${x.imageUrl}"
+                class="rounded-2"
+                width="48"
+                height="48"
+                alt=""
+              />
+            </div>
+            <div>
+              <h6 class="fw-semibold mb-1">${x.productName}</h6>
+              <p class="fs-2 mb-0 text-muted">${x.cleaningType}</p>
+            </div>
+          </div>
+        </td>
+        <td>
+          <p class="mb-0 fs-3 text-dark">${x.quantity}</p>
+        </td>
 
-    //   tableContainer.insertAdjacentHTML("beforeend", markup);
-    // });
+        <td>
+          <p class="fs-3 text-dark mb-0"></p>
+        </td>
+      </tr>`;
+
+      tableContainer.insertAdjacentHTML("beforeend", markup);
+    });
   }
   if (data.status === 404) {
     tableContainer.insertAdjacentHTML(
