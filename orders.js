@@ -13,7 +13,8 @@ window.addEventListener("load", () => {
   });
   // ends
 
-  getOrder();
+  // Call getOrder function for the first page
+  getOrder(1);
 
   // call toaster
   const toastDetailsJSON = localStorage.getItem("nextPageToast");
@@ -30,23 +31,21 @@ window.addEventListener("load", () => {
   // ends
 });
 
-async function getOrder() {
-  //   document.querySelector(".loader").classList.remove("d-none");
-
+async function getOrder(page) {
   const token = localStorage.getItem("token");
   const config = {
     Accept: "*/*",
     Authorization: `Bearer ` + token,
   };
 
-  var requestOptions = {
+  const requestOptions = {
     method: "GET",
     headers: config,
     redirect: "follow",
   };
 
   fetch(
-    "https://developmentsamak-production-7c7b.up.railway.app/admin/getAllOrders",
+    `https://developmentsamak-production-7c7b.up.railway.app/admin/getAllOrders?page=${page}`,
     requestOptions
   )
     .then((response) => response.json())
@@ -57,79 +56,66 @@ async function getOrder() {
 function orderList(data) {
   const tableContainer = document.querySelector(".tb-container");
 
-  let dataCopy = [...data].reverse();
+  // Clear previous data
+  tableContainer.innerHTML = "";
 
-  dataCopy.forEach((x) => {
+  data.forEach((x) => {
     let markup = `<tr>
-        <td class="border-bottom-0">
-          <h6 class="fw-semibold mb-0">${x.orderId}</h6>
+          <td class="border-bottom-0">
+            <h6 class="fw-semibold mb-0">${x.orderId}</h6>
+          </td>
+          <td class="border-bottom-0">
+          <p class="mb-0 fw-normal">${x.orderedAt}</p>
         </td>
         <td class="border-bottom-0">
-        <p class="mb-0 fw-normal">${x.orderedAt}</p>
-      </td>
-      <td class="border-bottom-0">
-        <p class="mb-0 fw-normal">${x.shippingresponse.firstName} ${x.shippingresponse.lastName}</p>
-      </td>
-        <td class="border-bottom-0">
-          <p class="mb-0 fw-normal">SAR${x.totalPrice}</p>
+          <p class="mb-0 fw-normal">${x.shippingresponse.firstName} ${x.shippingresponse.lastName}</p>
         </td>
-        <td class="border-bottom-0">
-          <p class="mb-0 fw-normal">${x.status}</p>
-        </td>
-        <td class="border-bottom-0">
-          <p class="mb-0 fw-normal">
-           ${x.paymentMode}
-          </p>
-        </td>
-        <td class="border-bottom-0">
-          <a href="">
-            <button class="btn btn-primary viewBtn" data-id=${x.orderId}>View Order</button>
-          </a>
-          <a href="">
-            <button class="btn btn-primary updateStatus" >Edit</button>
-          </a>
-        </td>
-      </tr>`;
+          <td class="border-bottom-0">
+            <p class="mb-0 fw-normal">SAR${x.totalPrice}</p>
+          </td>
+          <td class="border-bottom-0">
+            <p class="mb-0 fw-normal">${x.status}</p>
+          </td>
+          <td class="border-bottom-0">
+            <p class="mb-0 fw-normal">
+             ${x.paymentMode}
+            </p>
+          </td>
+          <td class="border-bottom-0">
+            <a href="">
+              <button class="btn btn-primary viewBtn" data-id=${x.orderId}>View Order</button>
+            </a>
+            <a href="">
+              <button class="btn btn-primary updateStatus" >Edit</button>
+            </a>
+          </td>
+        </tr>`;
     tableContainer.insertAdjacentHTML("beforeend", markup);
   });
 
-  const viewBtn = document.querySelectorAll(".viewBtn");
-
-  const updateBtn = document.querySelector(".updateStatus");
-
-  viewBtn.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const data1 = data.result;
-
-      localStorage.setItem("viewOrderId", e.target.dataset.id);
-      window.location.href = "https://admin.sammak.store/view-order.html";
-    });
-  });
+  // Display pagination
+  displayPagination();
 }
 
-// toaster function
+function displayPagination() {
+  const paginationContainer = document.getElementById("pagination-container");
+  paginationContainer.innerHTML = "";
 
-// function showToast(message, type) {
-//   const toastContainer = document.querySelector(".toast");
-//   // Create a new toast element
-//   const toastBd = document.querySelector(".toast-body");
-//   toastBd.innerHTML = message;
-//   toastContainer.classList.add("show");
-//   toastContainer.classList.add(type);
-// }
+  const totalPages = 10; // Assuming there are 10 pages for example
 
-// ends
+  for (let i = 1; i <= totalPages; i++) {
+    const li = document.createElement("li");
+    li.classList.add("page-item");
+    const link = document.createElement("a");
+    link.classList.add("page-link");
+    link.href = "#";
+    link.textContent = i;
+    li.appendChild(link);
+    paginationContainer.appendChild(li);
 
-// function showToastOnNextPage(message, type) {
-//   const toastDetails = {
-//     message: message,
-//     type: type,
-//   };
-
-//   // Store the toast details in local storage
-//   localStorage.setItem("nextPageToast", JSON.stringify(toastDetails));
-
-//   // Redirect to the next page
-//   window.location.href = "https://admin.sammak.store/hero-slider.html";
-// }
+    // Add click event listener to each page link
+    link.addEventListener("click", () => {
+      getOrder(i);
+    });
+  }
+}
