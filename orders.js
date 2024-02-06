@@ -100,7 +100,7 @@ function orderList(data) {
       e.preventDefault();
       let id = e.target.dataset.id;
       localStorage.setItem("orderId", id);
-      window.location.redirect("https://admin.sammak.store/view-order.html");
+      window.location.href = "https://admin.sammak.store/view-order.html";
     });
   });
 }
