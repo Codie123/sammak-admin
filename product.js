@@ -8,8 +8,8 @@ window.addEventListener("load", () => {
     }
   }, 1000);
   form.addEventListener("submit", (e) => {
-    // e.preventDefault();
-    add();
+    e.preventDefault(); // Prevent the default form submission
+    add(); // Call the add function for form validation and submission
   });
 });
 
@@ -24,6 +24,8 @@ function add() {
   const prQty = document.querySelector("#quantity");
 
   const submitBtn = document.querySelector("#submit");
+
+  // Form validation logic
   if (
     prName.value &&
     prImage.files.length != 0 &&
@@ -44,7 +46,6 @@ function add() {
         body: formData,
 
         headers: {
-          // Accept: "*/*",
           Authorization: `Bearer ` + localStorage.getItem("token"),
           Accept: "application/json",
         },
@@ -57,25 +58,22 @@ function add() {
         return response.json();
       })
       .then((data) => {
-        // Handle the response from the backend
         if (data.status === 200) {
           submitBtn.innerHTML = `Submit`;
-          submitBtn.setAttribute("disabled", "false");
+          submitBtn.removeAttribute("disabled"); // Remove the disabled attribute
 
           // initiate toaster value
           showToastOnNextPage(`${data.result}`, `${data.message}`);
-          // ends
         } else {
-          // Handle other conditions if needed
-
           console.error("Error:", data.errorMessage);
         }
       })
       .catch((error) => {
         console.error("Error:", error);
-        // Optionally, show an error toaster message
-        // toastr.error("An error occurred while adding the product.");
       });
+  } else {
+    // If form fields are not valid, you can show an error message or take other actions
+    console.log("Form fields are not valid");
   }
 }
 
@@ -85,9 +83,6 @@ function showToastOnNextPage(message, type) {
     type: type,
   };
 
-  // Store the toast details in local storage
   localStorage.setItem("nextPageToast", JSON.stringify(toastDetails));
-
-  // Redirect to the next page
   window.location.href = "https://admin.sammak.store/product.html";
 }
