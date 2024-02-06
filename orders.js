@@ -98,73 +98,9 @@ function orderList(data) {
   viewBtn.forEach((x) => {
     x.addEventListener("click", (e) => {
       e.preventDefault();
-      getOrderById(e.target.dataset.id);
-
-      // window.location.href = "https://admin.sammak.store/view-order.html";
+      let id = e.target.dataset.id;
+      localStorage.setItem("orderId", id);
+      window.location.href = "https://admin.sammak.store/view-order.html";
     });
   });
-}
-
-async function getOrderById(id) {
-  const token = localStorage.getItem("token");
-  const config = {
-    Accept: "*/*",
-    Authorization: `Bearer ` + token,
-  };
-
-  const requestOptions = {
-    method: "GET",
-    headers: config,
-
-    redirect: "follow",
-  };
-  const tableContainer = document.querySelector(".tBody");
-
-  const response = await fetch(
-    `https://developmentsamak-production-7c7b.up.railway.app/admin/getOrderByTrackId?trackId=${id}`,
-    requestOptions
-  );
-
-  const data = await response.json();
-
-  if (data.status === 200) {
-    let resData = data.result;
-    console.log(resData);
-    // resData.forEach((x) => {
-    //   const markup = `  <tr>
-    //     <td class="ps-0">
-    //       <div class="d-flex align-items-center">
-    //         <div class="me-2 pe-1">
-    //           <img
-    //             src="../assets/images/products/product-1.jpg"
-    //             class="rounded-2"
-    //             width="48"
-    //             height="48"
-    //             alt=""
-    //           />
-    //         </div>
-    //         <div>
-    //           <h6 class="fw-semibold mb-1">Minecraf App</h6>
-    //           <p class="fs-2 mb-0 text-muted">Jason Roy</p>
-    //         </div>
-    //       </div>
-    //     </td>
-    //     <td>
-    //       <p class="mb-0 fs-3 text-dark">qty</p>
-    //     </td>
-
-    //     <td>
-    //       <p class="fs-3 text-dark mb-0">$3.5k</p>
-    //     </td>
-    //   </tr>`;
-
-    //   tableContainer.insertAdjacentHTML("beforeend", markup);
-    // });
-  }
-  if (data.status === 404) {
-    tableContainer.insertAdjacentHTML(
-      "beforeend",
-      "<h4>No Products Found , please add a new product</h4>"
-    );
-  }
 }
