@@ -7686,6 +7686,8 @@ fieldset:disabled .btn {
     box-shadow: var(--bs-toast-box-shadow);
     border-radius: var(--bs-toast-border-radius);
     z-index: 20;
+    position: fixed;
+    top: 9%;
 }
 
 .toast.showing {
