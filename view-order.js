@@ -15,7 +15,9 @@ window.addEventListener("load", () => {
     localStorage.removeItem("token");
   });
   // ends
-
+  document.querySelector(
+    ".card-title"
+  ).innerHTML = `Order#${localStorage.getItem("orderId")}`;
   // token
   getOrderById(localStorage.getItem("orderId"));
   // ends
@@ -42,14 +44,17 @@ async function getOrderById(id) {
       Authorization: `Bearer ` + token,
     },
   };
+
+  const requestOptions = {
+    method: "GET",
+    headers: config,
+    redirect: "follow",
+  };
   const tableContainer = document.querySelector(".tBody");
 
   const response = await fetch(
-    `https://developmentsamak-production-7c7b.up.railway.app/admin/getOrderByTrackId/${id}`,
-    {
-      method: "GET",
-      config,
-    }
+    `https://developmentsamak-production-7c7b.up.railway.app/admin/getOrderByTrackId?trackId=${id}`,
+    requestOptions
   );
 
   const data = await response.json();
