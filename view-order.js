@@ -1,5 +1,4 @@
 window.addEventListener("load", () => {
-  const tableContainer = document.querySelector(".tBody");
   // Authenticate User
   setInterval(() => {
     if (!localStorage.getItem("token")) {
@@ -38,6 +37,7 @@ window.addEventListener("load", () => {
   // ends
 });
 async function getOrderById(id) {
+  const tableContainer = document.querySelector(".tBody");
   const token = localStorage.getItem("token");
   const config = {
     Accept: "*/*",
