@@ -1,7 +1,8 @@
 "use strict";
 window.addEventListener("load", () => {
   const form = document.querySelector(".addForm");
-
+  const toast = document.querySelector(".toast");
+  const toastBody = document.querySelector(".toast-body");
   setInterval(() => {
     if (!localStorage.getItem("token")) {
       window.location.href = "https://admin.sammak.store/index.html";
@@ -73,6 +74,8 @@ function add() {
       });
   } else {
     // If form fields are not valid, you can show an error message or take other actions
+    toast.classList.add("show");
+    toastBody.innerHTML = "Form fields are not valid ";
     console.log("Form fields are not valid");
   }
 }
