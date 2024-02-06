@@ -19,7 +19,7 @@ window.addEventListener("load", () => {
     ".card-title"
   ).innerHTML = `Order#${localStorage.getItem("orderId")}`;
   // token
-  getOrderById(localStorage.getItem("orderId"));
+
   // ends
 
   // call toaster
@@ -36,100 +36,100 @@ window.addEventListener("load", () => {
   }
   // ends
 });
-async function getOrderById(id) {
-  const token = localStorage.getItem("token");
-  const config = {
-    headers: {
-      Accept: "*/*",
-      Authorization: `Bearer ` + token,
-    },
-  };
-  var formdata = new FormData();
-  formdata.append("trackId", `${id}`);
+// async function getOrderById(id) {
+//   const token = localStorage.getItem("token");
+//   const config = {
+//     headers: {
+//       Accept: "*/*",
+//       Authorization: `Bearer ` + token,
+//     },
+//   };
+//   var formdata = new FormData();
+//   formdata.append("trackId", `${id}`);
 
-  const requestOptions = {
-    method: "GET",
-    headers: config,
-    body: formdata,
-    redirect: "follow",
-  };
-  const tableContainer = document.querySelector(".tBody");
+//   const requestOptions = {
+//     method: "GET",
+//     headers: config,
+//     body: formdata,
+//     redirect: "follow",
+//   };
+//   const tableContainer = document.querySelector(".tBody");
 
-  const response = await fetch(
-    `https://developmentsamak-production-7c7b.up.railway.app/admin/getOrderByTrackId?trackId=${id}`,
-    requestOptions
-  );
+//   const response = await fetch(
+//     `https://developmentsamak-production-7c7b.up.railway.app/admin/getOrderByTrackId?trackId=${id}`,
+//     requestOptions
+//   );
 
-  const data = await response.json();
+//   const data = await response.json();
 
-  if (data.status === 200) {
-    let resData = data.result;
-    console.log(resData);
-    // resData.forEach((x) => {
-    //   const markup = `  <tr>
-    //     <td class="ps-0">
-    //       <div class="d-flex align-items-center">
-    //         <div class="me-2 pe-1">
-    //           <img
-    //             src="../assets/images/products/product-1.jpg"
-    //             class="rounded-2"
-    //             width="48"
-    //             height="48"
-    //             alt=""
-    //           />
-    //         </div>
-    //         <div>
-    //           <h6 class="fw-semibold mb-1">Minecraf App</h6>
-    //           <p class="fs-2 mb-0 text-muted">Jason Roy</p>
-    //         </div>
-    //       </div>
-    //     </td>
-    //     <td>
-    //       <p class="mb-0 fs-3 text-dark">qty</p>
-    //     </td>
+//   if (data.status === 200) {
+//     let resData = data.result;
+//     console.log(resData);
+//     // resData.forEach((x) => {
+//     //   const markup = `  <tr>
+//     //     <td class="ps-0">
+//     //       <div class="d-flex align-items-center">
+//     //         <div class="me-2 pe-1">
+//     //           <img
+//     //             src="../assets/images/products/product-1.jpg"
+//     //             class="rounded-2"
+//     //             width="48"
+//     //             height="48"
+//     //             alt=""
+//     //           />
+//     //         </div>
+//     //         <div>
+//     //           <h6 class="fw-semibold mb-1">Minecraf App</h6>
+//     //           <p class="fs-2 mb-0 text-muted">Jason Roy</p>
+//     //         </div>
+//     //       </div>
+//     //     </td>
+//     //     <td>
+//     //       <p class="mb-0 fs-3 text-dark">qty</p>
+//     //     </td>
 
-    //     <td>
-    //       <p class="fs-3 text-dark mb-0">$3.5k</p>
-    //     </td>
-    //   </tr>`;
+//     //     <td>
+//     //       <p class="fs-3 text-dark mb-0">$3.5k</p>
+//     //     </td>
+//     //   </tr>`;
 
-    //   tableContainer.insertAdjacentHTML("beforeend", markup);
-    // });
-  }
-  if (data.status === 404) {
-    tableContainer.insertAdjacentHTML(
-      "beforeend",
-      "<h4>No Products Found , please add a new product</h4>"
-    );
-  }
+//     //   tableContainer.insertAdjacentHTML("beforeend", markup);
+//     // });
+//   }
+//   if (data.status === 404) {
+//     tableContainer.insertAdjacentHTML(
+//       "beforeend",
+//       "<h4>No Products Found , please add a new product</h4>"
+//     );
+//   }
 
-  // document.querySelector(".loader").classList.add("d-none");
+//   // document.querySelector(".loader").classList.add("d-none");
 
-  //   edit button global intitiator
-  // editBtn = document.querySelectorAll(".editBtn");
-  // editBtn.forEach((x) => {
-  //   x.addEventListener("click", (e) => {
-  //     e.preventDefault();
+//   //   edit button global intitiator
+//   // editBtn = document.querySelectorAll(".editBtn");
+//   // editBtn.forEach((x) => {
+//   //   x.addEventListener("click", (e) => {
+//   //     e.preventDefault();
 
-  //     const data1 = data.result;
+//   //     const data1 = data.result;
 
-  //     localStorage.setItem("editpro", (data.result.id = e.target.dataset.edit));
+//   //     localStorage.setItem("editpro", (data.result.id = e.target.dataset.edit));
 
-  //     window.location.href = "https://admin.sammak.store/edit-product.html";
-  //   });
-  // });
+//   //     window.location.href = "https://admin.sammak.store/edit-product.html";
+//   //   });
+//   // });
 
-  // const deleteBtn = document.querySelectorAll(".delete-btn");
-  // const deleteModal = document.querySelector("#deleteModal");
+//   // const deleteBtn = document.querySelectorAll(".delete-btn");
+//   // const deleteModal = document.querySelector("#deleteModal");
 
-  // deleteBtn.forEach((x) => {
-  //   x.addEventListener("click", (e) => {
-  //     deleteProductId = e.target.dataset.prid;
-  //     console.log(deleteProductId);
-  //     // deleteModal.classList.add("show");
-  //     // deleteModal.style.display = "block";
-  //     // deleteModal.setAttribute("aria-hidden", false);
-  //     loadDelete();
-  //   });
-  // });
-}
+//   // deleteBtn.forEach((x) => {
+//   //   x.addEventListener("click", (e) => {
+//   //     deleteProductId = e.target.dataset.prid;
+//   //     console.log(deleteProductId);
+//   //     // deleteModal.classList.add("show");
+//   //     // deleteModal.style.display = "block";
+//   //     // deleteModal.setAttribute("aria-hidden", false);
+//   //     loadDelete();
+//   //   });
+//   // });
+// }
