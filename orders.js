@@ -59,36 +59,38 @@ function orderList(data) {
 
   let dataCopy = [...data].reverse();
 
-  console.log(data);
   dataCopy.forEach((x) => {
-    // let markup = `<tr>
-    //     <td class="border-bottom-0">
-    //       <h6 class="fw-semibold mb-0">${x.orderId}</h6>
-    //     </td>
-    //     <td class="border-bottom-0">
-    //     <p class="mb-0 fw-normal">${x.orderedAt}</p>
-    //   </td>
-    //     <td class="border-bottom-0">
-    //       <p class="mb-0 fw-normal">SAR${x.totalPrice}</p>
-    //     </td>
-    //     <td class="border-bottom-0">
-    //       <p class="mb-0 fw-normal">${x.status}</p>
-    //     </td>
-    //     <td class="border-bottom-0">
-    //       <p class="mb-0 fw-normal">
-    //        ${x.paymentMode}
-    //       </p>
-    //     </td>
-    //     <td class="border-bottom-0">
-    //       <a href="">
-    //         <button class="btn btn-primary viewBtn" data-id=${x.orderId}>View Order</button>
-    //       </a>
-    //       <a href="">
-    //         <button class="btn btn-primary updateStatus" >Edit</button>
-    //       </a>
-    //     </td>
-    //   </tr>`;
-    // tableContainer.insertAdjacentHTML("beforeend", markup);
+    let markup = `<tr>
+        <td class="border-bottom-0">
+          <h6 class="fw-semibold mb-0">${x.orderId}</h6>
+        </td>
+        <td class="border-bottom-0">
+        <p class="mb-0 fw-normal">${x.orderedAt}</p>
+      </td>
+      <td class="border-bottom-0">
+        <p class="mb-0 fw-normal">${x.shippingresponse.firstName} ${x.shippingresponse.lastName}</p>
+      </td>
+        <td class="border-bottom-0">
+          <p class="mb-0 fw-normal">SAR${x.totalPrice}</p>
+        </td>
+        <td class="border-bottom-0">
+          <p class="mb-0 fw-normal">${x.status}</p>
+        </td>
+        <td class="border-bottom-0">
+          <p class="mb-0 fw-normal">
+           ${x.paymentMode}
+          </p>
+        </td>
+        <td class="border-bottom-0">
+          <a href="">
+            <button class="btn btn-primary viewBtn" data-id=${x.orderId}>View Order</button>
+          </a>
+          <a href="">
+            <button class="btn btn-primary updateStatus" >Edit</button>
+          </a>
+        </td>
+      </tr>`;
+    tableContainer.insertAdjacentHTML("beforeend", markup);
   });
 
   const viewBtn = document.querySelectorAll(".viewBtn");
