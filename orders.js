@@ -98,8 +98,9 @@ function orderList(data) {
   viewBtn.forEach((x) => {
     x.addEventListener("click", (e) => {
       e.preventDefault();
-      localStorage.setItem("orderId", e.target.datset.id);
-      window.location.href("https://admin.sammak.store/view-order.html");
+      console.log(e.target.dataset);
+      // localStorage.setItem("orderId", e.target.datset.id);
+      // window.location.href("https://admin.sammak.store/view-order.html");
     });
   });
 }
