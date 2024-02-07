@@ -98,7 +98,7 @@ async function getOrderById(id) {
     });
 
     const markup = `<h6>Customer Name - ${resData.shippingresponse.firstName} ${resData.shippingresponse.lastName}</h6>
-      <p>Customer email - ${resData.shippingresponse.email}</p>
+      <p><strong>Customer email</strong> - ${resData.shippingresponse.email}</p>
       <p>Street - ${resData.shippingresponse.street1}</p>
       <p>City - ${resData.shippingresponse.city}</p>
       <p>State - ${resData.shippingresponse.state}</p>
