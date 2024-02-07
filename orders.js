@@ -166,7 +166,7 @@ async function updateStatus(uid, oid, status) {
   };
 
   const requestOptions = {
-    method: "GET",
+    method: "PUT",
     headers: config,
     redirect: "follow",
   };
