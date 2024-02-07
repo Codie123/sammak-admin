@@ -120,18 +120,9 @@ function orderList(data) {
         title: "Select field validation",
         input: "select",
         inputOptions: {
-          Fruits: {
-            apples: "Apples",
-            bananas: "Bananas",
-            grapes: "Grapes",
-            oranges: "Oranges",
-          },
-          Vegetables: {
-            potato: "Potato",
-            broccoli: "Broccoli",
-            carrot: "Carrot",
-          },
-          icecream: "Ice cream",
+          delivered: "Delivered",
+          pending: "Pending",
+          cancelled: "Cancelled",
         },
         inputPlaceholder: "Select a fruit",
         showCancelButton: true,
@@ -145,7 +136,20 @@ function orderList(data) {
           });
         },
       }).then((value) => {
-        console.log(value);
+        if (value.isConfirmed) {
+          Swal.fire({
+            title: "Processing!",
+            text: "Update in progress.",
+            icon: "info",
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+          });
+          console.log(value);
+        } else {
+          // window.location.href = "product.html";
+        }
       });
 
       // updateStatus(userid, orderid);
