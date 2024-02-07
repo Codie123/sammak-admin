@@ -97,15 +97,15 @@ async function getOrderById(id) {
       tableContainer.insertAdjacentHTML("beforeend", markup);
     });
 
-    const markup = `<h6>${resData.shippingresponse.firstName} ${resData.shippingresponse.lastName}</h6>
-      <p>${resData.shippingresponse.email}</p>
-      <p>${resData.shippingresponse.street1}</p>
-      <p>${resData.shippingresponse.city}</p>
-      <p>${resData.shippingresponse.state}</p>
-      <p>${resData.shippingresponse.phone}</p>
-      <p>${resData.shippingresponse.country}</p>
+    const markup = `<h6>Customer Name - ${resData.shippingresponse.firstName} ${resData.shippingresponse.lastName}</h6>
+      <p>Customer email - ${resData.shippingresponse.email}</p>
+      <p>Street - ${resData.shippingresponse.street1}</p>
+      <p>City - ${resData.shippingresponse.city}</p>
+      <p>State - ${resData.shippingresponse.state}</p>
+      <p>Phone - ${resData.shippingresponse.phone}</p>
+      <p>Country -  ${resData.shippingresponse.country}</p>
 
-      <p>${resData.shippingresponse.zip}</p>`;
+      <p>Zip-code - ${resData.shippingresponse.zip}</p>`;
     ctCard.insertAdjacentHTML("beforeend", markup);
 
     const markup2 = `
