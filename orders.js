@@ -110,6 +110,7 @@ function orderList(data) {
   });
 
   const edit = document.querySelectorAll(".updateStatus");
+
   edit.forEach((x) => {
     x.addEventListener("click", (e) => {
       e.preventDefault();
@@ -146,7 +147,7 @@ function orderList(data) {
             allowEscapeKey: false,
             allowEnterKey: false,
           });
-          console.log(value);
+          updateStatus(uid, oid, value.value);
         } else {
           // window.location.href = "product.html";
         }
@@ -157,44 +158,40 @@ function orderList(data) {
   });
 }
 
-// async function updateStatus(uid, oid) {
-//   Swal.fire({
-//     title: "Submit your Github username",
-//     input: "select",
-//     inputOptions: {
-//       delivered: "Delvered",
-//       pending: "pending",
-//       cancelled: "cancelled",
-//     },
-//     inputPlaceholder: "Select an option",
-//     showCancelButton: true,
-//     confirmButtonText: "Look up",
-//     showLoaderOnConfirm: true,
-//     preConfirm: async () => {
-//       try {
-//         const githubUrl = `
-//         https://developmentsamak-production-7c7b.up.railway.app/admin/updateOrderStatusById?orderId=${uid}&status=${}&userId=13
-//         `;
-//         const response = await fetch(githubUrl);
-//         if (!response.ok) {
-//           return Swal.showValidationMessage(`
-//             ${JSON.stringify(await response.json())}
-//           `);
-//         }
-//         return response.json();
-//       } catch (error) {
-//         Swal.showValidationMessage(`
-//           Request failed: ${error}
-//         `);
-//       }
-//     },
-//     allowOutsideClick: () => !Swal.isLoading(),
-//   }).then((result) => {
-//     if (result.isConfirmed) {
-//       Swal.fire({
-//         title: `${result.value.login}'s avatar`,
-//         imageUrl: result.value.avatar_url,
-//       });
-//     }
-//   });
-// }
+async function updateStatus(uid, oid, status) {
+  const token = localStorage.getItem("token");
+  const config = {
+    Accept: "*/*",
+    Authorization: `Bearer ` + token,
+  };
+
+  const requestOptions = {
+    method: "GET",
+    headers: config,
+    redirect: "follow",
+  };
+
+  fetch(
+    `https://developmentsamak-production-7c7b.up.railway.app/admin/updateOrderStatusById?orderId=${oid}&status=${status}&userId=${uid}`,
+    requestOptions
+  )
+    .then((response) => response.json())
+    .then((result) => {
+      if (result.status === 200) {
+        Swal.fire({
+          title: "updated",
+          text: "Status Updated successfully.",
+          icon: "success",
+        }).then(() => {
+          window.location.href = "https://admin.sammak.store/orders.html";
+        });
+      } else {
+        Swal.fire({
+          title: "Error!",
+          text: `Error: ${response.status} - ${response.statusText}`,
+          icon: "error",
+        });
+      }
+    })
+    .catch((error) => console.log("error", error));
+}
