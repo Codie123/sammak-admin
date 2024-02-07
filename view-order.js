@@ -97,21 +97,21 @@ async function getOrderById(id) {
       tableContainer.insertAdjacentHTML("beforeend", markup);
     });
 
-    const markup = `<h6>Customer Name - ${resData.shippingresponse.firstName} ${resData.shippingresponse.lastName}</h6>
+    const markup = `<h6><strong>Customer Name</strong> - ${resData.shippingresponse.firstName} ${resData.shippingresponse.lastName}</h6>
       <p><strong>Customer email</strong> - ${resData.shippingresponse.email}</p>
-      <p>Street - ${resData.shippingresponse.street1}</p>
-      <p>City - ${resData.shippingresponse.city}</p>
-      <p>State - ${resData.shippingresponse.state}</p>
-      <p>Phone - ${resData.shippingresponse.phone}</p>
-      <p>Country -  ${resData.shippingresponse.country}</p>
+      <p><strong>Street</strong> - ${resData.shippingresponse.street1}</p>
+      <p><strong>City</strong> - ${resData.shippingresponse.city}</p>
+      <p><strong>State</strong> - ${resData.shippingresponse.state}</p>
+      <p><strong>Phone</strong> - ${resData.shippingresponse.phone}</p>
+      <p><strong>Country</strong> -  ${resData.shippingresponse.country}</p>
 
-      <p>Zip-code - ${resData.shippingresponse.zip}</p>`;
+      <p><strong>Zip-code</strong> - ${resData.shippingresponse.zip}</p>`;
     ctCard.insertAdjacentHTML("beforeend", markup);
 
     const markup2 = `
-      <p>Payment Method - ${resData.paymentMode}</p>
-      <p>status - ${resData.status}</p>
-      <p>Total Price - ${resData.totalPrice}</p>`;
+      <p><strong>Payment Method</strong> - ${resData.paymentMode}</p>
+      <p><strong>status</strong> - ${resData.status}</p>
+      <p><Strong>Total Price</Strong> - ${resData.totalPrice}</p>`;
 
     ctCard2.insertAdjacentHTML("beforeend", markup2);
   }
