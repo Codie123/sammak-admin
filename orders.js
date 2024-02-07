@@ -113,6 +113,7 @@ function orderList(data) {
   edit.forEach((x) => {
     x.addEventListener("click", (e) => {
       e.preventDefault();
+      console.log(data.filter((x) => e.target.datasetid === x.orderId));
       localStorage.setItem("orderId", e.target.dataset.id);
       // localStorage.setItem('userId',e.target.dataset.userid)
     });
