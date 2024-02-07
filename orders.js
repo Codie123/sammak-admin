@@ -113,13 +113,84 @@ function orderList(data) {
   edit.forEach((x) => {
     x.addEventListener("click", (e) => {
       e.preventDefault();
-      console.log(
-        data.filter((x) => {
-          return x.orderId === parseInt(localStorage.getItem("orderId"));
-        })
-      );
-      localStorage.setItem("orderId", e.target.dataset.id);
-      // localStorage.setItem('userId',e.target.dataset.userid)
+      let userid = localStorage.setItem("userId", e.target.dataset.userid);
+      let orderid = localStorage.setItem("orderId", e.target.dataset.id);
+
+      Swal.fire({
+        title: "Select field validation",
+        input: "select",
+        inputOptions: {
+          Fruits: {
+            apples: "Apples",
+            bananas: "Bananas",
+            grapes: "Grapes",
+            oranges: "Oranges",
+          },
+          Vegetables: {
+            potato: "Potato",
+            broccoli: "Broccoli",
+            carrot: "Carrot",
+          },
+          icecream: "Ice cream",
+        },
+        inputPlaceholder: "Select a fruit",
+        showCancelButton: true,
+        inputValidator: (value) => {
+          return new Promise((resolve) => {
+            if (value) {
+              resolve();
+            } else {
+              resolve("You need to select select an option:)");
+            }
+          });
+        },
+      }).then((value) => {
+        console.log(value);
+      });
+
+      // updateStatus(userid, orderid);
     });
   });
 }
+
+// async function updateStatus(uid, oid) {
+//   Swal.fire({
+//     title: "Submit your Github username",
+//     input: "select",
+//     inputOptions: {
+//       delivered: "Delvered",
+//       pending: "pending",
+//       cancelled: "cancelled",
+//     },
+//     inputPlaceholder: "Select an option",
+//     showCancelButton: true,
+//     confirmButtonText: "Look up",
+//     showLoaderOnConfirm: true,
+//     preConfirm: async () => {
+//       try {
+//         const githubUrl = `
+//         https://developmentsamak-production-7c7b.up.railway.app/admin/updateOrderStatusById?orderId=${uid}&status=${}&userId=13
+//         `;
+//         const response = await fetch(githubUrl);
+//         if (!response.ok) {
+//           return Swal.showValidationMessage(`
+//             ${JSON.stringify(await response.json())}
+//           `);
+//         }
+//         return response.json();
+//       } catch (error) {
+//         Swal.showValidationMessage(`
+//           Request failed: ${error}
+//         `);
+//       }
+//     },
+//     allowOutsideClick: () => !Swal.isLoading(),
+//   }).then((result) => {
+//     if (result.isConfirmed) {
+//       Swal.fire({
+//         title: `${result.value.login}'s avatar`,
+//         imageUrl: result.value.avatar_url,
+//       });
+//     }
+//   });
+// }
