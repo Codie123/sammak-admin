@@ -89,9 +89,7 @@ async function getOrderById(id) {
           <p class="mb-0 fs-3 text-dark">${x.quantity}</p>
         </td>
 
-        <td>
-          <p class="fs-3 text-dark mb-0"></p>
-        </td>
+       
       </tr>`;
 
       tableContainer.insertAdjacentHTML("beforeend", markup);
