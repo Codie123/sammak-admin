@@ -147,7 +147,7 @@ function orderList(data) {
             allowEscapeKey: false,
             allowEnterKey: false,
           });
-          updateStatus(uid, oid, value.value);
+          updateStatus(userid, orderid, value.value);
         } else {
           // window.location.href = "product.html";
         }
