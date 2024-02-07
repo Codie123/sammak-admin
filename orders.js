@@ -90,7 +90,7 @@ function orderList(data) {
               <button class="btn btn-primary viewBtn" data-id=${x.orderId}>View Order</button>
             </a>
             <a href="">
-              <button class="btn btn-primary updateStatus" data-id=${x.orderId} data-userid= >Edit</button>
+              <button class="btn btn-primary updateStatus" data-id=${x.orderId} data-userid=${x.userId} >Edit</button>
             </a>
           </td>
         </tr>`;
@@ -113,7 +113,11 @@ function orderList(data) {
   edit.forEach((x) => {
     x.addEventListener("click", (e) => {
       e.preventDefault();
-      console.log(data.filter((x) => e.target.datasetid === x.orderId));
+      console.log(
+        data.filter((x) => {
+          return x.orderId === parseInt(localStorage.getItem("orderId"));
+        })
+      );
       localStorage.setItem("orderId", e.target.dataset.id);
       // localStorage.setItem('userId',e.target.dataset.userid)
     });
