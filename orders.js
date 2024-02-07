@@ -12,7 +12,7 @@ window.addEventListener("load", () => {
     localStorage.removeItem("token");
   });
   // ends
-
+  localStorage.removeItem("orderId");
   // Call getOrder function for the first page
   getOrder();
 
@@ -58,7 +58,11 @@ function orderList(data) {
 
   // Clear previous data
   tableContainer.innerHTML = "";
+
+  console.log(data);
+
   let dtcpy = [...data].reverse();
+
   dtcpy.forEach((x) => {
     let markup = `<tr>
           <td class="border-bottom-0">
@@ -86,10 +90,11 @@ function orderList(data) {
               <button class="btn btn-primary viewBtn" data-id=${x.orderId}>View Order</button>
             </a>
             <a href="">
-              <button class="btn btn-primary updateStatus" >Edit</button>
+              <button class="btn btn-primary updateStatus" data-id=${x.orderId} data-userid= >Edit</button>
             </a>
           </td>
         </tr>`;
+
     tableContainer.insertAdjacentHTML("beforeend", markup);
   });
 
@@ -108,25 +113,8 @@ function orderList(data) {
   edit.forEach((x) => {
     x.addEventListener("click", (e) => {
       e.preventDefault();
-      Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-      }).then((result) => {
-        Swal.fire({
-          title: "Processing!",
-          text: "Delete in progress.",
-          icon: "info",
-          showConfirmButton: false,
-          allowOutsideClick: false,
-          allowEscapeKey: false,
-          allowEnterKey: false,
-        });
-      });
+      localStorage.setItem("orderId", e.target.dataset.id);
+      // localStorage.setItem('userId',e.target.dataset.userid)
     });
   });
 }
