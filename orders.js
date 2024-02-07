@@ -107,6 +107,7 @@ function orderList(data) {
   const edit = document.querySelectorAll(".updateStatus");
   edit.forEach((x) => {
     x.addEventListener("click", (e) => {
+      e.preventDefault();
       Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
