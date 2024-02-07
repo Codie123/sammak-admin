@@ -125,7 +125,7 @@ function orderList(data) {
           pending: "Pending",
           cancelled: "Cancelled",
         },
-        inputPlaceholder: "Select a fruit",
+        inputPlaceholder: "Select an Option",
         showCancelButton: true,
         inputValidator: (value) => {
           return new Promise((resolve) => {
