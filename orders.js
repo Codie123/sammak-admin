@@ -103,4 +103,29 @@ function orderList(data) {
       window.location.href = "https://admin.sammak.store/view-order.html";
     });
   });
+
+  const edit = document.querySelectorAll(".updateStatus");
+  edit.forEach((x) => {
+    x.addEventListener("click", (e) => {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        Swal.fire({
+          title: "Processing!",
+          text: "Delete in progress.",
+          icon: "info",
+          showConfirmButton: false,
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          allowEnterKey: false,
+        });
+      });
+    });
+  });
 }
