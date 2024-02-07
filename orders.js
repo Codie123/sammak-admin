@@ -114,8 +114,8 @@ function orderList(data) {
   edit.forEach((x) => {
     x.addEventListener("click", (e) => {
       e.preventDefault();
-      let userid = localStorage.setItem("userId", e.target.dataset.userid);
-      let orderid = localStorage.setItem("orderId", e.target.dataset.id);
+      let userid = e.target.dataset.userid;
+      let orderid = e.target.dataset.id;
 
       Swal.fire({
         title: "Select field validation",
@@ -164,6 +164,7 @@ async function updateStatus(uid, oid, status) {
   console.log(status);
 
   const token = localStorage.getItem("token");
+
   const config = {
     Accept: "*/*",
     Authorization: `Bearer ` + token,
