@@ -176,27 +176,27 @@ async function updateStatus(uid, oid, status) {
     redirect: "follow",
   };
 
-  // fetch(
-  //   `https://developmentsamak-production-7c7b.up.railway.app/admin/updateOrderStatusById?orderId=${oid}&status=${status}&userId=${uid}`,
-  //   requestOptions
-  // )
-  //   .then((response) => response.json())
-  //   .then((result) => {
-  //     if (result.status === 200) {
-  //       Swal.fire({
-  //         title: "updated",
-  //         text: "Status Updated successfully.",
-  //         icon: "success",
-  //       }).then(() => {
-  //         window.location.href = "https://admin.sammak.store/orders.html";
-  //       });
-  //     } else {
-  //       Swal.fire({
-  //         title: "Error!",
-  //         text: `Error: ${response.status} - ${response.statusText}`,
-  //         icon: "error",
-  //       });
-  //     }
-  //   })
-  //   .catch((error) => console.log("error", error));
+  fetch(
+    `https://developmentsamak-production-7c7b.up.railway.app/admin/updateOrderStatusById?orderId=${oid}&status=${status}&userId=${uid}`,
+    requestOptions
+  )
+    .then((response) => response.json())
+    .then((result) => {
+      if (result.status === 200) {
+        Swal.fire({
+          title: "updated",
+          text: "Status Updated successfully.",
+          icon: "success",
+        }).then(() => {
+          window.location.href = "https://admin.sammak.store/orders.html";
+        });
+      } else {
+        Swal.fire({
+          title: "Error!",
+          text: `Error: ${response.status} - ${response.statusText}`,
+          icon: "error",
+        });
+      }
+    })
+    .catch((error) => console.log("error", error));
 }
