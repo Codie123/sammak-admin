@@ -63,7 +63,7 @@ async function getOrderById(id) {
 
   if (data.status === 200) {
     let resData = data.result;
-
+    console.log(resData);
     let productInfo = [...resData.orderItemResponseList];
 
     productInfo.forEach((x) => {
