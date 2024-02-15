@@ -1,10 +1,10 @@
 window.addEventListener("load", () => {
   // validate token
-  setInterval(() => {
-    if (!localStorage.getItem("token")) {
-      window.location.href = "https://admin.sammak.store/index.html";
-    }
-  }, 1000);
+  // setInterval(() => {
+  //   if (!localStorage.getItem("token")) {
+  //     window.location.href = "https://admin.sammak.store/index.html";
+  //   }
+  // }, 1000);
   // ends
   // logout trigger
   const logoutBtn = document.querySelector("#logout");
@@ -32,7 +32,9 @@ window.addEventListener("load", () => {
 });
 
 async function getOrder() {
-  const token = localStorage.getItem("token");
+  // const token = localStorage.getItem("token");
+  const token =
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmYWhpbGhhbmVlZjAwNkBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BZG1pbiJ9XSwiaWF0IjoxNzA3OTY1OTM2LCJleHAiOjE3MDc5NzMxMzZ9.CCTfJKd2ePX7xPvncVI_UgYwMD1HMZiGgkiR6LChQ1w";
   const config = {
     Accept: "*/*",
     Authorization: `Bearer ` + token,
@@ -64,21 +66,35 @@ function orderList(data) {
   let dtcpy = [...data].reverse();
 
   dtcpy.forEach((x) => {
+    // Format the orderedAt date
+    const orderedAtDate = new Date(x.orderedAt);
+    const optionsDate = { day: "2-digit", month: "short", year: "numeric" };
+    const optionsTime = { hour: "numeric", minute: "numeric", hour12: true };
+    const formattedDate = orderedAtDate.toLocaleDateString(
+      "en-US",
+      optionsDate
+    );
+    const formattedTime = orderedAtDate.toLocaleTimeString(
+      "en-US",
+      optionsTime
+    );
+    const formattedDateTime = `${formattedDate} - ${formattedTime}`;
+
     let markup = `<tr>
           <td class="border-bottom-0">
             <h6 class="fw-semibold mb-0">${x.orderId}</h6>
           </td>
           <td class="border-bottom-0">
-          <p class="mb-0 fw-normal">${x.orderedAt}</p>
-        </td>
-        <td class="border-bottom-0">
-          <p class="mb-0 fw-normal">${x.shippingresponse.firstName} ${x.shippingresponse.lastName}</p>
-        </td>
+            <p class="mb-0 fw-normal">${formattedDateTime}</p>
+          </td>
+          <td class="border-bottom-0">
+            <p class="mb-0 fw-normal">${x.shippingresponse.firstName} ${x.shippingresponse.lastName}</p>
+          </td>
           <td class="border-bottom-0">
             <p class="mb-0 fw-normal">SAR${x.totalPrice}</p>
           </td>
-          <td class="border-bottom-0">
-            <p class="mb-0 fw-normal">${x.status}</p>
+          <td class="border-bottom-0 mb-0 fw-normal" data-status=${x.status}>
+            ${x.status}
           </td>
           <td class="border-bottom-0">
             <p class="mb-0 fw-normal">
@@ -97,6 +113,15 @@ function orderList(data) {
 
     tableContainer.insertAdjacentHTML("beforeend", markup);
   });
+
+  // filter event
+  document
+    .getElementById("orderStatus")
+    .addEventListener("change", function () {
+      var selectedStatus = this.value.toLowerCase(); // Convert to lowercase for consistency
+      filterOrders(selectedStatus);
+    });
+  // ends
 
   // view btn
   const viewBtn = document.querySelectorAll(".viewBtn");
@@ -200,3 +225,24 @@ async function updateStatus(uid, oid, status) {
     })
     .catch((error) => console.log("error", error));
 }
+
+function filterOrders(orderStatus) {
+  var orders = document.querySelectorAll(".tb-container tr");
+
+  orders.forEach(function (order) {
+    order.style.display = "table-row";
+  });
+
+  if (orderStatus !== "all") {
+    orders.forEach(function (order) {
+      var statusCell = order.querySelector("td:nth-child(5)");
+      var status = statusCell.textContent.trim().toLowerCase();
+
+      if (status !== orderStatus) {
+        order.style.display = "none";
+      }
+    });
+  }
+}
+
+// pagination

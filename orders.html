@@ -198,7 +198,26 @@
               <div class="card w-100">
                 <div class="card-body p-4">
                   <h5 class="card-title fw-semibold mb-4">Orders List</h5>
+                  <div
+                    class="mb-3 d-flex flex-column justify-content-end align-items-end"
+                  >
+                    <label for="orderStatus" class="form-label"
+                      >Filter by Order Status:</label
+                    >
+                    <select
+                      class="form-select"
+                      id="orderStatus"
+                      style="width: 15%"
+                    >
+                      <option value="all">All</option>
+                      <option value="placed">Placed</option>
+                      <option value="delivered">Delivered</option>
+                      <!-- <option value="completed">Completed</option>
+                      <option value="cancelled">Cancelled</option> -->
+                    </select>
+                  </div>
                 </div>
+
                 <div class="col-lg d-flex align-items-strech">
                   <div class="card w-100">
                     <div class="card-body p-4">
@@ -241,9 +260,11 @@
                           <tbody class="tb-container"></tbody>
                         </table>
                       </div>
-                      <div id="pagination-container d-flex">
-                        <ul class="pagination justify-content-center"></ul>
-                      </div>
+                      <div
+                        id="pagination-container"
+                        class="d-flex justify-content-center mt-3"
+                      ></div>
+
                       <div class="loader d-none"></div>
                     </div>
                   </div>
@@ -254,8 +275,9 @@
         </div>
       </div>
     </div>
+
     <script src="./orders.js"></script>
-    <script src="./token_validate.js"></script>
+    <!-- <script src="./token_validate.js"></script> -->
     <script src="./assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="./assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/sidebarmenu.js"></script>
