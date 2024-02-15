@@ -52,7 +52,7 @@ window.addEventListener("load", () => {
             toastBody.innerHTML = "Logged in successfully";
 
             localStorage.setItem("token", data.result.accessToken);
-            window.location.href = "https://admin.sammak.store/home.html";
+            window.location.href = "https://admin.sammak.store/orders.html";
           } else {
             submitBtn.innerHTML = "submit";
             submitBtn.removeAttribute("disabled");
