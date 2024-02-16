@@ -261,29 +261,33 @@
                           <tbody class="tb-container"></tbody>
                         </table>
                       </div>
-                      <div
-                        id="pagination-container"
-                        class="d-flex justify-content-center mt-3 gap-3"
+                      <ul
+                        class="pagination m-0 mt-4 justify-content-end"
+                        style="margin-right: 6% !important"
                       >
-                        <button
-                          class="btn bg-primary-subtle text-primary"
-                          id="previous-btn"
-                        >
-                          Previous
-                        </button>
-                        <p
-                          class="btn btn-outline-secondary"
-                          id="pagination-value"
-                        >
-                          0
-                        </p>
-                        <button
-                          class="btn bg-primary-subtle text-primary"
-                          id="next-btn"
-                        >
-                          Next
-                        </button>
-                      </div>
+                        <li class="page-item">
+                          <a
+                            class="page-link link"
+                            href="#"
+                            aria-label="Previous"
+                          >
+                            <span aria-hidden="true">
+                              <i class="ti ti-chevrons-left fs-4"></i>
+                            </span>
+                          </a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link link" href="#">1</a>
+                        </li>
+
+                        <li class="page-item">
+                          <a class="page-link link" href="#" aria-label="Next">
+                            <span aria-hidden="true">
+                              <i class="ti ti-chevrons-right fs-4"></i>
+                            </span>
+                          </a>
+                        </li>
+                      </ul>
 
                       <div class="loader d-none"></div>
                     </div>
