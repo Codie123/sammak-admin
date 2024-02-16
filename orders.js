@@ -1,5 +1,7 @@
-const itemsPerPage = 10;
+const itemsPerPage = 8;
 let currentPage = 1;
+localStorage.setItem("page", 1);
+let filterStatus = "All";
 
 function handlenextpage() {
   currentPage = currentPage + 1;
@@ -13,6 +15,7 @@ function handlePreviouspage() {
     getOrder();
   }
 }
+
 document.getElementById("next-btn").addEventListener("click", handlenextpage);
 document
   .getElementById("previous-btn")
@@ -69,7 +72,12 @@ async function getOrder() {
     requestOptions
   )
     .then((response) => response.json())
-    .then((result) => (result.status === 200 ? orderList(result.result) : ""))
+    .then((result) => {
+      if (result.status === 200) {
+        orderList(result.result);
+        localStorage.setItem("orderlist", JSON.stringify(result.result));
+      }
+    })
     .catch((error) => console.log("error", error));
 }
 
@@ -79,11 +87,19 @@ function orderList(data) {
   // Clear previous data
   tableContainer.innerHTML = "";
 
-  console.log(data);
   let indexOfLastItem = currentPage * itemsPerPage;
   let indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-  let dtcpy = [...data].slice(indexOfFirstItem, indexOfLastItem).reverse();
+  let dtcpy = [...data]
+    .filter((x) => {
+      if (filterStatus === "All") {
+        return x;
+      } else {
+        return x.status === filterStatus;
+      }
+    })
+    .slice(indexOfFirstItem, indexOfLastItem)
+    .reverse();
 
   dtcpy
     .map((x) => {
@@ -140,8 +156,8 @@ function orderList(data) {
   document
     .getElementById("orderStatus")
     .addEventListener("change", function () {
-      var selectedStatus = this.value.toLowerCase(); // Convert to lowercase for consistency
-      filterOrders(selectedStatus);
+      filterStatus = this.value;
+      getOrder();
     });
   // ends
 
@@ -248,23 +264,23 @@ async function updateStatus(uid, oid, status) {
     .catch((error) => console.log("error", error));
 }
 
-function filterOrders(orderStatus) {
-  var orders = document.querySelectorAll(".tb-container tr");
+// function filterOrders(orderStatus) {
+//   var orders = document.querySelectorAll(".tb-container tr");
 
-  orders.forEach(function (order) {
-    order.style.display = "table-row";
-  });
+//   orders.forEach(function (order) {
+//     order.style.display = "table-row";
+//   });
 
-  if (orderStatus !== "all") {
-    orders.forEach(function (order) {
-      var statusCell = order.querySelector("td:nth-child(5)");
-      var status = statusCell.textContent.trim().toLowerCase();
+//   if (orderStatus !== "all") {
+//     orders.forEach(function (order) {
+//       var statusCell = order.querySelector("td:nth-child(5)");
+//       var status = statusCell.textContent.trim().toLowerCase();
 
-      if (status !== orderStatus) {
-        order.style.display = "none";
-      }
-    });
-  }
-}
+//       if (status !== orderStatus) {
+//         order.style.display = "none";
+//       }
+//     });
+//   }
+// }
 
 // pagination
