@@ -4,15 +4,18 @@ localStorage.setItem("page", 1);
 let filterStatus = "All";
 
 function handlenextpage() {
+  let pagenum = document.getElementById("pageNum");
   currentPage = currentPage + 1;
   getOrder();
+  pagenum.textContent = currentPage;
 }
+
 function handlePreviouspage() {
-  if (currentPage === 1) {
+  let pagenum = document.getElementById("pageNum");
+  if ((currentPage = 1)) {
     currentPage = 1;
-  } else {
-    currentPage = currentPage - 1;
     getOrder();
+    pagenum.textContent = currentPage;
   }
 }
 
@@ -29,6 +32,7 @@ window.addEventListener("load", () => {
   // }, 1000);
   // ends
   // logout trigger
+
   const logoutBtn = document.querySelector("#logout");
   logoutBtn.addEventListener("click", () => {
     localStorage.removeItem("token");
@@ -87,17 +91,12 @@ function orderList(data) {
   // Clear previous data
   tableContainer.innerHTML = "";
 
+  console.log(data);
   let indexOfLastItem = currentPage * itemsPerPage;
   let indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
   let dtcpy = [...data]
-    .filter((x) => {
-      if (filterStatus === "All") {
-        return x;
-      } else {
-        return x.status === filterStatus;
-      }
-    })
+    .filter((x) => filterStatus === "All" || x.status === filterStatus)
     .slice(indexOfFirstItem, indexOfLastItem)
     .reverse();
 
@@ -119,7 +118,7 @@ function orderList(data) {
 
       let markup = `<tr>
           <td class="border-bottom-0">
-            <h6 class="fw-semibold mb-0">#${x.orderId}</h6>
+            <h6 class="fw-semibold mb-0">${x.orderId}</h6>
           </td>
           <td class="border-bottom-0">
             <p class="mb-0 fw-normal">${formattedDateTime}</p>
@@ -156,7 +155,9 @@ function orderList(data) {
   document
     .getElementById("orderStatus")
     .addEventListener("change", function () {
+      console.log(this.value);
       filterStatus = this.value;
+
       getOrder();
     });
   // ends
