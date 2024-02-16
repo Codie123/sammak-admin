@@ -1,3 +1,22 @@
+const itemsPerPage = 10;
+let currentPage = 1;
+
+function handlenextpage() {
+  currentPage = currentPage + 1;
+  getOrder();
+}
+function handlePreviouspage() {
+  if (currentPage === 1) {
+    currentPage = 1;
+  } else {
+    currentPage = currentPage - 1;
+    getOrder();
+  }
+}
+document.getElementById("next-btn").addEventListener("click", handlenextpage);
+document
+  .getElementById("previous-btn")
+  .addEventListener("click", handlePreviouspage);
 window.addEventListener("load", () => {
   // validate token
   // setInterval(() => {
@@ -32,9 +51,8 @@ window.addEventListener("load", () => {
 });
 
 async function getOrder() {
-  // const token = localStorage.getItem("token");
-  const token =
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmYWhpbGhhbmVlZjAwNkBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BZG1pbiJ9XSwiaWF0IjoxNzA3OTY1OTM2LCJleHAiOjE3MDc5NzMxMzZ9.CCTfJKd2ePX7xPvncVI_UgYwMD1HMZiGgkiR6LChQ1w";
+  const token = localStorage.getItem("token");
+
   const config = {
     Accept: "*/*",
     Authorization: `Bearer ` + token,
@@ -62,25 +80,28 @@ function orderList(data) {
   tableContainer.innerHTML = "";
 
   console.log(data);
+  let indexOfLastItem = currentPage * itemsPerPage;
+  let indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-  let dtcpy = [...data].reverse();
+  let dtcpy = [...data].slice(indexOfFirstItem, indexOfLastItem).reverse();
 
-  dtcpy.forEach((x) => {
-    // Format the orderedAt date
-    const orderedAtDate = new Date(x.orderedAt);
-    const optionsDate = { day: "2-digit", month: "short", year: "numeric" };
-    const optionsTime = { hour: "numeric", minute: "numeric", hour12: true };
-    const formattedDate = orderedAtDate.toLocaleDateString(
-      "en-US",
-      optionsDate
-    );
-    const formattedTime = orderedAtDate.toLocaleTimeString(
-      "en-US",
-      optionsTime
-    );
-    const formattedDateTime = `${formattedDate} - ${formattedTime}`;
+  dtcpy
+    .map((x) => {
+      // Format the orderedAt date
+      const orderedAtDate = new Date(x.orderedAt);
+      const optionsDate = { day: "2-digit", month: "short", year: "numeric" };
+      const optionsTime = { hour: "numeric", minute: "numeric", hour12: true };
+      const formattedDate = orderedAtDate.toLocaleDateString(
+        "en-US",
+        optionsDate
+      );
+      const formattedTime = orderedAtDate.toLocaleTimeString(
+        "en-US",
+        optionsTime
+      );
+      const formattedDateTime = `${formattedDate} - ${formattedTime}`;
 
-    let markup = `<tr>
+      let markup = `<tr>
           <td class="border-bottom-0">
             <h6 class="fw-semibold mb-0">${x.orderId}</h6>
           </td>
@@ -111,8 +132,9 @@ function orderList(data) {
           </td>
         </tr>`;
 
-    tableContainer.insertAdjacentHTML("beforeend", markup);
-  });
+      tableContainer.insertAdjacentHTML("beforeend", markup);
+    })
+    .slice(indexOfFirstItem, indexOfLastItem);
 
   // filter event
   document
