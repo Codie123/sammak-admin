@@ -197,40 +197,39 @@
             <div class="col-lg d-flex align-items-strech">
               <div class="card w-100">
                 <div class="card-body p-4">
-                  <h5 class="card-title fw-semibold mb-4">Orders List</h5>
-                  <div
-                    class="mb-3 d-flex flex-column justify-content-end align-items-end"
-                  >
-                    <button id="next-btn">Next</button>
-                    <button id="previous-btn">Previous</button>
-                    <label for="orderStatus" class="form-label"
-                      >Filter by Order Status:</label
-                    >
-                    <select
-                      class="form-select"
-                      id="orderStatus"
-                      style="width: 15%"
-                    >
-                      <option value="all">All</option>
-                      <option value="placed">Placed</option>
-                      <option value="delivered">Delivered</option>
-                      <!-- <option value="completed">Completed</option>
-                      <option value="cancelled">Cancelled</option> -->
-                    </select>
-                  </div>
-                </div>
+                  <div class="d-flex justify-content-between align-items-end">
+                    <div>
+                      <h5 class="card-title fw-semibold mb-4">Orders List</h5>
+                    </div>
 
-                <div class="col-lg d-flex align-items-strech">
-                  <div class="card w-100">
-                    <div class="card-body p-4">
+                    <div>
+                      <label for="orderStatus" class="form-label"
+                        >Filter by Order Status:</label
+                      >
+                      <select
+                        class="form-select"
+                        id="orderStatus"
+                        style="width: 100%"
+                      >
+                        <option value="all">All</option>
+                        <option value="placed">Placed</option>
+                        <option value="delivered">Delivered</option>
+                        <!-- <option value="completed">Completed</option>
+                      <option value="cancelled">Cancelled</option> -->
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="">
+                    <div class="card-body p-4 mt-4">
                       <div
                         class="table-responsive"
                         style="
                           position: relative;
                           overflow: auto;
                           width: 100%;
-                          max-height: 500px;
-                          height: 500px;
+                          /* max-height: 500px; */
+                          /* height: 500px; */
                         "
                       >
                         <table class="table text-nowrap mb-0 align-middle">
@@ -264,13 +263,34 @@
                       </div>
                       <div
                         id="pagination-container"
-                        class="d-flex justify-content-center mt-3"
-                      ></div>
+                        class="d-flex justify-content-center mt-3 gap-3"
+                      >
+                        <button
+                          class="btn bg-primary-subtle text-primary"
+                          id="previous-btn"
+                        >
+                          Previous
+                        </button>
+                        <p
+                          class="btn btn-outline-secondary"
+                          id="pagination-value"
+                        >
+                          0
+                        </p>
+                        <button
+                          class="btn bg-primary-subtle text-primary"
+                          id="next-btn"
+                        >
+                          Next
+                        </button>
+                      </div>
 
                       <div class="loader d-none"></div>
                     </div>
                   </div>
                 </div>
+
+                <div class=""></div>
               </div>
             </div>
           </div>
