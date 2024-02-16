@@ -119,7 +119,7 @@ function orderList(data) {
 
       let markup = `<tr>
           <td class="border-bottom-0">
-            <h6 class="fw-semibold mb-0">${x.orderId}</h6>
+            <h6 class="fw-semibold mb-0">#${x.orderId}</h6>
           </td>
           <td class="border-bottom-0">
             <p class="mb-0 fw-normal">${formattedDateTime}</p>
