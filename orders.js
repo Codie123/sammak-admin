@@ -23,10 +23,6 @@ function handlePreviouspage() {
   }
 }
 
-nextBtn.addEventListener("click", handlenextpage);
-
-prevBtn.addEventListener("click", handlePreviouspage);
-
 window.addEventListener("load", () => {
   // validate token
   // setInterval(() => {
@@ -38,6 +34,10 @@ window.addEventListener("load", () => {
   // logout trigger
   nextBtn = document.querySelector(".next-btn");
   prevBtn = document.querySelector(".previous-btn");
+
+  nextBtn.addEventListener("click", handlenextpage);
+
+  prevBtn.addEventListener("click", handlePreviouspage);
 
   const logoutBtn = document.querySelector("#logout");
   logoutBtn.addEventListener("click", () => {
