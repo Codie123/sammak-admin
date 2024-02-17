@@ -52,6 +52,7 @@ async function getContacts() {
     .catch((error) => console.log("error", error));
 }
 function generateCtCard(data) {
+  console.log(data);
   const container = document.querySelector("#card-container");
   data.forEach((x) => {
     const markup = `<div class="col-lg-4 col-md-6">
