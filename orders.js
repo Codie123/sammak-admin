@@ -14,9 +14,14 @@ function handlePreviouspage() {
   let pagenum = document.getElementById("pageNum");
   if (currentPage === 1) {
     currentPage = 1;
+    document.querySelector("#previous-btn").setAttribute("disabled", "true");
+    document.querySelector("#previous-btn").style.opacity = "0.8";
     getOrder();
     pagenum.textContent = currentPage;
   } else {
+    if (document.querySelector("#previous-btn").getAttribute("disabled")) {
+      document.querySelector("#previous-btn").removeAttribute("disabled");
+    }
     currentPage = currentPage - 1;
     getOrder();
     pagenum.textContent = currentPage;
@@ -103,6 +108,12 @@ function orderList(data) {
     .filter((x) => filterStatus === "All" || x.status === filterStatus)
     .slice(indexOfFirstItem, indexOfLastItem)
     .reverse();
+
+  if (currentPage >= data.length / itemsPerPage) {
+    document.querySelector("#next-btn").setAttribute("disabled", "true");
+  } else {
+    document.querySelector("#next-btn").removeAttribute("disabled");
+  }
 
   dtcpy
     .map((x) => {
