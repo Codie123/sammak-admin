@@ -206,6 +206,7 @@ function updatePagination(totalItems) {
   const nextButton = document.getElementById("next-btn");
 
   if (currentPage === 1) {
+    pageNum.textContent = currentPage;
     previousButton.setAttribute("disabled", true);
   } else {
     previousButton.removeAttribute("disabled");
