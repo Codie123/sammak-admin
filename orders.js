@@ -12,7 +12,7 @@ function handlenextpage() {
   getOrder();
   pagenum.textContent = currentPage;
 }
-
+console.log(currentPage);
 function handlePreviouspage() {
   let pagenum = document.getElementById("pageNum");
   if ((currentPage = 1)) {
