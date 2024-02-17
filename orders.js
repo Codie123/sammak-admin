@@ -2,9 +2,12 @@ const itemsPerPage = 8;
 let currentPage = 1;
 localStorage.setItem("page", 1);
 let filterStatus = "All";
+const nextBtn = document.querySelector(".next-btn");
+const prevBtn = document.querySelector(".previous-btn");
 
 function handlenextpage() {
   let pagenum = document.getElementById("pageNum");
+
   currentPage = currentPage + 1;
   getOrder();
   pagenum.textContent = currentPage;
@@ -14,15 +17,14 @@ function handlePreviouspage() {
   let pagenum = document.getElementById("pageNum");
   if ((currentPage = 1)) {
     currentPage = 1;
+    prevBtn.style.display = "none";
     getOrder();
     pagenum.textContent = currentPage;
   }
 }
 
-document.getElementById("next-btn").addEventListener("click", handlenextpage);
-document
-  .getElementById("previous-btn")
-  .addEventListener("click", handlePreviouspage);
+nextBtn.addEventListener("click", handlenextpage);
+prevBtn.addEventListener("click", handlePreviouspage);
 window.addEventListener("load", () => {
   // validate token
   // setInterval(() => {
@@ -92,6 +94,7 @@ function orderList(data) {
   tableContainer.innerHTML = "";
 
   console.log(data);
+
   let indexOfLastItem = currentPage * itemsPerPage;
   let indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
@@ -99,6 +102,10 @@ function orderList(data) {
     .filter((x) => filterStatus === "All" || x.status === filterStatus)
     .slice(indexOfFirstItem, indexOfLastItem)
     .reverse();
+
+  if (dtcpy.length / itemsPerPage < currentPage) {
+    nextBtn.style.display = "none";
+  }
 
   dtcpy
     .map((x) => {
