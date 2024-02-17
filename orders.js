@@ -109,11 +109,11 @@ function orderList(data) {
   console.log(Math.floor(data.length / itemsPerPage));
   console.log(currentPage);
   // val1   <=   val2
-  // if (currentPage >= dtcpy.length / itemsPerPage) {
-  //   nextBtn.setAttribute("disabled", "true");
-  // } else {
-  //   nextBtn.removeAttribute("disabled", "");
-  // }
+  if (currentPage >= dtcpy.length / itemsPerPage) {
+    nextBtn.setAttribute("disabled", "true");
+  } else {
+    nextBtn.removeAttribute("disabled", "");
+  }
 
   dtcpy
     .map((x) => {
