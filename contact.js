@@ -58,7 +58,7 @@ function generateCtCard(data) {
         <div class="card text-center">
           <div class="card-body">
             <img
-              src="../assets/images/profile/default-profile.webp"
+              src="./assets/images/profile/default-profile.webp"
               class="rounded-1 img-fluid"
               width="90"
             />
