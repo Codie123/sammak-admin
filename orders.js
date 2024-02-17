@@ -20,6 +20,12 @@ function handlePreviouspage() {
     prevBtn.setAttribute("disabled", "true");
     getOrder();
     pagenum.textContent = currentPage;
+  } else {
+    prevBtn.removeAttribute("disabled", "");
+    currentPage = currentPage - 1;
+
+    getOrder();
+    pagenum.textContent = currentPage;
   }
 }
 
