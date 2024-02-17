@@ -21,7 +21,9 @@ function handlePreviouspage() {
     getOrder();
     pagenum.textContent = currentPage;
   } else {
-    prevBtn.removeAttribute("disabled", "");
+    if (prevBtn.getAttribute("disabled")) {
+      prevBtn.removeAttribute("disabled");
+    }
     currentPage = currentPage - 1;
 
     getOrder();
@@ -118,7 +120,7 @@ function orderList(data) {
   if (currentPage >= data.length / itemsPerPage) {
     nextBtn.setAttribute("disabled", "true");
   } else {
-    nextBtn.removeAttribute("disabled", "");
+    nextBtn.removeAttribute("disabled");
   }
 
   dtcpy
