@@ -2,8 +2,8 @@ const itemsPerPage = 8;
 let currentPage = 1;
 localStorage.setItem("page", 1);
 let filterStatus = "All";
-let nextBtn;
-let prevBtn;
+const nextBtn = document.querySelector("#next-btn");
+const prevBtn = document.querySelector("#previous-btn");
 
 function handlenextpage() {
   let pagenum = document.getElementById("pageNum");
@@ -23,6 +23,10 @@ function handlePreviouspage() {
   }
 }
 
+nextBtn.addEventListener("click", handlenextpage);
+
+prevBtn.addEventListener("click", handlePreviouspage);
+
 window.addEventListener("load", () => {
   // validate token
   // setInterval(() => {
@@ -32,12 +36,6 @@ window.addEventListener("load", () => {
   // }, 1000);
   // ends
   // logout trigger
-  nextBtn = document.querySelector(".next-btn");
-  prevBtn = document.querySelector(".previous-btn");
-
-  nextBtn.addEventListener("click", handlenextpage);
-
-  prevBtn.addEventListener("click", handlePreviouspage);
 
   const logoutBtn = document.querySelector("#logout");
   logoutBtn.addEventListener("click", () => {
