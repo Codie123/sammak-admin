@@ -103,7 +103,7 @@ function orderList(data) {
     .slice(indexOfFirstItem, indexOfLastItem)
     .reverse();
 
-  if (dtcpy.length / itemsPerPage < currentPage) {
+  if (dtcpy.length / itemsPerPage <= currentPage) {
     nextBtn.style.display = "none";
   }
 
