@@ -1,6 +1,7 @@
 const itemsPerPage = 8;
 let currentPage = 1;
 let filterStatus = "All";
+const pageNum = document.querySelector("#pageNum");
 
 document.getElementById("next-btn").addEventListener("click", handlenextpage);
 document
@@ -9,11 +10,13 @@ document
 
 function handlenextpage() {
   currentPage++;
+  pageNum.textContent = currentPage;
   getOrder();
 }
 
 function handlePreviouspage() {
   if (currentPage > 1) {
+    pageNum.textContent = currentPage;
     currentPage--;
     getOrder();
   }
@@ -201,7 +204,7 @@ function updatePagination(totalItems) {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   const previousButton = document.getElementById("previous-btn");
   const nextButton = document.getElementById("next-btn");
-  console.log(totalPages);
+
   if (currentPage === 1) {
     previousButton.setAttribute("disabled", true);
   } else {
