@@ -79,7 +79,7 @@ async function getProduct() {
           <p class="card-text">
            ${element.smallDescription}
           </p>
-          <div class="d-flex">
+          <div class="d-flex gap-2">
           <button class="editBtn btn btn-primary" data-edit=${
             element.id
           }>Edit</button>
