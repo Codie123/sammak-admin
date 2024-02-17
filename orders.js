@@ -17,7 +17,7 @@ function handlePreviouspage() {
   let pagenum = document.getElementById("pageNum");
   if ((currentPage = 1)) {
     currentPage = 1;
-    prevBtn.style.display = "none";
+    prevBtn.setAttribute("disabled", "true");
     getOrder();
     pagenum.textContent = currentPage;
   }
@@ -105,8 +105,11 @@ function orderList(data) {
     .slice(indexOfFirstItem, indexOfLastItem)
     .reverse();
 
-  if (dtcpy.length / itemsPerPage <= currentPage) {
-    nextBtn.style.display = "none";
+  // val1   <=   val2
+  if (currentPage >= dtcpy.length / itemsPerPage) {
+    nextBtn.setAttribute("disabled", "true");
+  } else {
+    nextBtn.removeAttribute("disabled", "");
   }
 
   dtcpy
