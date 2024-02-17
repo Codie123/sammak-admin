@@ -2,39 +2,31 @@ const itemsPerPage = 8;
 let currentPage = 1;
 localStorage.setItem("page", 1);
 let filterStatus = "All";
-const nextBtn = document.querySelector("#next-btn");
-const prevBtn = document.querySelector("#previous-btn");
 
 function handlenextpage() {
   let pagenum = document.getElementById("pageNum");
-
   currentPage = currentPage + 1;
   getOrder();
   pagenum.textContent = currentPage;
 }
-console.log(currentPage);
+
 function handlePreviouspage() {
   let pagenum = document.getElementById("pageNum");
-  if ((currentPage = 1)) {
+  if (currentPage === 1) {
     currentPage = 1;
-    prevBtn.setAttribute("disabled", "true");
     getOrder();
     pagenum.textContent = currentPage;
   } else {
-    if (prevBtn.getAttribute("disabled")) {
-      prevBtn.removeAttribute("disabled");
-    }
     currentPage = currentPage - 1;
-
     getOrder();
     pagenum.textContent = currentPage;
   }
 }
 
-nextBtn.addEventListener("click", handlenextpage);
-
-prevBtn.addEventListener("click", handlePreviouspage);
-
+document.getElementById("next-btn").addEventListener("click", handlenextpage);
+document
+  .getElementById("previous-btn")
+  .addEventListener("click", handlePreviouspage);
 window.addEventListener("load", () => {
   // validate token
   // setInterval(() => {
@@ -104,7 +96,6 @@ function orderList(data) {
   tableContainer.innerHTML = "";
 
   console.log(data);
-
   let indexOfLastItem = currentPage * itemsPerPage;
   let indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
@@ -112,16 +103,6 @@ function orderList(data) {
     .filter((x) => filterStatus === "All" || x.status === filterStatus)
     .slice(indexOfFirstItem, indexOfLastItem)
     .reverse();
-
-  console.log(data.length);
-  console.log(Math.floor(data.length / itemsPerPage));
-  console.log(currentPage);
-  // val1   <=   val2
-  if (currentPage >= data.length / itemsPerPage) {
-    nextBtn.setAttribute("disabled", "true");
-  } else {
-    nextBtn.removeAttribute("disabled");
-  }
 
   dtcpy
     .map((x) => {
@@ -141,7 +122,7 @@ function orderList(data) {
 
       let markup = `<tr>
           <td class="border-bottom-0">
-            <h6 class="fw-semibold mb-0">#${x.orderId}</h6>
+            <h6 class="fw-semibold mb-0">${x.orderId}</h6>
           </td>
           <td class="border-bottom-0">
             <p class="mb-0 fw-normal">${formattedDateTime}</p>
