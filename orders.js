@@ -2,8 +2,8 @@ const itemsPerPage = 8;
 let currentPage = 1;
 localStorage.setItem("page", 1);
 let filterStatus = "All";
-const nextBtn = document.querySelector(".next-btn");
-const prevBtn = document.querySelector(".previous-btn");
+let nextBtn;
+let prevBtn;
 
 function handlenextpage() {
   let pagenum = document.getElementById("pageNum");
@@ -36,6 +36,8 @@ window.addEventListener("load", () => {
   // }, 1000);
   // ends
   // logout trigger
+  nextBtn = document.querySelector(".next-btn");
+  prevBtn = document.querySelector(".previous-btn");
 
   const logoutBtn = document.querySelector("#logout");
   logoutBtn.addEventListener("click", () => {
