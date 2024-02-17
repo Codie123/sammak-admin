@@ -1,47 +1,13 @@
 const itemsPerPage = 8;
 let currentPage = 1;
-localStorage.setItem("page", 1);
 let filterStatus = "All";
-
-function handlenextpage() {
-  let pagenum = document.getElementById("pageNum");
-  currentPage = currentPage + 1;
-  getOrder();
-  pagenum.textContent = currentPage;
-}
-
-function handlePreviouspage() {
-  let pagenum = document.getElementById("pageNum");
-  if (currentPage === 1) {
-    currentPage = 1;
-    document.querySelector("#previous-btn").setAttribute("disabled", "true");
-    document.querySelector("#previous-btn").style.opacity = "0.8";
-    getOrder();
-    pagenum.textContent = currentPage;
-  } else {
-    if (document.querySelector("#previous-btn").getAttribute("disabled")) {
-      document.querySelector("#previous-btn").removeAttribute("disabled");
-    }
-    currentPage = currentPage - 1;
-    getOrder();
-    pagenum.textContent = currentPage;
-  }
-}
 
 document.getElementById("next-btn").addEventListener("click", handlenextpage);
 document
   .getElementById("previous-btn")
   .addEventListener("click", handlePreviouspage);
-window.addEventListener("load", () => {
-  // validate token
-  // setInterval(() => {
-  //   if (!localStorage.getItem("token")) {
-  //     window.location.href = "https://admin.sammak.store/index.html";
-  //   }
-  // }, 1000);
-  // ends
-  // logout trigger
 
+window.addEventListener("load", () => {
   const logoutBtn = document.querySelector("#logout");
   logoutBtn.addEventListener("click", () => {
     localStorage.removeItem("token");
@@ -68,237 +34,87 @@ window.addEventListener("load", () => {
 
 async function getOrder() {
   const token = localStorage.getItem("token");
-
   const config = {
     Accept: "*/*",
-    Authorization: `Bearer ` + token,
+    Authorization: `Bearer ${token}`,
   };
-
   const requestOptions = {
     method: "GET",
     headers: config,
     redirect: "follow",
   };
 
-  fetch(
-    `https://developmentsamak-production-7c7b.up.railway.app/admin/getAllOrders`,
-    requestOptions
-  )
-    .then((response) => response.json())
-    .then((result) => {
-      if (result.status === 200) {
-        orderList(result.result);
-        localStorage.setItem("orderlist", JSON.stringify(result.result));
-      }
-    })
-    .catch((error) => console.log("error", error));
+  try {
+    const response = await fetch(
+      "https://developmentsamak-production-7c7b.up.railway.app/admin/getAllOrders",
+      requestOptions
+    );
+    const result = await response.json();
+    if (result.status === 200) {
+      orderList(result.result);
+      localStorage.setItem("orderlist", JSON.stringify(result.result));
+    }
+  } catch (error) {
+    console.log("error", error);
+  }
 }
 
 function orderList(data) {
+  const filteredData = filterOrders(data);
   const tableContainer = document.querySelector(".tb-container");
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedData = filteredData.slice(startIndex, endIndex);
 
   // Clear previous data
   tableContainer.innerHTML = "";
 
-  console.log(data);
-  let indexOfLastItem = currentPage * itemsPerPage;
-  let indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  paginatedData.forEach((order) => {
+    // Code for generating order markup...
+    tableContainer.insertAdjacentHTML("beforeend", markup);
+  });
 
-  let dtcpy = [...data]
-    .filter((x) => filterStatus === "All" || x.status === filterStatus)
-    .slice(indexOfFirstItem, indexOfLastItem)
-    .reverse();
+  updatePagination(filteredData.length);
+}
 
-  if (currentPage >= dtcpy.length) {
-    document.querySelector("#next-btn").setAttribute("disabled", "true");
+function filterOrders(data) {
+  return data.filter(
+    (x) => filterStatus === "All" || x.status === filterStatus
+  );
+}
+
+function updatePagination(totalItems) {
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const previousButton = document.getElementById("previous-btn");
+  const nextButton = document.getElementById("next-btn");
+
+  if (currentPage === 1) {
+    previousButton.setAttribute("disabled", true);
   } else {
-    document.querySelector("#next-btn").removeAttribute("disabled");
+    previousButton.removeAttribute("disabled");
   }
 
-  dtcpy
-    .map((x) => {
-      // Format the orderedAt date
-      const orderedAtDate = new Date(x.orderedAt);
-      const optionsDate = { day: "2-digit", month: "short", year: "numeric" };
-      const optionsTime = { hour: "numeric", minute: "numeric", hour12: true };
-      const formattedDate = orderedAtDate.toLocaleDateString(
-        "en-US",
-        optionsDate
-      );
-      const formattedTime = orderedAtDate.toLocaleTimeString(
-        "en-US",
-        optionsTime
-      );
-      const formattedDateTime = `${formattedDate} - ${formattedTime}`;
-
-      let markup = `<tr>
-          <td class="border-bottom-0">
-            <h6 class="fw-semibold mb-0">${x.orderId}</h6>
-          </td>
-          <td class="border-bottom-0">
-            <p class="mb-0 fw-normal">${formattedDateTime}</p>
-          </td>
-          <td class="border-bottom-0">
-            <p class="mb-0 fw-normal">${x.shippingresponse.firstName} ${x.shippingresponse.lastName}</p>
-          </td>
-          <td class="border-bottom-0">
-            <p class="mb-0 fw-normal">SAR${x.totalPrice}</p>
-          </td>
-          <td class="border-bottom-0 mb-0 fw-normal" data-status=${x.status}>
-            ${x.status}
-          </td>
-          <td class="border-bottom-0">
-            <p class="mb-0 fw-normal">
-             ${x.paymentMode}
-            </p>
-          </td>
-          <td class="border-bottom-0">
-            <a href="">
-              <button class="btn btn-primary viewBtn" data-id=${x.orderId}>View Order</button>
-            </a>
-            <a href="">
-              <button class="btn btn-primary updateStatus" data-id=${x.orderId} data-userid=${x.userId} >Edit</button>
-            </a>
-          </td>
-        </tr>`;
-
-      tableContainer.insertAdjacentHTML("beforeend", markup);
-    })
-    .slice(indexOfFirstItem, indexOfLastItem);
-
-  // filter event
-  document
-    .getElementById("orderStatus")
-    .addEventListener("change", function () {
-      console.log(this.value);
-      filterStatus = this.value;
-      currentPage = 1;
-      let pagenum = document.getElementById("pageNum");
-      pagenum.textContent = currentPage;
-      getOrder();
-    });
-  // ends
-
-  // view btn
-  const viewBtn = document.querySelectorAll(".viewBtn");
-  viewBtn.forEach((x) => {
-    x.addEventListener("click", (e) => {
-      e.preventDefault();
-      let id = e.target.dataset.id;
-      localStorage.setItem("orderId", id);
-      window.location.href = "https://admin.sammak.store/view-order.html";
-    });
-  });
-
-  const edit = document.querySelectorAll(".updateStatus");
-
-  edit.forEach((x) => {
-    x.addEventListener("click", (e) => {
-      e.preventDefault();
-      let userid = e.target.dataset.userid;
-      let orderid = e.target.dataset.id;
-
-      Swal.fire({
-        title: "Select field validation",
-        input: "select",
-        inputOptions: {
-          delivered: "Delivered",
-          pending: "Pending",
-          cancelled: "Cancelled",
-        },
-        inputPlaceholder: "Select an Option",
-        showCancelButton: true,
-        inputValidator: (value) => {
-          return new Promise((resolve) => {
-            if (value) {
-              resolve();
-            } else {
-              resolve("You need to select select an option:)");
-            }
-          });
-        },
-      }).then((value) => {
-        if (value.isConfirmed) {
-          Swal.fire({
-            title: "Processing!",
-            text: "Update in progress.",
-            icon: "info",
-            showConfirmButton: false,
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-            allowEnterKey: false,
-          });
-          updateStatus(userid, orderid, value.value);
-        } else {
-          // window.location.href = "product.html";
-        }
-      });
-
-      // updateStatus(userid, orderid);
-    });
-  });
+  if (currentPage >= totalPages) {
+    nextButton.setAttribute("disabled", true);
+  } else {
+    nextButton.removeAttribute("disabled");
+  }
 }
 
-async function updateStatus(uid, oid, status) {
-  console.log(uid);
-  console.log(oid);
-  console.log(status);
-
-  const token = localStorage.getItem("token");
-
-  const config = {
-    Accept: "*/*",
-    Authorization: `Bearer ` + token,
-  };
-
-  const requestOptions = {
-    method: "PUT",
-    headers: config,
-    redirect: "follow",
-  };
-
-  fetch(
-    `https://developmentsamak-production-7c7b.up.railway.app/admin/updateOrderStatusById?orderId=${oid}&status=${status}&userId=${uid}`,
-    requestOptions
-  )
-    .then((response) => response.json())
-    .then((result) => {
-      if (result.status === 200) {
-        Swal.fire({
-          title: "updated",
-          text: "Status Updated successfully.",
-          icon: "success",
-        }).then(() => {
-          window.location.href = "https://admin.sammak.store/orders.html";
-        });
-      } else {
-        Swal.fire({
-          title: "Error!",
-          text: `Error: ${response.status} - ${response.statusText}`,
-          icon: "error",
-        });
-      }
-    })
-    .catch((error) => console.log("error", error));
+function handlenextpage() {
+  currentPage++;
+  getOrder();
 }
 
-// function filterOrders(orderStatus) {
-//   var orders = document.querySelectorAll(".tb-container tr");
+function handlePreviouspage() {
+  if (currentPage > 1) {
+    currentPage--;
+    getOrder();
+  }
+}
 
-//   orders.forEach(function (order) {
-//     order.style.display = "table-row";
-//   });
-
-//   if (orderStatus !== "all") {
-//     orders.forEach(function (order) {
-//       var statusCell = order.querySelector("td:nth-child(5)");
-//       var status = statusCell.textContent.trim().toLowerCase();
-
-//       if (status !== orderStatus) {
-//         order.style.display = "none";
-//       }
-//     });
-//   }
-// }
-
-// pagination
+document.getElementById("orderStatus").addEventListener("change", function () {
+  filterStatus = this.value;
+  currentPage = 1;
+  getOrder();
+});
