@@ -106,7 +106,7 @@ function orderList(data) {
     .reverse();
 
   // val1   <=   val2
-  if (currentPage >= dtcpy.length / itemsPerPage) {
+  if (currentPage <= dtcpy.length / itemsPerPage) {
     nextBtn.setAttribute("disabled", "true");
   } else {
     nextBtn.removeAttribute("disabled", "");
