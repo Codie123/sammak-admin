@@ -77,9 +77,7 @@ function generateCtCard(data) {
             
                 <div class="col text-align-start" style="text-align: left;">
                     <h5>Subject</h5>
-                    <p>${
-                      x.contactSubject === "" ? "No subject!" : x.contactSubject
-                    }
+                    <p>${x.contactSubject ? "No subject!" : x.contactSubject}
                     </p>
                 </div>
 
