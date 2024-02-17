@@ -46,8 +46,49 @@ async function getContacts() {
     .then((response) => response.json())
     .then((result) => {
       if (result.status === 200) {
-        console.log(result);
+        generateCtCard(result.result);
       }
     })
     .catch((error) => console.log("error", error));
+}
+function generateCtCard(data) {
+  const container = document.querySelector("#card-container");
+  data.forEach((x) => {
+    const markup = `<div class="col-lg-4 col-md-6">
+        <div class="card text-center">
+          <div class="card-body">
+            <img
+              src="../assets/images/profile/default-profile.webp"
+              class="rounded-1 img-fluid"
+              width="90"
+            />
+            <div class="mt-n2">
+              <span class="badge text-bg-primary">#${x.contactId}</span>
+              <h3 class="card-title mt-3">${x.contactName}</h3>
+              <a href="mailto:${x.contactEmail}" class="card-subtitle">${
+      x.contactEmail
+    }</a>
+            </div>
+          
+            <div class="row mt-4 justify-content-center flex-column">
+                <div class="col" style="text-align: left;">
+                    <p><strong>Message</strong>: ${x.contactMessage}</p>
+                </div>
+            
+                <div class="col text-align-start" style="text-align: left;">
+                    <h5>Subject</h5>
+                    <p>${x.contactSubject ? x.contactSubject : "No subject!"}
+                    </p>
+                </div>
+
+            </div>
+                
+              
+          
+          </div>
+        </div>
+      </div>`;
+
+    container.insertAdjacentHTML("beforeend", markup);
+  });
 }
