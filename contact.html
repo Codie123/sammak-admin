@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sammak Admin - Edit Products</title>
+    <title>Sammak - Contact Page</title>
     <link
       rel="shortcut icon"
       type="image/png"
@@ -11,14 +11,7 @@
     />
     <link rel="stylesheet" href="./assets/css/styles.min.css" />
     <link rel="stylesheet" href="./assets/css/styles.css" />
-    <!-- fontawesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+
     <!-- sweet alert  -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.3/dist/sweetalert2.all.min.js"></script>
     <link
@@ -82,7 +75,7 @@
 
               <li class="sidebar-item">
                 <a
-                  class="sidebar-link active"
+                  class="sidebar-link"
                   href="./product.html"
                   aria-expanded="false"
                 >
@@ -105,9 +98,9 @@
                   <span class="hide-menu">Hero Slider</span>
                 </a>
               </li>
-              <li class="sidebar-item">
+              <li class="sidebar-item selected">
                 <a
-                  class="sidebar-link"
+                  class="sidebar-link active"
                   href="./contact.html"
                   aria-expanded="false"
                 >
@@ -212,139 +205,146 @@
         <!--  Header End -->
         <div class="container-fluid">
           <!--  Row 1 -->
-          <div class="row flex-column gap-3">
-            <div class="col d-flex justify-content-end">
-              <a href="./product.html">
-                <button type="button" class="btn btn-primary m-1">Back</button>
-              </a>
+          <div class="row">
+            <div class="col-lg-4 col-md-6">
+              <div class="card text-center">
+                <div class="card-body">
+                  <img
+                    src="../assets/images/profile/user-1.jpg"
+                    class="rounded-1 img-fluid"
+                    width="90"
+                  />
+                  <div class="mt-n2">
+                    <span class="badge text-bg-primary">Editor</span>
+                    <h3 class="card-title mt-3">Matt Carlson</h3>
+                    <h6 class="card-subtitle">San Francisco, CA</h6>
+                  </div>
+                  <div class="row mt-3 justify-content-center">
+                    <div class="col-6">
+                      <div
+                        class="py-2 px-3 text-bg-light rounded-pill d-flex align-items-center"
+                      >
+                        <span class="text-warning"
+                          ><i class="ti ti-star fs-8"></i
+                        ></span>
+                        <div class="ms-2 text-start">
+                          <h6 class="fw-normal text-muted mb-0">Reviews</h6>
+                          <h4 class="mb-0 fs-5">368</h4>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div
+                        class="py-2 px-3 text-bg-light rounded-pill d-flex align-items-center"
+                      >
+                        <span class="text-primary"
+                          ><i class="ti ti-brand-google-photos fs-8"></i
+                        ></span>
+                        <div class="ms-2 text-start">
+                          <h6 class="fw-normal text-muted mb-0">Photos</h6>
+                          <h4 class="mb-0 fs-5">1200</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <h5 class="card-title fw-semibold mb-4">Add Product</h5>
-
-            <div class="card">
-              <div class="card-body">
-                <form
-                  class="forms-sample"
-                  action=""
-                  id="productForm"
-                  method="POST"
-                  enctype="multipart/form-data"
-                >
-                  <div class="form-group mb-3">
-                    <label for="name">Name</label>
-                    <input
-                      type="text"
-                      name="productName"
-                      class="form-control"
-                      id="name"
-                      placeholder="Name"
-                    />
+            <div class="col-lg-4 col-md-6">
+              <div class="card text-center">
+                <div class="card-body">
+                  <img
+                    src="../assets/images/profile/user-2.jpg"
+                    class="rounded-1 img-fluid"
+                    width="90"
+                  />
+                  <div class="mt-n2">
+                    <span class="badge text-bg-danger">Developer</span>
+                    <h3 class="card-title mt-3">Matt Carlson</h3>
+                    <h6 class="card-subtitle">San Francisco, CA</h6>
                   </div>
-                  <div class="form-group mb-3">
-                    <label>Image</label>
-                    <input
-                      type="file"
-                      name="file"
-                      multiple
-                      class="form-control file-upload-info"
-                    />
+                  <div class="row mt-3 justify-content-center">
+                    <div class="col-6">
+                      <div
+                        class="py-2 px-3 text-bg-light rounded-pill d-flex align-items-center"
+                      >
+                        <span class="text-warning"
+                          ><i class="ti ti-star fs-8"></i
+                        ></span>
+                        <div class="ms-2 text-start">
+                          <h6 class="fw-normal text-muted mb-0">Reviews</h6>
+                          <h4 class="mb-0 fs-5">368</h4>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div
+                        class="py-2 px-3 text-bg-light rounded-pill d-flex align-items-center"
+                      >
+                        <span class="text-primary"
+                          ><i class="ti ti-brand-google-photos fs-8"></i
+                        ></span>
+                        <div class="ms-2 text-start">
+                          <h6 class="fw-normal text-muted mb-0">Photos</h6>
+                          <h4 class="mb-0 fs-5">1200</h4>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="mb-3 row">
-                    <div
-                      class="col-md-4 d-flex justify-content-between gap-3"
-                      id="preview"
-                    ></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div class="card text-center">
+                <div class="card-body">
+                  <img
+                    src="../assets/images/profile/user-3.jpg"
+                    class="rounded-1 img-fluid"
+                    width="90"
+                  />
+                  <div class="mt-n2">
+                    <span class="badge text-bg-warning">Desinger</span>
+                    <h3 class="card-title mt-3">Matt Carlson</h3>
+                    <h6 class="card-subtitle">San Francisco, CA</h6>
                   </div>
-
-                  <div class="form-group mb-3">
-                    <label for="small_description" class="pt-2 pb-2"
-                      >Small Description</label
-                    >
-                    <textarea
-                      class="form-control"
-                      name="smallDescription"
-                      id="small_description"
-                      rows="4"
-                    ></textarea>
+                  <div class="row mt-3 justify-content-center">
+                    <div class="col-6">
+                      <div
+                        class="py-2 px-3 text-bg-light rounded-pill d-flex align-items-center"
+                      >
+                        <span class="text-warning"
+                          ><i class="ti ti-star fs-8"></i
+                        ></span>
+                        <div class="ms-2 text-start">
+                          <h6 class="fw-normal text-muted mb-0">Reviews</h6>
+                          <h4 class="mb-0 fs-5">368</h4>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div
+                        class="py-2 px-3 text-bg-light rounded-pill d-flex align-items-center"
+                      >
+                        <span class="text-primary"
+                          ><i class="ti ti-brand-google-photos fs-8"></i
+                        ></span>
+                        <div class="ms-2 text-start">
+                          <h6 class="fw-normal text-muted mb-0">Photos</h6>
+                          <h4 class="mb-0 fs-5">1200</h4>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="form-group mb-3">
-                    <label for="description">Description</label>
-                    <textarea
-                      class="form-control"
-                      name="productDescription"
-                      id="description"
-                      rows="4"
-                    ></textarea>
-                  </div>
-
-                  <!-- details -->
-                  <h4 class="card-title">Details</h4>
-                  <div class="form-group mb-3">
-                    <label for="original_price" class="pt-2 pb-2"
-                      >Original Price</label
-                    >
-                    <input
-                      type="text"
-                      name="originalPrice"
-                      class="form-control"
-                      id="original_price"
-                      placeholder="Original Price"
-                    />
-                  </div>
-                  <div class="form-group mb-3">
-                    <label for="selling_price" class="pt-2 pb-2"
-                      >Selling Price</label
-                    >
-                    <input
-                      type="text"
-                      name="sellingPrice"
-                      class="form-control"
-                      id="selling_price"
-                      placeholder="selling Price"
-                    />
-                  </div>
-                  <div class="form-group mb-3">
-                    <label for="quantity" class="pt-2 pb-2">Category</label>
-                    <input
-                      type="text"
-                      name="categoryName"
-                      class="form-control"
-                      id="category"
-                      placeholder="Category"
-                    />
-                  </div>
-                  <div class="form-group mb-3">
-                    <label for="quantity" class="pt-2 pb-2">Quantity</label>
-                    <input
-                      type="text"
-                      name="quantity"
-                      class="form-control"
-                      id="quantity"
-                      placeholder="Quantity"
-                    />
-                  </div>
-
-                  <!-- ends -->
-
-                  <div class="d-flex gap-3">
-                    <button
-                      type="submit"
-                      class="d-flex align-items-center justify-content-center btn btn-primary mr-2 gap-2"
-                      id="submit"
-                    >
-                      Submit
-                    </button>
-
-                    <a href="./product.html" class="btn btn-light">Cancel</a>
-                  </div>
-                </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <script src="./contact.js"></script>
     <script src="./token_validate.js"></script>
-    <script src="editpro.js"></script>
     <script src="./assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="./assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/sidebarmenu.js"></script>
