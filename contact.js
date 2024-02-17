@@ -35,7 +35,7 @@ async function getContacts() {
   };
   const tableContainer = document.querySelector(".tBody");
 
-  document.querySelector(".loader").classList.remove("d-none");
+  //   document.querySelector(".loader").classList.remove("d-none");
   const response = await fetch(
     "https://developmentsamak-production-7c7b.up.railway.app/contactUs/getAll",
     {
@@ -46,15 +46,15 @@ async function getContacts() {
 
   const data = await response.json();
 
-  if (data.status === 200) {
-    let resData = data.result;
-  }
-  if (data.status === 404) {
-    tableContainer.insertAdjacentHTML(
-      "beforeend",
-      "<h4>No Products Found , please add a new product</h4>"
-    );
-  }
+  //   if (data.status === 200) {
+  //     let resData = data.result;
+  //   }
+  //   if (data.status === 404) {
+  //     tableContainer.insertAdjacentHTML(
+  //       "beforeend",
+  //       "<h4>No Products Found , please add a new product</h4>"
+  //     );
+  //   }
 
-  document.querySelector(".loader").classList.add("d-none");
+  //   document.querySelector(".loader").classList.add("d-none");
 }
