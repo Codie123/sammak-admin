@@ -105,8 +105,8 @@ function orderList(data) {
     .slice(indexOfFirstItem, indexOfLastItem)
     .reverse();
 
-  console.log(dtcpy.length);
-  console.log(dtcpy.length / itemsPerPage);
+  console.log(data.length);
+  console.log(data.length / itemsPerPage);
   console.log(currentPage);
   // val1   <=   val2
   // if (currentPage >= dtcpy.length / itemsPerPage) {
