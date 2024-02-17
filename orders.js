@@ -109,7 +109,7 @@ function orderList(data) {
     .slice(indexOfFirstItem, indexOfLastItem)
     .reverse();
 
-  if (currentPage >= data.length / itemsPerPage) {
+  if (currentPage >= dtcpy.length) {
     document.querySelector("#next-btn").setAttribute("disabled", "true");
   } else {
     document.querySelector("#next-btn").removeAttribute("disabled");
