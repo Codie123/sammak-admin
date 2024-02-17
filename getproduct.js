@@ -45,7 +45,7 @@ async function getProduct() {
       Authorization: `Bearer ` + token,
     },
   };
-  const tableContainer = document.querySelector(".tBody");
+  const tableContainer = document.querySelector("#card-container");
 
   document.querySelector(".loader").classList.remove("d-none");
   const response = await fetch(
@@ -65,27 +65,33 @@ async function getProduct() {
     let resData = data.result;
 
     resData.forEach((element) => {
-      const markup = `<tr class="tableRow"><td class="border-bottom-0"><h6 class="fw-semibold mb-0">${
-        element.id
-      }</h6></td><td class="border-bottom-0"><h6 class="fw-semibold mb-1">${
-        element.productName
-      }</h6> <span class="fw-normal">${
-        element.categoryName
-      }</span></td><td class="border-bottom-0"><h6 class="fw-semibold mb-0 fs-4">SAR${
-        element.sellingPrice
-      }</h6></td><td class="border-bottom-0"><div class="d-flex align-items-center gap-2"><img src="${
-        element.images.length > 0
-          ? element.images[element.images.length - 1].imageUrl
-          : ""
-      }" width="100px" height="100px"></div></td><td class="border-bottom-0"><a><button class="editBtn btn btn-primary" data-edit=${
-        element.id
-      }>Edit</button>
-    </a>
-    <button type="button"  class="btn btn-primary delete-btn"  data-prid="${
-      element.id
-    }" data-target="#deleteModal" data-toggle="modal" >Delete</button> 
-    </td>
-    </tr>`;
+      const markup = `<div class="col-lg-4 col-md-6">
+      <!-- Card -->
+      <div class="card">
+        <img class="card-img-top img-responsive" src="${
+          element.images.length > 0
+            ? element.images[element.images.length - 1].imageUrl
+            : ""
+        }" alt="Card image cap">
+        <div class="card-body">
+        <span>${element.id}</span>
+          <h4 class="card-title">${element.productName}</h4>
+          <p class="card-text">
+           ${element.smallDescription}
+          </p>
+          <div class="d-flex">
+          <button class="editBtn btn btn-primary" data-edit=${
+            element.id
+          }>Edit</button>
+          <button type="button"  class="btn btn-primary delete-btn"  data-prid="${
+            element.id
+          }" data-target="#deleteModal" data-toggle="modal" >Delete</button> 
+          </div>
+
+        </div>
+      </div>
+   
+    </div>`;
 
       tableContainer.insertAdjacentHTML("beforeend", markup);
     });
