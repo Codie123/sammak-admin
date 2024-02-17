@@ -157,7 +157,9 @@ function orderList(data) {
     .addEventListener("change", function () {
       console.log(this.value);
       filterStatus = this.value;
-
+      currentPage = 1;
+      let pagenum = document.getElementById("pageNum");
+      pagenum.textContent = currentPage;
       getOrder();
     });
   // ends
