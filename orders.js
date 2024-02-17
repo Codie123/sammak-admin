@@ -24,7 +24,9 @@ function handlePreviouspage() {
 }
 
 nextBtn.addEventListener("click", handlenextpage);
+
 prevBtn.addEventListener("click", handlePreviouspage);
+
 window.addEventListener("load", () => {
   // validate token
   // setInterval(() => {
