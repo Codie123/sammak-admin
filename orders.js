@@ -84,21 +84,22 @@ function orderList(data) {
 
   tableContainer.innerHTML = "";
 
-  paginatedData.forEach((order) => {
-    // Code for generating order markup...
-    const orderedAtDate = new Date(order.orderedAt);
-    const optionsDate = { day: "2-digit", month: "short", year: "numeric" };
-    const optionsTime = { hour: "numeric", minute: "numeric", hour12: true };
-    const formattedDate = orderedAtDate.toLocaleDateString(
-      "en-US",
-      optionsDate
-    );
-    const formattedTime = orderedAtDate.toLocaleTimeString(
-      "en-US",
-      optionsTime
-    );
-    const formattedDateTime = `${formattedDate} - ${formattedTime}`;
-    let markup = `<tr>
+  paginatedData
+    .map((order) => {
+      // Code for generating order markup...
+      const orderedAtDate = new Date(order.orderedAt);
+      const optionsDate = { day: "2-digit", month: "short", year: "numeric" };
+      const optionsTime = { hour: "numeric", minute: "numeric", hour12: true };
+      const formattedDate = orderedAtDate.toLocaleDateString(
+        "en-US",
+        optionsDate
+      );
+      const formattedTime = orderedAtDate.toLocaleTimeString(
+        "en-US",
+        optionsTime
+      );
+      const formattedDateTime = `${formattedDate} - ${formattedTime}`;
+      let markup = `<tr>
       <td class="border-bottom-0">
         <h6 class="fw-semibold mb-0">${order.orderId}</h6>
       </td>
@@ -129,8 +130,9 @@ function orderList(data) {
       </td>
         </tr>`;
 
-    tableContainer.insertAdjacentHTML("beforeend", markup);
-  });
+      tableContainer.insertAdjacentHTML("beforeend", markup);
+    })
+    .reverse();
 
   updatePagination(filteredData.length);
 
